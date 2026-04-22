@@ -31,18 +31,18 @@ const RevenueGrowthChart: React.FC = () => {
     return (
       <div className="bg-white dark:bg-gray-800 p-6 rounded-[24px] border border-gray-100 dark:border-gray-700/50 shadow-sm col-span-12 lg:col-span-4">
         <div className="flex items-center justify-between mb-2">
-          <h3 className="text-[15px] font-bold text-gray-800 dark:text-white">Tăng trưởng doanh thu</h3>
+          <h3 className="text-xl font-bold text-gray-800 dark:text-white">Tăng trưởng doanh thu</h3>
           <CustomSelect 
             options={rangeOptions}
             value={selectedRange}
             onChange={setSelectedRange}
             width="150px"
-            buttonClassName="h-8 rounded-[10px] px-3 border-transparent bg-gray-50/80"
+            buttonClassName="h-8 rounded-[10px] px-3 bg-white font-normal"
           />
         </div>
         
         <div className="flex items-center gap-3 mb-6">
-           <span className="text-[20px] font-bold text-[#005CAB] leading-none">920 triệu VNĐ</span>
+           <span className="text-theme-2xl font-bold text-blue-custom leading-none">920 triệu VNĐ</span>
            <div className="flex items-center bg-[#E6F9F1] px-2 py-0.5 rounded-full">
               <span className="text-[11px] font-bold text-[#059669]">10%</span>
               <span className="text-[10px] ml-0.5 font-bold text-[#059669]">↑</span>

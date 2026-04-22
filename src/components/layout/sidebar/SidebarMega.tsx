@@ -42,7 +42,7 @@ const SidebarMega: React.FC<SidebarMegaProps> = ({
       `}
     >
       {/* Pane 1: Slim Bar (Modules) */}
-      <div className="w-[64px] flex-shrink-0 border-r border-gray-100 dark:border-gray-800 flex flex-col items-center py-6 gap-6">
+      <div className="w-[64px] flex-shrink-0 border-r border-gray-100 dark:border-gray-800 flex flex-col items-center py-4 gap-4">
         <Link href="/" className="mb-4">
           <Image src="/images/logo/egas-logo.svg" alt="Logo" width={24} height={24} />
         </Link>
@@ -53,9 +53,9 @@ const SidebarMega: React.FC<SidebarMegaProps> = ({
               <button
                 onClick={() => setActiveModule(module.id)}
                 className={`
-                  w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 group relative
+                  w-12 h-12 rounded-lg flex items-center justify-center transition-all duration-300 group relative
                   ${activeModuleId === module.id 
-                    ? "bg-brand-50 text-brand-500 dark:bg-brand-900/20 dark:text-brand-400 shadow-sm opacity-100" 
+                    ? "bg-brand-50 text-brand-500 dark:bg-brand-900/20 dark:text-brand-400 opacity-100" 
                     : "text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-600 opacity-40 hover:opacity-100"}
                 `}
               >
@@ -70,9 +70,9 @@ const SidebarMega: React.FC<SidebarMegaProps> = ({
 
       {/* Pane 2: Content Panel */}
       <div className="flex-1 flex flex-col min-w-0 animate-in fade-in slide-in-from-left-4 duration-300 w-[240px]">
-        <div className="h-20 flex items-center justify-between px-6 dark:border-gray-800">
+        <div className="h-[50px] flex items-center justify-between px-6 dark:border-gray-800">
           <div className="flex items-center gap-3 overflow-hidden">
-            <h2 className="text-lg font-bold text-gray-800 dark:text-white truncate">
+            <h2 className="text-theme-xl font-bold text-gray-800 dark:text-white truncate">
               {activeModule.name}
             </h2>
             <button 

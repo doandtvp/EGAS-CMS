@@ -26,7 +26,7 @@ const SidebarSlim: React.FC<SidebarSlimProps> = ({
         ${isMobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
       `}
     >
-      <div className="w-full flex flex-col items-center py-6 gap-6">
+      <div className="w-full flex flex-col items-center py-4 gap-4">
         <Link href="/" className="mb-4">
           <Image src="/images/logo/egas-logo.svg" alt="Logo" width={24} height={24} />
         </Link>

@@ -149,9 +149,13 @@ const TabBar: React.FC = () => {
                 e.stopPropagation();
                 removeTab(tab.id);
               }}
-              className="ml-2.5 p-0.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-400 hover:text-red-500 transition-colors opacity-100 lg:opacity-0 lg:group-hover:opacity-100"
+              className={`ml-2.5 p-0.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-red-500 transition-colors opacity-100 lg:group-hover:opacity-100 ${
+                activeTabId === tab.id
+                  ? "text-brand-500 dark:text-brand-400 lg:opacity-100"
+                  : "text-gray-400 lg:opacity-0"
+              }`}
             >
-              <CloseIcon className="w-3 h-3" />
+              <CloseIcon className="w-4 h-4" />
             </button>
             
             {/* Active Indicator Underline */}
