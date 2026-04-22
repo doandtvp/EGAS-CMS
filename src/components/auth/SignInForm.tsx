@@ -17,15 +17,15 @@ export default function SignInForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const { login, isAuthenticated, hasHydrated } = useAuthStore();
+  const { login, isAuthenticated, hasHydrated, user } = useAuthStore();
   const resetNavigation = useLayoutStore((state) => state.resetNavigation);
   const router = useRouter();
 
   React.useEffect(() => {
     if (hasHydrated && isAuthenticated) {
-      router.replace("/");
+      router.replace(user?.role === "nhan_vien" ? "/staff" : "/");
     }
-  }, [hasHydrated, isAuthenticated, router]);
+  }, [hasHydrated, isAuthenticated, router, user?.role]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -35,6 +35,11 @@ export default function SignInForm() {
 
     if (!loggedInUser) {
       setErrorMessage("Sai tài khoản hoặc mật khẩu.");
+      return;
+    }
+
+    if (loggedInUser.role === "nhan_vien") {
+      router.replace("/staff");
       return;
     }
 
