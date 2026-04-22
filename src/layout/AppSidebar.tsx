@@ -1,7 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import { useLayoutStore } from "../store/useLayoutStore";
-import { modules, MenuItem } from "./menu-config";
+import { getModulesByRole, MenuItem } from "./menu-config";
+import { useAuthStore } from "@/store/useAuthStore";
 
 // Modular Components
 import SidebarSlim from "../components/layout/sidebar/SidebarSlim";
@@ -18,9 +19,17 @@ const AppSidebar: React.FC = () => {
     setActiveModule,
     toggleSidebar
   } = useLayoutStore();
+  const userRole = useAuthStore((state) => state.user?.role);
+  const modules = getModulesByRole(userRole);
 
   const [openMenus, setOpenMenus] = useState<string[]>([]);
   const activeModule = modules.find(m => m.id === activeModuleId) || modules[0];
+
+  React.useEffect(() => {
+    if (!modules.some((module) => module.id === activeModuleId) && modules[0]) {
+      setActiveModule(modules[0].id);
+    }
+  }, [activeModuleId, modules, setActiveModule]);
 
   // Sync activeModuleId with activeTabId
   React.useEffect(() => {
@@ -36,7 +45,7 @@ const AppSidebar: React.FC = () => {
         setActiveModule(moduleContainingTab.id);
       }
     }
-  }, [activeTabId, activeModuleId, setActiveModule]);
+  }, [activeTabId, activeModuleId, modules, setActiveModule]);
 
   const toggleMenu = (id: string) => {
     setOpenMenus((prev) =>

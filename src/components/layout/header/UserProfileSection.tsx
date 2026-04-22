@@ -3,10 +3,12 @@ import Image from "next/image";
 import { ChevronDownIcon } from "@/icons";
 import UserDropdown from "./UserDropdown";
 import { useClickOutside } from "@/hooks/useClickOutside";
+import { useAuthStore } from "@/store/useAuthStore";
 
 const UserProfileSection: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const user = useAuthStore((state) => state.user);
 
   useClickOutside(containerRef, () => setIsOpen(false));
 
@@ -21,13 +23,13 @@ const UserProfileSection: React.FC = () => {
             isOpen ? "border-brand-500 scale-105" : "border-white dark:border-gray-800"
           }`}>
             <Image 
-              src="/images/user/user-01.jpg" 
+              src={user?.avatarUrl || "/images/user/user-01.jpg"} 
               alt="Avatar" 
               width={44} 
               height={44} 
               className="object-cover"
               onError={(e) => {
-                e.currentTarget.src = "https://ui-avatars.com/api/?name=Nguyen+Van+Anh&background=0D8ABC&color=fff";
+                e.currentTarget.src = "https://ui-avatars.com/api/?name=User&background=0D8ABC&color=fff";
               }}
             />
           </div>
@@ -36,8 +38,10 @@ const UserProfileSection: React.FC = () => {
         <div className="hidden sm:flex flex-col items-end">
           <span className={`text-sm font-bold transition-colors ${
             isOpen ? "text-brand-500" : "text-gray-900 dark:text-white group-hover:text-brand-500"
-          }`}>Nguyễn Văn Anh</span>
-          <span className="text-[10px] text-gray-400 font-medium">ID: 12345678</span>
+          }`}>{user?.displayName || "Nguoi dung"}</span>
+          <span className="text-[10px] text-gray-400 font-medium">
+            ID: {user?.employeeCode || "N/A"}
+          </span>
         </div>
         
         <ChevronDownIcon className={`w-4 h-4 text-gray-400 transition-transform ${
