@@ -37,8 +37,13 @@ export default function AdminLayout({
     if (!hasHydrated) return;
     if (!isAuthenticated) {
       router.replace("/signin");
+      return;
     }
-  }, [hasHydrated, isAuthenticated, router]);
+
+    if (user?.role === "nhan_vien") {
+      router.replace("/staff");
+    }
+  }, [hasHydrated, isAuthenticated, router, user?.role]);
 
   useEffect(() => {
     if (!isHydrated) return;
@@ -80,7 +85,7 @@ export default function AdminLayout({
   // Get current active tab object
   const activeTab = isHydrated ? openTabs.find((t) => t.id === activeTabId) : null;
 
-  if (!hasHydrated || !isAuthenticated) {
+  if (!hasHydrated || !isAuthenticated || user?.role === "nhan_vien") {
     return null;
   }
 
