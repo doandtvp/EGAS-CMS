@@ -37,17 +37,17 @@ const RevenueGrowthChart: React.FC = () => {
             value={selectedRange}
             onChange={setSelectedRange}
             width="150px"
-            buttonClassName="h-8 rounded-[10px] px-3 bg-white font-normal"
+            buttonClassName="h-8 rounded-lg px-3 bg-white font-normal"
           />
         </div>
         
         <div className="flex items-center gap-3 mb-6">
            <span className="text-theme-2xl font-bold text-blue-custom leading-none">920 triệu VNĐ</span>
-           <div className="flex items-center bg-[#E6F9F1] px-2 py-0.5 rounded-full">
-              <span className="text-[11px] font-bold text-[#059669]">10%</span>
-              <span className="text-[10px] ml-0.5 font-bold text-[#059669]">↑</span>
+           <div className="flex items-center justify-center min-w-[66px] h-[31px] bg-green-custom-100 border border-green-custom-200 px-2 rounded-full">
+              <span className="text-[16px] font-semibold text-green-custom-600 leading-[24px]">10%</span>
+              <span className="text-[14px] ml-1 font-semibold text-green-custom-600 leading-none mt-0.5">↑</span>
            </div>
-           <span className="text-[10px] text-gray-400 font-medium">+ 120 triệu so với tuần trước</span>
+           <span className="text-[14px] font-normal text-grayscale-50 leading-[20px]">+ 120 triệu so với tuần trước</span>
         </div>
   
         <div className="h-[250px] relative">
@@ -100,7 +100,7 @@ const SalesStructureChart: React.FC = () => {
 
     return (
         <div className="bg-white dark:bg-gray-800 p-6 rounded-[24px] border border-gray-100 dark:border-gray-700/50 shadow-sm col-span-12 lg:col-span-4 translate-y-0">
-             <h3 className="text-[15px] font-bold text-gray-800 dark:text-white mb-8">Cơ cấu tỷ trọng doanh thu theo mặt hàng</h3>
+             <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-8">Cơ cấu tỷ trọng doanh thu theo mặt hàng</h3>
              <div className="h-[280px] flex items-center justify-center">
                  <ReactApexChart options={options} series={series} type="donut" height="100%" width="120%" />
              </div>
@@ -131,12 +131,12 @@ const RevenueByShiftChart: React.FC = () => {
 
     return (
         <div className="bg-white dark:bg-gray-800 p-6 rounded-[24px] border border-gray-100 dark:border-gray-700/50 shadow-sm col-span-12 lg:col-span-4">
-             <h3 className="text-[15px] font-bold text-gray-800 dark:text-white mb-2">Doanh thu theo ca</h3>
-             <div className="text-[10px] text-gray-400 font-medium mb-4">Triệu vnđ</div>
-             
-             <div className="h-[250px] relative">
-                 <ReactApexChart options={options} series={series} type="bar" height="100%" />
-             </div>
+          <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">Doanh thu theo ca</h3>
+          <div className="text-[10px] text-gray-400 font-medium mb-4">Triệu vnđ</div>
+          
+          <div className="h-[250px] relative">
+            <ReactApexChart options={options} series={series} type="bar" height="100%" />
+          </div>
         </div>
     );
 };
