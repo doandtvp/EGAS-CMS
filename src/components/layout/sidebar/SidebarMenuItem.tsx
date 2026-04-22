@@ -30,12 +30,12 @@ const SidebarMenuItem: React.FC<SidebarMenuItemProps> = ({
   // Level-specific base styles
   const basePadding = "px-4 py-2.5";
   const fontSize = level === 0 ? "text-sm" : "text-[13px]";
-  const fontWeight = level === 0 ? "font-bold" : "font-medium";
+  const fontWeight = "font-normal";
   
   // Active Styles
-  const selectedStyle = "bg-brand-500 text-white shadow-lg shadow-brand-500/20";
-  const parentActiveStyle = "bg-brand-500 text-white dark:bg-brand-900/10 dark:text-brand-400";
-  const inactiveStyle = "text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-gray-200";
+  const selectedStyle = "bg-gradient-1 text-white";
+  const parentActiveStyle = "bg-gradient-1 text-white dark:bg-brand-900/10 dark:text-brand-400";
+  const inactiveStyle = "text-gray-600 dark:text-gray-400 hover:bg-blue-light-200 dark:hover:bg-gray-800/50 hover:text-gray-900 dark:hover:text-gray-200";
 
   const currentStyle = isActuallySelected 
     ? selectedStyle 

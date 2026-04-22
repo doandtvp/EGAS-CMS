@@ -66,6 +66,12 @@ import ColorCategoryIcon from "./color-category.svg";
 import MenuIconMobile from "./menu-icon-mobile.svg";
 import OilStaffIcon from "./oil-staff.svg";
 import OilCarIcon from "./oil-car.svg";
+import FilterIcon from "./filter-icon.svg";
+import ColorWarning from "./color-warning.svg";
+import ColorTotalAmount from "./color-total-amount.svg";
+import ColorTotalOrder from "./color-total-order.svg";
+import ColorTotalMoney from "./color-total-money.svg";
+import ColorTotalGoods from "./color-total-goods.svg";
 
 export {
   DownloadIcon,
@@ -135,5 +141,11 @@ export {
   ColorCategoryIcon,
   MenuIconMobile,
   OilStaffIcon,
-  OilCarIcon
+  OilCarIcon,
+  FilterIcon,
+  ColorWarning,
+  ColorTotalAmount,
+  ColorTotalOrder,
+  ColorTotalMoney,
+  ColorTotalGoods,
 };

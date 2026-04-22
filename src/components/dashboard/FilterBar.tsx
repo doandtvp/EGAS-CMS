@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import DatePicker from "@/components/form/date-picker";
 import CustomSelect from "./CustomSelect";
+import { FilterIcon } from "@/icons";
 
 const FilterBar: React.FC = () => {
   const [filterValues, setFilterValues] = useState({
@@ -24,6 +25,7 @@ const FilterBar: React.FC = () => {
           onChange={(val) => handleFilterChange("item", val)}
           placeholder="Chọn mặt hàng"
           width="180px"
+          buttonClassName="bg-white font-normal"
         />
 
         <CustomSelect 
@@ -32,6 +34,7 @@ const FilterBar: React.FC = () => {
           onChange={(val) => handleFilterChange("shift", val)}
           placeholder="Chọn Ca"
           width="140px"
+          buttonClassName="bg-white font-normal"
         />
 
         <CustomSelect 
@@ -40,6 +43,7 @@ const FilterBar: React.FC = () => {
           onChange={(val) => handleFilterChange("staff", val)}
           placeholder="Chọn nhân viên"
           width="200px"
+          buttonClassName="bg-white font-normal"
         />
 
         {/* Date Selector */}
@@ -53,13 +57,8 @@ const FilterBar: React.FC = () => {
         </div>
 
         {/* Apply Button */}
-        <button className="h-11 bg-gradient-to-r from-[#FF8B1F] to-[#f59e0b] hover:from-[#e07a1b] hover:to-[#d97706] text-white px-6 rounded-xl font-bold text-sm transition-all active:scale-[0.98] shadow-lg shadow-orange-500/20 flex items-center justify-center gap-2">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 5.25H15M3 9H15M3 12.75H15" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            <circle cx="6" cy="5.25" r="1.5" fill="white" stroke="#FF8B1F" strokeWidth="2"/>
-            <circle cx="12" cy="9" r="1.5" fill="white" stroke="#FF8B1F" strokeWidth="2"/>
-            <circle cx="7.5" cy="12.75" r="1.5" fill="white" stroke="#FF8B1F" strokeWidth="2"/>
-          </svg>
+        <button className="max-w-[100px] w-full h-12 bg-gradient-2 text-white rounded-xl font-medium text-sm transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+          <FilterIcon className="w-5 h-5" />
           Áp dụng
         </button>
       </div>

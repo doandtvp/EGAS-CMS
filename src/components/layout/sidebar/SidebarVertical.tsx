@@ -38,7 +38,7 @@ const SidebarVertical: React.FC<SidebarVerticalProps> = ({
         ${isMobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
       `}
     >
-      <div className="h-20 flex items-center justify-between px-6 dark:border-gray-800">
+      <div className="h-[50px] flex items-center justify-between px-6 dark:border-gray-800">
         <Link href="/" className="flex items-center gap-3">
           <Image src="/images/logo/egas-logo.svg" alt="Logo" width={24} height={24} />
           <span className="text-xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-400 tracking-wider">
@@ -60,8 +60,8 @@ const SidebarVertical: React.FC<SidebarVerticalProps> = ({
             <button
               onClick={() => toggleMenu(module.id)}
               className={`
-                w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group text-sm font-bold
-                ${activeModuleId === module.id ? "bg-brand-50 text-brand-500 dark:bg-brand-900/20" : "text-gray-800 dark:text-white hover:bg-gray-50"}
+                w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group text-sm font-semibold
+                ${activeModuleId === module.id ? "bg-brand-50 text-[#2B82D8] dark:bg-brand-900/20" : "text-gray-800 dark:text-white hover:bg-gray-50"}
               `}
             >
               <span className="flex-shrink-0 text-brand-500">{module.icon}</span>

@@ -26,8 +26,10 @@
   --text-title-md--line-height: 44px;
   --text-title-sm: 30px;
   --text-title-sm--line-height: 38px;
+  --text-theme-2xl: 24px;
+  --text-theme-2xl--line-height: 32px;
   --text-theme-xl: 20px;
-  --text-theme-xl--line-height: 30px;
+  --text-theme-xl--line-height: 28px;
   --text-theme-sm: 14px;
   --text-theme-sm--line-height: 20px;
   --text-theme-xs: 12px;
@@ -64,6 +66,7 @@
   --color-blue-light-900: #0b4a6f;
   --color-blue-light-950: #062c41;
   --color-blue-bg: #e2e8ee;
+  --color-blue-custom: #2B82D8;
 
   --color-gray-bg: #F9F9FD;
   --color-gray-20: #4A5564;
@@ -81,6 +84,11 @@
   --color-gray-950: #0c111d;
   --color-gray-dark: #1a2231;
 
+  --color-gray-custom: #4B5563;
+  --color-black-custom: #282833;
+  --color-gray-dark-custom: #646868;
+  --color-grayscale-30: #5D6A7D;
+  --color-grayscale-50: #687383;  
   --color-orange-25: #fffaf5;
   --color-orange-50: #fff6ed;
   --color-orange-100: #ffead5;
@@ -105,6 +113,10 @@
   --color-success-700: #027a48;
   --color-success-800: #05603a;
   --color-success-900: #054f31;
+
+  --color-green-custom-100: #DCFCE7;
+  --color-green-custom-200: #B9F8CF;
+  --color-green-custom-600: #00A63E;
   --color-success-950: #053321;
 
   --color-error-25: #fffbfa;
@@ -162,6 +174,12 @@
 
   --drop-shadow-4xl:
     0 35px 35px rgba(0, 0, 0, 0.25), 0 45px 65px rgba(0, 0, 0, 0.15);
+  
+  --shadow-custom-blue: 0 4.03px 16.13px 0 rgba(2, 180, 250, 0.3);
+  --shadow-custom-orange: 0 4.03px 16.13px 0 rgba(255, 129, 16, 0.3);
+  --shadow-custom-green: 0 4.03px 16.13px 0 rgba(34, 176, 126, 0.3);
+  --shadow-custom-yellow: 0 4.03px 16.13px 0 rgba(253, 187, 31, 0.3);
+  --shadow-custom-red: 0 4.03px 16.13px 0 rgba(255, 59, 59, 0.3);
 
   --z-index-1: 1;
   --z-index-9: 9;
@@ -170,6 +188,52 @@
   --z-index-9999: 9999;
   --z-index-99999: 99999;
   --z-index-999999: 999999;
+
+  /* Màu bắt đầu và màu kết thúc của gradient */
+  --gradient-1-start: #2B82D8;
+  --gradient-1-end: #389EE8;
+  --gradient-2-start: #F4831F;
+  --gradient-2-end: #FB9D2D;
+  --gradient-3-start: #0EBDC9;
+  --gradient-3-end: #23CEDA;
+  --gradient-4-start: #9823FE;
+  --gradient-4-end: #AE53FF;
+  --gradient-5-start: #FDA81F;
+  --gradient-5-end: #FFCD57;
+  --gradient-6-start: #FF3B3B;
+  --gradient-6-end: #FF6666;
+
+  /* Bạn cũng có thể định nghĩa sẵn một biến chứa toàn bộ dải gradient */
+  --gradient-1: linear-gradient(180deg, var(--gradient-1-start) 0%, var(--gradient-1-end) 100%);
+  --gradient-2: linear-gradient(180deg, var(--gradient-2-start) 0%, var(--gradient-2-end) 100%);
+  --gradient-3: linear-gradient(180deg, var(--gradient-3-start) 0%, var(--gradient-3-end) 100%);
+  --gradient-4: linear-gradient(180deg, var(--gradient-4-start) 0%, var(--gradient-4-end) 100%);
+  --gradient-5: linear-gradient(180deg, var(--gradient-5-start) 0%, var(--gradient-5-end) 100%);
+  --gradient-6: linear-gradient(180deg, var(--gradient-6-start) 0%, var(--gradient-6-end) 100%);
+}
+
+@utility bg-gradient-1 {
+  background-image: var(--gradient-1);
+}
+
+@utility bg-gradient-2 {
+  background-image: var(--gradient-2);
+}
+
+@utility bg-gradient-3 {
+  background-image: var(--gradient-3);
+}
+
+@utility bg-gradient-4 {
+  background-image: var(--gradient-4);
+}
+
+@utility bg-gradient-5 {
+  background-image: var(--gradient-5);
+}
+
+@utility bg-gradient-6 {
+  background-image: var(--gradient-6);
 }
 
 /*
