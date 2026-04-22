@@ -22,6 +22,14 @@ const BarChart = dynamic(() => import("../app/(admin)/(others-pages)/(chart)/bar
 
 const Blank = dynamic(() => import("../app/(admin)/(others-pages)/blank/page"), { ssr: false });
 const GoodsImport = dynamic(() => import("../components/goods/ImportGoodsList"), { ssr: false });
+const StaffDashboard = dynamic(() => import("../components/role-views/StaffDashboard"), { ssr: false });
+const ShiftLeadDashboard = dynamic(() => import("../components/role-views/ShiftLeadDashboard"), {
+  ssr: false,
+});
+const StaffTasks = dynamic(() => import("../components/role-views/StaffTasks"), { ssr: false });
+const ShiftLeadTasks = dynamic(() => import("../components/role-views/ShiftLeadTasks"), {
+  ssr: false,
+});
 
 export const ComponentRegistry: Record<string, React.ComponentType<object>> = {
   Dashboard: Dashboard,
@@ -37,6 +45,10 @@ export const ComponentRegistry: Record<string, React.ComponentType<object>> = {
   BarChart: BarChart,
   Blank: Blank,
   GoodsImport: GoodsImport,
+  StaffDashboard: StaffDashboard,
+  ShiftLeadDashboard: ShiftLeadDashboard,
+  StaffTasks: StaffTasks,
+  ShiftLeadTasks: ShiftLeadTasks,
 };
 
 export const getComponent = (key: string) => {

@@ -2,13 +2,8 @@ import React from "react";
 import {
   OilStaffIcon,
   OilCarIcon,
-  CalenderIcon,
-  ListIcon,
-  TableIcon,
-  PieChartIcon,
-  BoxCubeIcon,
-  PlugInIcon,
 } from "../icons/index";
+import { UserRole } from "@/types/auth";
 
 export type MenuItem = {
   id: string;
@@ -31,7 +26,7 @@ export type Module = {
   }[];
 };
 
-export const modules: Module[] = [
+const managerModules: Module[] = [
   {
     id: "module-shift",
     name: "Quản lý ca bể chứa",
@@ -65,41 +60,143 @@ export const modules: Module[] = [
       }
     ]
   },
+];
+
+const shiftLeadModules: Module[] = [
   {
-    id: "module-goods",
-    name: "Quản lý Hàng hóa",
-    icon: <OilCarIcon />,
+    id: "module-shift",
+    name: "Quản lý ca bể chứa",
+    icon: <OilStaffIcon />,
     sections: [
       {
-        title: "Nhập xuất kho",
+        title: "Nghiệp vụ ca trưởng",
         items: [
           {
-            id: "goods-receive-xds",
-            name: "Nhập hàng vào bể (XDS)",
+            id: "shift-lead-overview",
+            name: "Tổng quan ca trực",
+            path: "/",
+            componentKey: "ShiftLeadDashboard",
+            icon: null,
+          },
+          {
+            id: "shift-lead-approve",
+            name: "Xác nhận số liệu đầu ca",
+            path: "/calendar",
+            componentKey: "ShiftLeadTasks",
+            icon: null,
+          },
+          {
+            id: "shift-lead-checklist",
+            name: "Checklist vận hành ca",
             path: "/basic-tables",
-            componentKey: "GoodsImport",
-            icon: null
+            componentKey: "ShiftLeadTasks",
+            icon: null,
           },
-          {
-            id: "goods-receive-other",
-            name: "Nhập hàng hóa khác",
-            path: "/blank-3",
-            componentKey: "Blank",
-            icon: null
-          },
-          {
-            id: "goods-promotion",
-            name: "Nhập hàng khuyến mại",
-            path: "/blank-4",
-            componentKey: "Blank",
-            icon: null
-          },
-        ]
-      }
-    ]
+        ],
+      },
+    ],
   },
 ];
 
+const staffModules: Module[] = [
+  {
+    id: "module-shift",
+    name: "Nghiệp vụ nhân viên",
+    icon: <OilStaffIcon />,
+    sections: [
+      {
+        title: "Vận hành ca",
+        items: [
+          {
+            id: "staff-dashboard",
+            name: "Màn hình làm việc",
+            path: "/",
+            componentKey: "StaffDashboard",
+            icon: null,
+          },
+          {
+            id: "staff-checklist",
+            name: "Checklist đầu ca",
+            path: "/calendar",
+            componentKey: "StaffTasks",
+            icon: null,
+          },
+          {
+            id: "staff-report",
+            name: "Nhật ký cuối ca",
+            path: "/basic-tables",
+            componentKey: "StaffTasks",
+            icon: null,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "module-goods",
+    name: "Hàng hóa tại cột bơm",
+    icon: <OilCarIcon />,
+    sections: [
+      {
+        title: "Tác vụ nhanh",
+        items: [
+          {
+            id: "staff-goods-receive",
+            name: "Ghi nhận nhập hàng",
+            path: "/basic-tables",
+            componentKey: "StaffTasks",
+            icon: null,
+          },
+        ],
+      },
+    ],
+  },
+];
+
+export const ROLE_MODULES: Record<UserRole, Module[]> = {
+  nhan_vien: staffModules,
+  ca_truong: shiftLeadModules,
+  cua_hang_truong: managerModules,
+};
+
+export const getModulesByRole = (role?: UserRole): Module[] => {
+  if (!role) return ROLE_MODULES.cua_hang_truong;
+  return ROLE_MODULES[role];
+};
+
+const findFirstItem = (items: MenuItem[]): MenuItem | null => {
+  for (const item of items) {
+    if (item.subItems?.length) {
+      const nestedFirst = findFirstItem(item.subItems);
+      if (nestedFirst) return nestedFirst;
+      continue;
+    }
+
+    if (item.path) return item;
+  }
+
+  return null;
+};
+
+export const getDefaultMenuItemByRole = (role?: UserRole): MenuItem => {
+  const modules = getModulesByRole(role);
+
+  for (const moduleItem of modules) {
+    for (const section of moduleItem.sections) {
+      const firstItem = findFirstItem(section.items);
+      if (firstItem) return firstItem;
+    }
+  }
+
+  return {
+    id: "fallback-dashboard",
+    name: "Dashboard",
+    path: "/",
+    componentKey: "Dashboard",
+  };
+};
+
 // Re-export for compatibility
-export const navItems = modules[0].sections[0].items;
-export const othersItems = modules[0].sections[0].items;
+export const modules = managerModules;
+export const navItems = managerModules[0].sections[0].items;
+export const othersItems = managerModules[0].sections[0].items;

@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useState, startTransition } from "react";
-import { usePathname } from "next/navigation";
+import React, { useEffect, useMemo, useState, startTransition } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { useLayoutStore } from "@/store/useLayoutStore";
-import { modules, MenuItem } from "@/layout/menu-config";
+import { getModulesByRole, MenuItem } from "@/layout/menu-config";
 import AppHeader from "@/layout/AppHeader";
 import AppSidebar from "@/layout/AppSidebar";
 import Backdrop from "@/layout/Backdrop";
@@ -11,6 +11,7 @@ import TabBar from "@/components/layout/TabBar";
 import { getComponent } from "@/layout/ComponentRegistry";
 import BottomNav from "@/components/layout/BottomNav";
 import MobileSidebar from "@/components/layout/MobileSidebar";
+import { useAuthStore } from "@/store/useAuthStore";
 
 export default function AdminLayout({
   children,
@@ -18,8 +19,11 @@ export default function AdminLayout({
   children: React.ReactNode;
 }) {
   const { sidebarMode, isMobileOpen, openTabs, activeTabId, addTab } = useLayoutStore();
+  const router = useRouter();
   const [isHydrated, setIsHydrated] = useState(false);
   const pathname = usePathname();
+  const { user, isAuthenticated, hasHydrated } = useAuthStore();
+  const modules = useMemo(() => getModulesByRole(user?.role), [user?.role]);
 
   // Handle hydration only once on mount
   useEffect(() => {
@@ -30,7 +34,15 @@ export default function AdminLayout({
 
   // Sync initial URL to tab after hydration
   useEffect(() => {
+    if (!hasHydrated) return;
+    if (!isAuthenticated) {
+      router.replace("/signin");
+    }
+  }, [hasHydrated, isAuthenticated, router]);
+
+  useEffect(() => {
     if (!isHydrated) return;
+    if (!isAuthenticated) return;
 
     const findItemByPath = (items: MenuItem[], path: string): MenuItem | null => {
       for (const item of items) {
@@ -54,7 +66,7 @@ export default function AdminLayout({
         componentKey: match.componentKey || "Blank",
       });
     }
-  }, [pathname, addTab, isHydrated]);
+  }, [pathname, addTab, isHydrated, modules, isAuthenticated]);
 
   // Dynamic class for main content margin based on sidebar mode
   const mainContentMargin = isMobileOpen
@@ -67,6 +79,10 @@ export default function AdminLayout({
 
   // Get current active tab object
   const activeTab = isHydrated ? openTabs.find((t) => t.id === activeTabId) : null;
+
+  if (!hasHydrated || !isAuthenticated) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-dark-900 transition-colors duration-300">

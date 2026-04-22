@@ -8,6 +8,13 @@ interface Tab {
   componentKey: string;
 }
 
+const DEFAULT_TAB: Tab = {
+  id: "shift-measure",
+  title: "Số đo bể đầu ca",
+  path: "/",
+  componentKey: "Dashboard",
+};
+
 interface LayoutState {
   // Sidebar Slice
   sidebarMode: "slim" | "mega" | "vertical";
@@ -32,6 +39,7 @@ interface LayoutState {
   setActiveTab: (id: string) => void;
   closeOtherTabs: (id: string) => void;
   closeAllTabs: () => void;
+  resetNavigation: (tab: Tab, moduleId: string) => void;
 }
 
 export const useLayoutStore = create<LayoutState>()(
@@ -75,10 +83,8 @@ export const useLayoutStore = create<LayoutState>()(
       })),
 
       // Tab initial state
-      openTabs: [
-        { id: "shift-measure", title: "Số đo bể đầu ca", path: "/", componentKey: "Dashboard" }
-      ],
-      activeTabId: "shift-measure",
+      openTabs: [DEFAULT_TAB],
+      activeTabId: DEFAULT_TAB.id,
 
       addTab: (tab) =>
         set((state) => {
@@ -125,6 +131,12 @@ export const useLayoutStore = create<LayoutState>()(
         set({
           openTabs: [],
           activeTabId: null,
+        }),
+      resetNavigation: (tab, moduleId) =>
+        set({
+          openTabs: [tab],
+          activeTabId: tab.id,
+          activeModuleId: moduleId,
         }),
     }),
     {

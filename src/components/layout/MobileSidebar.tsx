@@ -1,9 +1,10 @@
 "use client";
 import React from "react";
 import { useLayoutStore } from "@/store/useLayoutStore";
-import { modules, MenuItem } from "@/layout/menu-config";
+import { getModulesByRole, MenuItem } from "@/layout/menu-config";
 import { CloseIcon, ChevronDownIcon } from "@/icons";
 import Image from "next/image";
+import { useAuthStore } from "@/store/useAuthStore";
 
 const MobileSidebar: React.FC = () => {
   const { 
@@ -14,8 +15,17 @@ const MobileSidebar: React.FC = () => {
     activeTabId,
     addTab
   } = useLayoutStore();
+  const user = useAuthStore((state) => state.user);
+  const userRole = user?.role;
+  const modules = getModulesByRole(userRole);
 
   const [expandedMenus, setExpandedMenus] = React.useState<string[]>([]);
+
+  React.useEffect(() => {
+    if (!modules.some((module) => module.id === activeModuleId) && modules[0]) {
+      setActiveModule(modules[0].id);
+    }
+  }, [activeModuleId, modules, setActiveModule]);
 
   if (!isMobileOpen) return null;
 
@@ -44,15 +54,15 @@ const MobileSidebar: React.FC = () => {
   return (
     <div className="lg:hidden">
       {/* Backdrop - Separate fixed element */}
-      <div 
-        className={`fixed inset-0 z-[60] bg-gray-900/60 backdrop-blur-sm transition-opacity duration-300 ${isMobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+      <div
+        className={`fixed inset-0 z-60 bg-gray-900/60 backdrop-blur-sm transition-opacity duration-300 ${isMobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
         onClick={toggleMobileSidebar}
       ></div>
 
       {/* Drawer Content - Separate fixed element */}
-      <div className={`fixed top-0 left-0 bottom-0 h-full w-[85%] max-w-[300px] z-[70] bg-white shadow-2xl flex flex-col transition-transform duration-300 ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}`}>
+      <div className={`fixed top-0 left-0 bottom-0 h-full w-[85%] max-w-[300px] z-70 bg-white shadow-2xl flex flex-col transition-transform duration-300 ${isMobileOpen ? "translate-x-0" : "-translate-x-full"}`}>
         {/* Header */}
-        <div className="h-[60px] flex items-center justify-between px-4 border-b border-gray-100 flex-shrink-0">
+        <div className="h-[60px] flex items-center justify-between px-4 border-b border-gray-100 shrink-0">
           <div className="flex items-center gap-2">
              <Image 
                src="/images/logo/egas-logo.svg" 
@@ -74,7 +84,7 @@ const MobileSidebar: React.FC = () => {
         {/* Content Area (Two Columns) */}
         <div className="flex flex-1 overflow-hidden">
           {/* Left Column: Modules */}
-          <div className="w-[72px] bg-gray-50/50 border-r border-gray-100 flex flex-col items-center py-4 gap-4 overflow-y-auto no-scrollbar flex-shrink-0">
+          <div className="w-[72px] bg-gray-50/50 border-r border-gray-100 flex flex-col items-center py-4 gap-4 overflow-y-auto no-scrollbar shrink-0">
             {modules.map((mod) => (
               <button
                 key={mod.id}
@@ -83,7 +93,7 @@ const MobileSidebar: React.FC = () => {
                   setActiveModule(mod.id);
                   setExpandedMenus([]); 
                 }}
-                className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all flex-shrink-0 cursor-pointer ${
+                className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all shrink-0 cursor-pointer ${
                   activeModuleId === mod.id 
                     ? "bg-brand-50 text-brand-500 border border-brand-200" 
                     : "text-gray-400 hover:text-gray-600"
@@ -152,17 +162,21 @@ const MobileSidebar: React.FC = () => {
         {/* Footer Area (Optional User Info) */}
         <div className="p-4 border-t border-gray-100 bg-gray-50/20">
            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full border border-white shadow-sm overflow-hidden flex-shrink-0 bg-brand-100">
+              <div className="w-10 h-10 rounded-full border border-white shadow-sm overflow-hidden shrink-0 bg-brand-100">
                 <Image 
-                  src="/images/user/user-01.jpg" 
+                  src={user?.avatarUrl || "/images/user/user-01.jpg"} 
                   alt="U" 
                   width={40} 
                   height={40} 
                 />
               </div>
               <div className="flex flex-col">
-                <span className="text-[13px] font-bold text-gray-800 leading-none">Nguyễn Văn Anh</span>
-                <span className="text-[10px] text-gray-400 font-medium">ID: 12345678</span>
+                <span className="text-[13px] font-bold text-gray-800 leading-none">
+                  {user?.displayName || "Nguoi dung"}
+                </span>
+                <span className="text-[10px] text-gray-400 font-medium">
+                  ID: {user?.employeeCode || "N/A"}
+                </span>
               </div>
            </div>
         </div>

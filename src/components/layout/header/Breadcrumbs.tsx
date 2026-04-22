@@ -3,12 +3,15 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useLayoutStore } from "@/store/useLayoutStore";
-import { modules, MenuItem } from "@/layout/menu-config";
+import { getModulesByRole, MenuItem } from "@/layout/menu-config";
 import { MenuIcon } from "@/icons";
+import { useAuthStore } from "@/store/useAuthStore";
 
 const Breadcrumbs: React.FC = () => {
   const pathname = usePathname();
   const { openTabs, activeTabId, toggleSlimMode } = useLayoutStore();
+  const userRole = useAuthStore((state) => state.user?.role);
+  const modules = getModulesByRole(userRole);
   const activeTab = openTabs.find(t => t.id === activeTabId);
 
   // Dynamic breadcrumb generation by tracing hierarchy
