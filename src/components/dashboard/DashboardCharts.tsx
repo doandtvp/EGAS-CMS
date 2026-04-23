@@ -48,7 +48,7 @@ const RevenueGrowthChart: React.FC = () => {
   const series = [{ name: "Doanh thu", data: [600, 400, 800, 650, 900, 700, 850] }];
 
   return (
-    <div className="bg-white dark:bg-gray-800 p-6 rounded-[24px] border border-grayscale-10 dark:border-gray-700/50 shadow-dashboard col-span-12 lg:col-span-4">
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-[24px] border border-grayscale-10 dark:border-gray-700/50 shadow-dashboard col-span-12 md:col-span-6 xl:col-span-4">
       <div className="flex items-center justify-between mb-2">
         <h3 className="text-xl font-bold text-gray-800 dark:text-white">Tăng trưởng doanh thu</h3>
         <CustomSelect
@@ -98,7 +98,7 @@ const SalesStructureChart: React.FC = () => {
     colors: ["#EF4444", "#10B981", "#3B82F6", "#F97316", "#FBC02D"],
     labels: ["Dầu nhờn", "Dầu DO", "Ron 95", "E5", "E10"],
     legend: {
-      position: "right",
+      position: window.innerWidth < 1440 ? "bottom" : "right",
       fontSize: "13px",
       markers: { size: 6, offsetX: -4 },
       itemMargin: { vertical: 10, horizontal: 10 },
@@ -133,7 +133,7 @@ const SalesStructureChart: React.FC = () => {
   const series = [15, 25, 25, 20, 15];
 
   return (
-    <div className="bg-white dark:bg-gray-800 p-6 rounded-[24px] border border-grayscale-10 dark:border-gray-700/50 shadow-dashboard col-span-12 lg:col-span-4 translate-y-0">
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-[24px] border border-grayscale-10 dark:border-gray-700/50 shadow-dashboard col-span-12 md:col-span-6 xl:col-span-4 translate-y-0">
       <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-8">
         Cơ cấu tỷ trọng doanh thu theo mặt hàng
       </h3>
@@ -173,7 +173,7 @@ const RevenueByShiftChart: React.FC = () => {
   const series = [{ name: "Doanh thu", data: [650, 890, 730] }];
 
   return (
-    <div className="bg-white dark:bg-gray-800 p-6 rounded-[24px] border border-grayscale-10 dark:border-gray-700/50 shadow-dashboard col-span-12 lg:col-span-4">
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-[24px] border border-grayscale-10 dark:border-gray-700/50 shadow-dashboard col-span-12 md:col-span-6 xl:col-span-4">
       <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">Doanh thu theo ca</h3>
       <div className="text-[10px] text-gray-400 font-medium mb-4">Triệu vnđ</div>
 

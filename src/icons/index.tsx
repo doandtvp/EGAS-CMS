@@ -72,6 +72,7 @@ import ColorTotalAmount from "./color-total-amount.svg";
 import ColorTotalOrder from "./color-total-order.svg";
 import ColorTotalMoney from "./color-total-money.svg";
 import ColorTotalGoods from "./color-total-goods.svg";
+import ArrowFill from "./arrow-fill.svg";
 import BeforePaymentIcon from "./before-payment-icon.svg";
 import AfterPaymentIcon from "./after-payment-icon.svg";
 
@@ -150,6 +151,7 @@ export {
   ColorTotalOrder,
   ColorTotalMoney,
   ColorTotalGoods,
+  ArrowFill,
   BeforePaymentIcon,
   AfterPaymentIcon,
 };

@@ -21,7 +21,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
           color === "red" ? "bg-[#EF4444]" : "bg-[#22C55E]"
         }`}
       >
-        <span className="scale-[127%] ml-[-2px]">
+        <span className="scale-[127%] -ml-0.5 mr-0.5">
           {color === "red" ? (
             <svg
               width="20"
@@ -135,4 +135,3 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({
     </div>
   );
 };
-

@@ -49,9 +49,9 @@ const Button: React.FC<ButtonProps> = ({
       )}
       {...props}
     >
-      {leftIcon && <span className="flex items-center shrink-0">{leftIcon}</span>}
+      {leftIcon && <span className="flex items-center justify-center shrink-0 overflow-visible">{leftIcon}</span>}
       {children}
-      {rightIcon && <span className="flex items-center shrink-0">{rightIcon}</span>}
+      {rightIcon && <span className="flex items-center justify-center shrink-0 overflow-visible">{rightIcon}</span>}
     </button>
   );
 };

@@ -16,10 +16,10 @@ const CustomerDebt: React.FC = () => {
   ];
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-[24px] border border-grayscale-10 dark:border-gray-700/50 shadow-dashboard col-span-12 lg:col-span-4 flex flex-col h-full">
-      <div className="flex items-center justify-between pb-4 mb-4 border-b border-grayscale-10 dark:border-gray-700 p-6">
-        <h3 className="text-[18px] font-semibold leading-[24px] text-[#5D6A7D] dark:text-white">Công nợ khách hàng</h3>
-        <Button variant="outline-orange" size="xs" className="min-w-[105px]">
+    <div className="bg-white dark:bg-gray-800 rounded-[24px] border border-grayscale-10 dark:border-gray-700/50 shadow-dashboard col-span-12 xl:col-span-4 flex flex-col h-full">
+      <div className="flex items-center justify-between gap-4 pb-4 mb-4 border-b border-grayscale-10 dark:border-gray-700 p-6">
+        <h3 className="text-[16px] sm:text-[18px] font-semibold leading-[24px] text-[#5D6A7D] dark:text-white">Công nợ khách hàng</h3>
+        <Button variant="outline-orange" size="xs" className="min-w-[90px] sm:min-w-[105px]">
           Xem tất cả
         </Button>
       </div>

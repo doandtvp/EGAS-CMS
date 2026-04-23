@@ -45,8 +45,8 @@ const managerModules: Module[] = [
           {
             id: "shift-report",
             name: "Danh mục ca bán hàng tại POS",
-            path: "/calendar",
-            componentKey: "Calendar",
+            path: "/pos-report",
+            componentKey: "POSSalesShiftReport",
             icon: null
           },
           {
