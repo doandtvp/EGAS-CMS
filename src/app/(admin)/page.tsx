@@ -9,13 +9,13 @@ import CustomerDebt from "@/components/dashboard/CustomerDebt";
 
 export default function GasDashboard() {
   return (
-    <div className="flex flex-col space-y-2">
+    <div className="flex flex-col space-y-2 p-6">
       <FilterBar />
-      
+
       <DashboardMetrics />
-      
+
       <DashboardCharts />
-      
+
       <div className="grid grid-cols-12 gap-6 pb-12">
         <RevenueTable />
         <CustomerDebt />
@@ -24,4 +24,3 @@ export default function GasDashboard() {
     </div>
   );
 }
-

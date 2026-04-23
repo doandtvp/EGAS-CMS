@@ -13,11 +13,7 @@ import BottomNav from "@/components/layout/BottomNav";
 import MobileSidebar from "@/components/layout/MobileSidebar";
 import { useAuthStore } from "@/store/useAuthStore";
 
-export default function AdminLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const { sidebarMode, isMobileOpen, openTabs, activeTabId, addTab } = useLayoutStore();
   const router = useRouter();
   const [isHydrated, setIsHydrated] = useState(false);
@@ -61,7 +57,7 @@ export default function AdminLayout({
     };
 
     // Correctly flattened search across modules
-    const allItems = modules.flatMap(m => m.sections.flatMap(s => s.items));
+    const allItems = modules.flatMap((m) => m.sections.flatMap((s) => s.items));
     const match = findItemByPath(allItems, pathname);
     if (match) {
       addTab({
@@ -77,10 +73,10 @@ export default function AdminLayout({
   const mainContentMargin = isMobileOpen
     ? "ml-0"
     : sidebarMode === "mega"
-    ? "lg:ml-[304px]"
-    : sidebarMode === "slim"
-    ? "lg:ml-[64px]"
-    : "lg:ml-[304px]";
+      ? "lg:ml-[304px]"
+      : sidebarMode === "slim"
+        ? "lg:ml-[64px]"
+        : "lg:ml-[304px]";
 
   // Get current active tab object
   const activeTab = isHydrated ? openTabs.find((t) => t.id === activeTabId) : null;
@@ -100,20 +96,20 @@ export default function AdminLayout({
 
         {/* Mobile Specific UI */}
         <MobileSidebar />
-        
+
         {/* Main Content Area */}
         <div
           className={`flex-1 transition-all duration-300 ease-in-out ${mainContentMargin} pb-[80px] lg:pb-0`}
         >
           {/* Header */}
           <AppHeader />
-          
+
           {/* Tab Bar Container */}
           {isHydrated && openTabs.length > 0 && <TabBar />}
 
           {/* Page Content area */}
           <main className="p-4 mx-auto max-w-full md:p-6 min-h-[calc(100vh-140px)]">
-            <div className="bg-white dark:bg-gray-900 rounded-3xl min-h-[inherit] shadow-theme-xl overflow-hidden animate-in fade-in zoom-in-95 duration-500 p-6">
+            <div className="bg-white dark:bg-gray-900 rounded-3xl min-h-[inherit] shadow-theme-xl overflow-hidden animate-in fade-in zoom-in-95 duration-500">
               {isHydrated && activeTab ? (
                 /* Dynamic Tab Content */
                 getComponent(activeTab.componentKey)
