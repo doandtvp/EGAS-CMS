@@ -6,6 +6,7 @@ import { Module, MenuItem } from "@/layout/menu-config";
 import { ChevronDownIcon, ToggleSidebarIcon } from "@/icons";
 import AIAssistantWidget from "../../sidebar/AIAssistantWidget";
 import SidebarMenuItem from "./SidebarMenuItem";
+import { cn } from "@/utils";
 
 interface SidebarVerticalProps {
   modules: Module[];
@@ -32,11 +33,10 @@ const SidebarVertical: React.FC<SidebarVerticalProps> = ({
 }) => {
   return (
     <aside
-      className={`
-        fixed top-0 left-0 z-50 h-screen bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 transition-all duration-300 ease-in-out flex flex-col
-        w-[304px]
-        ${isMobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
-      `}
+      className={cn(
+        "fixed top-0 left-0 z-50 h-screen bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 transition-all duration-300 ease-in-out flex flex-col w-[304px]",
+        isMobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+      )}
     >
       <div className="h-[50px] flex items-center justify-between px-6 dark:border-gray-800">
         <Link href="/" className="flex items-center gap-3">
@@ -45,7 +45,7 @@ const SidebarVertical: React.FC<SidebarVerticalProps> = ({
             EGAS
           </span>
         </Link>
-        <button 
+        <button
           onClick={toggleSidebar}
           className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 transition-colors flex-shrink-0"
           title="Thu nhỏ Sidebar"
@@ -59,25 +59,35 @@ const SidebarVertical: React.FC<SidebarVerticalProps> = ({
           <div key={module.id} className="space-y-1">
             <button
               onClick={() => toggleMenu(module.id)}
-              className={`
-                w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group text-sm font-semibold
-                ${activeModuleId === module.id ? "bg-brand-50 text-[#2B82D8] dark:bg-brand-900/20" : "text-gray-800 dark:text-white hover:bg-gray-50"}
-              `}
+              className={cn(
+                "w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group text-sm font-semibold",
+                activeModuleId === module.id
+                  ? "bg-brand-50 text-[#2B82D8] dark:bg-brand-900/20"
+                  : "text-gray-800 dark:text-white hover:bg-gray-50"
+              )}
             >
               <span className="flex-shrink-0 text-brand-500">{module.icon}</span>
               <span className="truncate">{module.name}</span>
-              <ChevronDownIcon className={`ml-auto w-4 h-4 transition-transform ${openMenus.includes(module.id) ? "rotate-180" : ""}`} />
+              <ChevronDownIcon
+                className={cn(
+                  "ml-auto w-4 h-4 transition-transform",
+                  openMenus.includes(module.id) ? "rotate-180" : ""
+                )}
+              />
             </button>
 
-            <div 
-              className={`grid transition-all duration-300 ease-in-out ${
-                openMenus.includes(module.id) ? "grid-rows-[1fr] opacity-100 mt-1" : "grid-rows-[0fr] opacity-0 mt-0"
-              }`}
+            <div
+              className={cn(
+                "grid transition-all duration-300 ease-in-out",
+                openMenus.includes(module.id)
+                  ? "grid-rows-[1fr] opacity-100 mt-1"
+                  : "grid-rows-[0fr] opacity-0 mt-0"
+              )}
             >
               <div className="overflow-hidden space-y-1">
-                {module.sections.map((section) => (
+                {module.sections.map((section) =>
                   section.items.map((item) => (
-                    <SidebarMenuItem 
+                    <SidebarMenuItem
                       key={item.id}
                       item={item}
                       level={1}
@@ -87,7 +97,7 @@ const SidebarVertical: React.FC<SidebarVerticalProps> = ({
                       isItemActive={isItemActive}
                     />
                   ))
-                ))}
+                )}
               </div>
             </div>
           </div>

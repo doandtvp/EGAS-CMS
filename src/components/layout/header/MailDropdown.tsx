@@ -1,6 +1,6 @@
-"use client";
 import React, { useState } from "react";
 import { MoreDotIcon, MailIcon } from "@/icons";
+import { cn } from "@/utils";
 
 const MailDropdown: React.FC = () => {
   const [activeTab, setActiveTab] = useState("all");
@@ -29,17 +29,19 @@ const MailDropdown: React.FC = () => {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`pb-2.5 text-sm font-bold transition-all relative ${
+            className={cn(
+              "pb-2.5 text-sm font-bold transition-all relative",
               activeTab === tab.id
                 ? "text-brand-500 dark:text-brand-400"
                 : "text-gray-400 hover:text-gray-600 dark:hover:text-gray-200"
-            }`}
+            )}
           >
             {tab.label}
             {tab.count > 0 && (
-              <span className={`ml-1.5 px-1.5 py-0.5 rounded-full text-[10px] ${
+              <span className={cn(
+                "ml-1.5 px-1.5 py-0.5 rounded-full text-[10px]",
                 activeTab === tab.id ? "bg-brand-500 text-white" : "bg-gray-100 dark:bg-gray-700 text-gray-500"
-              }`}>
+              )}>
                 {tab.count}
               </span>
             )}

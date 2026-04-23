@@ -1,6 +1,6 @@
-"use client";
 import React from "react";
 import { MoreDotIcon, AlertIcon, GasStationIcon, DollarLineIcon } from "@/icons";
+import { cn } from "@/utils";
 
 const NotificationDropdown: React.FC = () => {
   const notifications = [
@@ -50,7 +50,10 @@ const NotificationDropdown: React.FC = () => {
       <div className="max-h-[380px] overflow-y-auto scrollbar-thin">
         {notifications.map((noti) => (
           <div key={noti.id} className="px-5 py-4 hover:bg-gray-50 dark:hover:bg-gray-700/40 cursor-pointer transition-colors flex gap-4 border-b border-gray-50 dark:border-gray-700/50 last:border-0 relative">
-            <div className={`flex-shrink-0 min-w-[40px] w-10 h-10 rounded-full ${noti.iconBg} flex items-center justify-center`}>
+            <div className={cn(
+              "flex-shrink-0 min-w-[40px] w-10 h-10 rounded-full flex items-center justify-center",
+              noti.iconBg
+            )}>
               {noti.icon}
             </div>
             <div className="flex-grow min-w-0">

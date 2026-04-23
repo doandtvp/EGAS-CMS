@@ -11,6 +11,7 @@ import MailDropdown from "./MailDropdown";
 import NotificationDropdown from "./NotificationDropdown";
 import AppsDropdown from "./AppsDropdown";
 import { useClickOutside } from "@/hooks/useClickOutside";
+import { cn } from "@/utils";
 
 const HeaderActions: React.FC = () => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -32,7 +33,7 @@ const HeaderActions: React.FC = () => {
         <ActionIcon 
           icon={CategoryIcon} 
           onClick={() => toggleDropdown('apps')}
-          className={openDropdown === 'apps' ? 'bg-gray-100 dark:bg-gray-800 text-brand-500' : ''}
+          className={cn(openDropdown === 'apps' && 'bg-gray-100 dark:bg-gray-800 text-brand-500')}
         />
         {openDropdown === 'apps' && <AppsDropdown />}
       </div>
@@ -47,7 +48,7 @@ const HeaderActions: React.FC = () => {
           badgeCount={2} 
           badgeColor="bg-brand-500" 
           onClick={() => toggleDropdown('mail')}
-          className={openDropdown === 'mail' ? 'bg-gray-100 dark:bg-gray-800 text-brand-500' : ''}
+          className={cn(openDropdown === 'mail' && 'bg-gray-100 dark:bg-gray-800 text-brand-500')}
         />
         {openDropdown === 'mail' && <MailDropdown />}
       </div>
@@ -58,7 +59,7 @@ const HeaderActions: React.FC = () => {
           badgeCount={2} 
           badgeColor="bg-orange-500" 
           onClick={() => toggleDropdown('notifications')}
-          className={openDropdown === 'notifications' ? 'bg-gray-100 dark:bg-gray-800 text-brand-500' : ''}
+          className={cn(openDropdown === 'notifications' && 'bg-gray-100 dark:bg-gray-800 text-brand-500')}
         />
         {openDropdown === 'notifications' && <NotificationDropdown />}
       </div>
