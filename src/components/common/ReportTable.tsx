@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import { Table, TableHeader, TableBody, TableRow, TableCell } from "@/components/ui/table";
 import { ArrowFill } from "@/icons";
+import { cn } from "@/utils";
 
 export interface ReportColumn<T = unknown> {
   header?: ReactNode;
@@ -152,7 +153,10 @@ export function ReportTable<T>({
               return (
                 <TableCell
                   key={colIdx}
-                  className={`px-2 py-3 border-r border-b border-[#A0B8CE] dark:border-gray-700 text-right tabular-nums ${col.className || ""}`}
+                  className={cn(
+                    "px-2 py-3 border-r border-b border-[#A0B8CE] dark:border-gray-700 text-right tabular-nums",
+                    col.className
+                  )}
                 >
                   {content}
                 </TableCell>
@@ -178,9 +182,11 @@ export function ReportTable<T>({
             return (
               <TableCell
                 key={colIdx}
-                className={`px-2 py-3 border-r border-b border-[#A0B8CE] dark:border-gray-700 ${
-                  col.align === "right" ? "text-right tabular-nums" : col.align === "center" ? "text-center" : "text-left"
-                } ${col.className || ""}`}
+                className={cn(
+                  "px-2 py-3 border-r border-b border-[#A0B8CE] dark:border-gray-700",
+                  col.align === "right" ? "text-right tabular-nums" : col.align === "center" ? "text-center" : "text-left",
+                  col.className
+                )}
               >
                 {content}
               </TableCell>
@@ -194,7 +200,7 @@ export function ReportTable<T>({
   };
 
   return (
-    <div className={`bg-white dark:bg-gray-800 shadow-dashboard overflow-hidden flex flex-col ${className}`}>
+    <div className={cn("bg-white dark:bg-gray-800 shadow-dashboard overflow-hidden flex flex-col", className)}>
       <style jsx>{`
         .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
@@ -209,7 +215,10 @@ export function ReportTable<T>({
         onMouseLeave={handleMouseLeave}
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}
-        className={`overflow-auto relative custom-scrollbar ${canDragTable ? (isDragging ? "cursor-grabbing select-none" : "cursor-grab") : ""}`} 
+        className={cn(
+          "overflow-auto relative custom-scrollbar",
+          canDragTable && (isDragging ? "cursor-grabbing select-none" : "cursor-grab")
+        )} 
         style={maxHeight ? { maxHeight } : undefined}
       >
         <Table className="w-full text-left border-separate border-spacing-0" style={{ minWidth }}>
@@ -217,7 +226,10 @@ export function ReportTable<T>({
             {headerRows.map((row, rowIndex) => (
               <TableRow
                 key={rowIndex}
-                className={`hover:bg-transparent bg-[#B5D3F1] dark:bg-gray-800 ${rowIndex === 0 ? "h-[56px]" : "h-[48px]"}`}
+                className={cn(
+                  "hover:bg-transparent bg-[#B5D3F1] dark:bg-gray-800",
+                  rowIndex === 0 ? "h-[56px]" : "h-[48px]"
+                )}
               >
                 {row.map((col, colIndex) => {
                   const stickyTop = rowIndex === 0 ? "top-0" : "top-[56px]";
@@ -227,14 +239,18 @@ export function ReportTable<T>({
                       isHeader
                       rowSpan={col.rowSpan}
                       colSpan={col.colSpan}
-                      className={`sticky ${stickyTop} z-10 px-2 py-2 border-r border-b border-[#A0B8CE] text-[12px] font-semibold text-[#5D6A7D] dark:text-gray-200 leading-[16px] whitespace-nowrap bg-[#B5D3F1] dark:bg-[#2C3E50] ${
-                        col.align === "center" ? "text-center" : col.align === "right" ? "text-right" : "text-left"
-                      } ${col.className || ""}`}
+                      className={cn(
+                        "sticky z-10 px-2 py-2 border-r border-b border-[#A0B8CE] text-[12px] font-semibold text-[#5D6A7D] dark:text-gray-200 leading-[16px] whitespace-nowrap bg-[#B5D3F1] dark:bg-[#2C3E50]",
+                        stickyTop,
+                        col.align === "center" ? "text-center" : col.align === "right" ? "text-right" : "text-left",
+                        col.className
+                      )}
                       style={{ backgroundClip: "padding-box" }}
                     >
-                      <div className={`flex items-center gap-1 w-full ${
+                      <div className={cn(
+                        "flex items-center gap-1 w-full",
                         col.align === "center" ? "justify-center" : col.align === "right" ? "justify-end" : "justify-between"
-                      }`}>
+                      )}>
                         <span className="truncate">{col.header}</span>
                         {col.showSort && (
                           <div className="flex flex-col gap-1 shrink-0">
