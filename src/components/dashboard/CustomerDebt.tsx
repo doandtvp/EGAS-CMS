@@ -15,8 +15,8 @@ const CustomerDebt: React.FC = () => {
   ];
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-[24px] border border-[#EDF1F5] dark:border-gray-700/50 shadow-sm col-span-12 lg:col-span-4 flex flex-col h-full">
-      <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#EDF1F5] dark:border-gray-700 p-6">
+    <div className="bg-white dark:bg-gray-800 rounded-[24px] border border-grayscale-10 dark:border-gray-700/50 shadow-dashboard col-span-12 lg:col-span-4 flex flex-col h-full">
+      <div className="flex items-center justify-between pb-4 mb-4 border-b border-grayscale-10 dark:border-gray-700 p-6">
         <h3 className="text-[18px] font-semibold leading-[24px] text-[#5D6A7D] dark:text-white">Công nợ khách hàng</h3>
         <button className="flex items-center justify-center w-[95px] h-[30px] text-[14px] font-normal leading-[20px] text-[#F4831F] border border-[#F4831F] rounded-md bg-[#F4831F]/5 hover:bg-[#F4831F]/10 transition-all active:scale-95">
           Xem tất cả
@@ -25,7 +25,7 @@ const CustomerDebt: React.FC = () => {
 
       <div className="flex-1 space-y-3 px-6">
         {items.map((item, i) => (
-          <div key={i} className="flex items-center justify-between p-3 border border-dashed border-[#EDF1F5] dark:border-gray-700 rounded-[4px] group hover:border-gray-200 transition-all">
+          <div key={i} className="flex items-center justify-between p-3 border border-dashed border-grayscale-10 dark:border-gray-700 rounded-[4px] group hover:border-gray-200 transition-all">
             <div className="flex-1 text-left">
               <h4 className="text-[14px] font-semibold leading-[20px] text-gray-custom dark:text-white group-hover:text-blue-custom transition-colors line-clamp-1">{item.company}</h4>
               <p className="text-[12px] font-normal leading-[16px] text-[#8492B5] mt-1">Công nợ: {item.debt}</p>

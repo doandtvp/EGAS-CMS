@@ -180,6 +180,9 @@
   --shadow-custom-green: 0 4.03px 16.13px 0 rgba(34, 176, 126, 0.3);
   --shadow-custom-yellow: 0 4.03px 16.13px 0 rgba(253, 187, 31, 0.3);
   --shadow-custom-red: 0 4.03px 16.13px 0 rgba(255, 59, 59, 0.3);
+  --shadow-dashboard: 0px 12.09px 24.19px -4.03px rgba(143, 155, 166, 0.08);
+
+  --color-grayscale-10: #EDF1F5;
 
   --z-index-1: 1;
   --z-index-9: 9;
@@ -189,51 +192,12 @@
   --z-index-99999: 99999;
   --z-index-999999: 999999;
 
-  /* Màu bắt đầu và màu kết thúc của gradient */
-  --gradient-1-start: #2B82D8;
-  --gradient-1-end: #389EE8;
-  --gradient-2-start: #F4831F;
-  --gradient-2-end: #FB9D2D;
-  --gradient-3-start: #0EBDC9;
-  --gradient-3-end: #23CEDA;
-  --gradient-4-start: #9823FE;
-  --gradient-4-end: #AE53FF;
-  --gradient-5-start: #FDA81F;
-  --gradient-5-end: #FFCD57;
-  --gradient-6-start: #FF3B3B;
-  --gradient-6-end: #FF6666;
-
-  /* Bạn cũng có thể định nghĩa sẵn một biến chứa toàn bộ dải gradient */
-  --gradient-1: linear-gradient(180deg, var(--gradient-1-start) 0%, var(--gradient-1-end) 100%);
-  --gradient-2: linear-gradient(180deg, var(--gradient-2-start) 0%, var(--gradient-2-end) 100%);
-  --gradient-3: linear-gradient(180deg, var(--gradient-3-start) 0%, var(--gradient-3-end) 100%);
-  --gradient-4: linear-gradient(180deg, var(--gradient-4-start) 0%, var(--gradient-4-end) 100%);
-  --gradient-5: linear-gradient(180deg, var(--gradient-5-start) 0%, var(--gradient-5-end) 100%);
-  --gradient-6: linear-gradient(180deg, var(--gradient-6-start) 0%, var(--gradient-6-end) 100%);
-}
-
-@utility bg-gradient-1 {
-  background-image: var(--gradient-1);
-}
-
-@utility bg-gradient-2 {
-  background-image: var(--gradient-2);
-}
-
-@utility bg-gradient-3 {
-  background-image: var(--gradient-3);
-}
-
-@utility bg-gradient-4 {
-  background-image: var(--gradient-4);
-}
-
-@utility bg-gradient-5 {
-  background-image: var(--gradient-5);
-}
-
-@utility bg-gradient-6 {
-  background-image: var(--gradient-6);
+  --background-image-stat-1: linear-gradient(180deg, #2B82D8 0%, #389EE8 100%);
+  --background-image-stat-2: linear-gradient(180deg, #F4831F 0%, #FB9D2D 100%);
+  --background-image-stat-3: linear-gradient(180deg, #0EBDC9 0%, #23CEDA 100%);
+  --background-image-stat-4: linear-gradient(180deg, #9823FE 0%, #AE53FF 100%);
+  --background-image-stat-5: linear-gradient(180deg, #FDA81F 0%, #FFCD57 100%);
+  --background-image-stat-6: linear-gradient(180deg, #FF3B3B 0%, #FF6666 100%);
 }
 
 /*
