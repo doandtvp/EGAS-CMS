@@ -2,6 +2,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useLayoutStore } from "@/store/useLayoutStore";
 import { CloseIcon, MoreTabsIcon } from "@/icons";
+import { cn } from "@/utils";
 
 const TabBar: React.FC = () => {
   const { openTabs, activeTabId, setActiveTab, removeTab } = useLayoutStore();
@@ -124,23 +125,22 @@ const TabBar: React.FC = () => {
         onMouseLeave={handleMouseLeave}
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}
-        className={`flex-1 flex items-center overflow-x-auto no-scrollbar gap-1 min-w-0 ${
+        className={cn(
+          "flex-1 flex items-center overflow-x-auto no-scrollbar gap-1 min-w-0",
           isDragging ? "cursor-grabbing select-none" : "cursor-grab"
-        }`}
+        )}
       >
         {openTabs.map((tab) => (
           <div
             key={tab.id}
             data-tab-id={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`
-              inline-flex items-center group relative h-9 px-4 cursor-pointer transition-all duration-200 whitespace-nowrap text-sm font-medium
-              ${
-                activeTabId === tab.id
-                  ? "text-brand-500 dark:text-brand-400"
-                  : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
-              }
-            `}
+            className={cn(
+              "inline-flex items-center group relative h-9 px-4 cursor-pointer transition-all duration-200 whitespace-nowrap text-sm font-medium",
+              activeTabId === tab.id
+                ? "text-brand-500 dark:text-brand-400"
+                : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+            )}
           >
             {tab.title}
             
@@ -149,11 +149,12 @@ const TabBar: React.FC = () => {
                 e.stopPropagation();
                 removeTab(tab.id);
               }}
-              className={`ml-2.5 p-0.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-red-500 transition-colors opacity-100 lg:group-hover:opacity-100 ${
+              className={cn(
+                "ml-2.5 p-0.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-red-500 transition-colors opacity-100 lg:group-hover:opacity-100",
                 activeTabId === tab.id
                   ? "text-brand-500 dark:text-brand-400 lg:opacity-100"
                   : "text-gray-400 lg:opacity-0"
-              }`}
+              )}
             >
               <CloseIcon className="w-4 h-4" />
             </button>
@@ -171,7 +172,7 @@ const TabBar: React.FC = () => {
         {hiddenTabs.length > 0 && (
           <button
             onClick={() => setShowDropdown(!showDropdown)}
-            className={`cursor-pointer ${showDropdown ? "rotate-90" : ""}`}
+            className={cn("cursor-pointer transition-transform duration-200", showDropdown && "rotate-90")}
           >
             <MoreTabsIcon/>
           </button>
@@ -191,9 +192,10 @@ const TabBar: React.FC = () => {
                 {hiddenTabs.map((tab) => (
                   <div
                     key={tab.id}
-                    className={`group w-full flex items-center justify-between px-4 py-2 text-sm hover:bg-brand-50 dark:hover:bg-brand-900/20 cursor-pointer transition-colors ${
+                    className={cn(
+                      "group w-full flex items-center justify-between px-4 py-2 text-sm hover:bg-brand-50 dark:hover:bg-brand-900/20 cursor-pointer transition-colors",
                       activeTabId === tab.id ? "bg-brand-50/50 text-brand-500 font-semibold" : "text-gray-700 dark:text-gray-300"
-                    }`}
+                    )}
                     onClick={() => {
                       setActiveTab(tab.id);
                       setShowDropdown(false);

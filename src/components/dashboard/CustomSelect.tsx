@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronDownIcon, CloseIcon } from "@/icons";
+import { cn } from "@/utils";
 
 interface Option {
   label: string;
@@ -58,7 +59,10 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
       <button 
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className={`h-11 w-full flex items-center justify-between gap-2 bg-gray-50/50 dark:bg-gray-800/50 border border-gray-100 dark:border-gray-700 rounded-xl px-4 py-2.5 text-[13px] font-bold text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-[#FF8B1F]/20 cursor-pointer transition-all hover:bg-gray-100/50 dark:hover:bg-gray-700 active:scale-[0.98] ${buttonClassName}`}
+        className={cn(
+          "h-12 w-full flex items-center justify-between gap-2 bg-white dark:bg-gray-800 border border-black/10 dark:border-gray-700 rounded-xl px-3 py-2.5 text-[13px] font-bold text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-[#FF8B1F]/20 cursor-pointer transition-all hover:bg-gray-50 dark:hover:bg-gray-700 active:scale-[0.98]",
+          buttonClassName
+        )}
       >
         <span className={`block truncate text-left flex-1 ${!selectedOption ? "text-gray-400" : ""}`}>
           {selectedOption ? selectedOption.label : placeholder}

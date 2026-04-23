@@ -4,6 +4,7 @@ import {
   ColorKTIcon, 
   ColorCategoryIcon 
 } from "@/icons";
+import { cn } from "@/utils";
 
 interface AppItemProps {
   label: string;
@@ -12,15 +13,19 @@ interface AppItemProps {
 }
 
 const AppItem: React.FC<AppItemProps> = ({ label, icon, active }) => (
-  <button className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all group ${
+  <button className={cn(
+    "flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all group",
     active 
       ? "bg-white dark:bg-gray-800 border-brand-500 shadow-lg shadow-brand-100 dark:shadow-none" 
       : "bg-gray-50/50 dark:bg-gray-700/30 border-transparent hover:bg-white dark:hover:bg-gray-800 hover:border-brand-200 hover:shadow-md"
-  }`}>
-    <div className={`w-14 h-14 mb-2 flex items-center justify-center transition-transform group-hover:scale-110 duration-300`}>
+  )}>
+    <div className="w-14 h-14 mb-2 flex items-center justify-center transition-transform group-hover:scale-110 duration-300">
       {icon}
     </div>
-    <span className={`text-[13px] font-bold ${active ? "text-brand-500" : "text-gray-500 group-hover:text-brand-500"}`}>{label}</span>
+    <span className={cn(
+      "text-[13px] font-bold",
+      active ? "text-brand-500" : "text-gray-500 group-hover:text-brand-500"
+    )}>{label}</span>
   </button>
 );
 

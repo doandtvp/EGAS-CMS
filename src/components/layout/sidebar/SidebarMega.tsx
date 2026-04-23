@@ -7,6 +7,7 @@ import { ToggleSidebarIcon } from "@/icons";
 import AIAssistantWidget from "../../sidebar/AIAssistantWidget";
 import SidebarMenuItem from "./SidebarMenuItem";
 import SidebarTooltip from "./SidebarTooltip";
+import { cn } from "@/utils";
 
 interface SidebarMegaProps {
   modules: Module[];
@@ -35,11 +36,10 @@ const SidebarMega: React.FC<SidebarMegaProps> = ({
 }) => {
   return (
     <aside
-      className={`
-        fixed top-0 left-0 z-50 h-screen bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex transition-all duration-300 ease-in-out
-        w-[304px]
-        ${isMobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
-      `}
+      className={cn(
+        "fixed top-0 left-0 z-50 h-screen bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex transition-all duration-300 ease-in-out w-[304px]",
+        isMobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+      )}
     >
       {/* Pane 1: Slim Bar (Modules) */}
       <div className="w-[64px] flex-shrink-0 border-r border-gray-100 dark:border-gray-800 flex flex-col items-center py-4 gap-4">
@@ -52,14 +52,20 @@ const SidebarMega: React.FC<SidebarMegaProps> = ({
             <SidebarTooltip key={module.id} text={module.name}>
               <button
                 onClick={() => setActiveModule(module.id)}
-                className={`
-                  w-12 h-12 rounded-lg flex items-center justify-center transition-all duration-300 group relative
-                  ${activeModuleId === module.id 
-                    ? "bg-brand-50 text-brand-500 dark:bg-brand-900/20 dark:text-brand-400 opacity-100" 
-                    : "text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-600 opacity-40 hover:opacity-100"}
-                `}
+                className={cn(
+                  "w-12 h-12 rounded-lg flex items-center justify-center transition-all duration-300 group relative",
+                  activeModuleId === module.id
+                    ? "bg-brand-50 text-brand-500 dark:bg-brand-900/20 dark:text-brand-400 opacity-100"
+                    : "text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-gray-600 opacity-40 hover:opacity-100"
+                )}
               >
-                <div className={`${activeModuleId === module.id ? "scale-110 text-brand-500 fill-brand-500" : "group-hover:scale-110 transition-transform"}`}>
+                <div
+                  className={cn(
+                    activeModuleId === module.id
+                      ? "scale-110 text-brand-500 fill-brand-500"
+                      : "group-hover:scale-110 transition-transform"
+                  )}
+                >
                   {module.icon}
                 </div>
               </button>
@@ -75,7 +81,7 @@ const SidebarMega: React.FC<SidebarMegaProps> = ({
             <h2 className="text-theme-xl font-bold text-gray-800 dark:text-white truncate">
               {activeModule.name}
             </h2>
-            <button 
+            <button
               onClick={toggleSidebar}
               className="absolute left-[17%] w-6 h-6 flex items-center justify-center rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-400 transition-colors flex-shrink-0"
               title="Mở toàn bộ Sidebar"
@@ -89,7 +95,7 @@ const SidebarMega: React.FC<SidebarMegaProps> = ({
           {activeModule.sections.map((section, idx) => (
             <React.Fragment key={idx}>
               {section.items.map((item) => (
-                <SidebarMenuItem 
+                <SidebarMenuItem
                   key={item.id}
                   item={item}
                   level={0}

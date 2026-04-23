@@ -5,6 +5,7 @@ import CustomSelect from "@/components/dashboard/CustomSelect";
 import DatePicker from "@/components/form/date-picker";
 import { FilterIcon, DocsIcon, DownloadIcon } from "@/icons";
 import ReportTable, { ReportColumn } from "../common/ReportTable";
+import { cn } from "@/utils";
 
 import {
   ReportItem,
@@ -43,7 +44,7 @@ const POSSalesShiftReport: React.FC = () => {
 
   // Helper render tiêu đề nhóm
   const renderGroupHeader = (item: ReportItem) => (
-    <div className={`flex items-center gap-2 ${item.type === "subgroup" ? "pl-6" : ""}`}>
+    <div className={cn("flex items-center gap-2", item.type === "subgroup" && "pl-6")}>
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
         <path
           d="M10.2628 12.8843L14.9274 7.49531C15.1006 7.29436 14.9444 7 14.6646 7L5.33542 7C5.0556 7 4.89936 7.29436 5.07264 7.49531L9.73723 12.8843C9.87074 13.0386 10.1293 13.0386 10.2628 12.8843Z"
@@ -113,16 +114,17 @@ const POSSalesShiftReport: React.FC = () => {
 
             <Button
               variant="secondary"
-              className={`h-10 w-full 2xl:w-[140px] border border-gray-200 dark:border-gray-700 rounded-xl text-[13px] font-normal justify-between px-3 bg-[#F8F9FB] dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all ${
+              className={cn(
+                "h-10 w-full 2xl:w-[140px] border border-gray-200 dark:border-gray-700 rounded-xl text-[13px] font-normal justify-between px-3 bg-[#F8F9FB] dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all",
                 showAdvanced
                   ? "text-gray-900 dark:text-gray-100 ring-2 ring-brand-500/20"
                   : "text-gray-400"
-              }`}
+              )}
               onClick={() => setShowAdvanced(!showAdvanced)}
             >
               <span>{showAdvanced ? "Đang lọc..." : "Lọc nâng cao"}</span>
               <span
-                className={`text-[14px] transition-colors ${showAdvanced ? "text-yellow-500" : "text-gray-400"}`}
+                className={cn("text-[14px] transition-colors", showAdvanced ? "text-yellow-500" : "text-gray-400")}
               >
                 ★
               </span>
