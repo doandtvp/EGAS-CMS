@@ -57,7 +57,7 @@ const FilterBar: React.FC = () => {
         </div>
 
         {/* Apply Button */}
-        <button className="max-w-[100px] w-full h-12 bg-brand-gradient-2 text-white rounded-xl font-medium text-sm transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+        <button className="max-w-[100px] w-full h-12 bg-stat-2 text-white rounded-xl font-medium text-sm transition-all active:scale-[0.98] flex items-center justify-center gap-2">
           <FilterIcon className="w-5 h-5" />
           Áp dụng
         </button>

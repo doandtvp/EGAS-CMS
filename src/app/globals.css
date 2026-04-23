@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -46,7 +46,7 @@
   --color-brand-200: #c2d6ff;
   --color-brand-300: #9cb9ff;
   --color-brand-400: #7592ff;
-  --color-brand-500: #166BCC;
+  --color-brand-500: #166bcc;
   --color-brand-600: #465fff;
   --color-brand-700: #2a31d8;
   --color-brand-800: #252dae;
@@ -66,10 +66,10 @@
   --color-blue-light-900: #0b4a6f;
   --color-blue-light-950: #062c41;
   --color-blue-bg: #e2e8ee;
-  --color-blue-custom: #2B82D8;
+  --color-blue-custom: #2b82d8;
 
-  --color-gray-bg: #F9F9FD;
-  --color-gray-20: #4A5564;
+  --color-gray-bg: #f9f9fd;
+  --color-gray-20: #4a5564;
   --color-gray-25: #fcfcfd;
   --color-gray-50: #f9fafb;
   --color-gray-100: #f2f4f7;
@@ -77,18 +77,18 @@
   --color-gray-300: #d0d5dd;
   --color-gray-400: #98a2b3;
   --color-gray-500: #667085;
-  --color-gray-600: #4A5568;
+  --color-gray-600: #4a5568;
   --color-gray-700: #344054;
   --color-gray-800: #1d2939;
   --color-gray-900: #101828;
   --color-gray-950: #0c111d;
   --color-gray-dark: #1a2231;
 
-  --color-gray-custom: #4B5563;
+  --color-gray-custom: #4b5563;
   --color-black-custom: #282833;
   --color-gray-dark-custom: #646868;
-  --color-grayscale-30: #5D6A7D;
-  --color-grayscale-50: #687383;  
+  --color-grayscale-30: #5d6a7d;
+  --color-grayscale-50: #687383;
   --color-orange-25: #fffaf5;
   --color-orange-50: #fff6ed;
   --color-orange-100: #ffead5;
@@ -114,9 +114,9 @@
   --color-success-800: #05603a;
   --color-success-900: #054f31;
 
-  --color-green-custom-100: #DCFCE7;
-  --color-green-custom-200: #B9F8CF;
-  --color-green-custom-600: #00A63E;
+  --color-green-custom-100: #dcfce7;
+  --color-green-custom-200: #b9f8cf;
+  --color-green-custom-600: #00a63e;
   --color-success-950: #053321;
 
   --color-error-25: #fffbfa;
@@ -145,36 +145,29 @@
   --color-warning-900: #7a2e0e;
   --color-warning-950: #4e1d09;
 
-  --color-dark-25: #011A42;
+  --color-dark-25: #011a42;
 
   --color-theme-pink-500: #ee46bc;
 
   --color-theme-purple-500: #7a5af8;
 
   --shadow-theme-md:
-    0px 4px 8px -2px rgba(16, 24, 40, 0.1),
-    0px 2px 4px -2px rgba(16, 24, 40, 0.06);
+    0px 4px 8px -2px rgba(16, 24, 40, 0.1), 0px 2px 4px -2px rgba(16, 24, 40, 0.06);
   --shadow-theme-lg:
-    0px 12px 16px -4px rgba(16, 24, 40, 0.08),
-    0px 4px 6px -2px rgba(16, 24, 40, 0.03);
-  --shadow-theme-sm:
-    0px 1px 3px 0px rgba(16, 24, 40, 0.1),
-    0px 1px 2px 0px rgba(16, 24, 40, 0.06);
+    0px 12px 16px -4px rgba(16, 24, 40, 0.08), 0px 4px 6px -2px rgba(16, 24, 40, 0.03);
+  --shadow-theme-sm: 0px 1px 3px 0px rgba(16, 24, 40, 0.1), 0px 1px 2px 0px rgba(16, 24, 40, 0.06);
   --shadow-theme-xs: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
   --shadow-theme-xl:
-    0px 20px 24px -4px rgba(16, 24, 40, 0.08),
-    0px 8px 8px -4px rgba(16, 24, 40, 0.03);
+    0px 20px 24px -4px rgba(16, 24, 40, 0.08), 0px 8px 8px -4px rgba(16, 24, 40, 0.03);
   --shadow-datepicker: -5px 0 0 #262d3c, 5px 0 0 #262d3c;
   --shadow-focus-ring: 0px 0px 0px 4px rgba(70, 95, 255, 0.12);
   --shadow-slider-navigation:
     0px 1px 2px 0px rgba(16, 24, 40, 0.1), 0px 1px 3px 0px rgba(16, 24, 40, 0.1);
   --shadow-tooltip:
-    0px 4px 6px -2px rgba(16, 24, 40, 0.05),
-    -8px 0px 20px 8px rgba(16, 24, 40, 0.05);
+    0px 4px 6px -2px rgba(16, 24, 40, 0.05), -8px 0px 20px 8px rgba(16, 24, 40, 0.05);
 
-  --drop-shadow-4xl:
-    0 35px 35px rgba(0, 0, 0, 0.25), 0 45px 65px rgba(0, 0, 0, 0.15);
-  
+  --drop-shadow-4xl: 0 35px 35px rgba(0, 0, 0, 0.25), 0 45px 65px rgba(0, 0, 0, 0.15);
+
   --shadow-custom-blue: 0 4.03px 16.13px 0 rgba(2, 180, 250, 0.3);
   --shadow-custom-orange: 0 4.03px 16.13px 0 rgba(255, 129, 16, 0.3);
   --shadow-custom-green: 0 4.03px 16.13px 0 rgba(34, 176, 126, 0.3);
@@ -182,7 +175,7 @@
   --shadow-custom-red: 0 4.03px 16.13px 0 rgba(255, 59, 59, 0.3);
   --shadow-dashboard: 0px 12.09px 24.19px -4.03px rgba(143, 155, 166, 0.08);
 
-  --color-grayscale-10: #EDF1F5;
+  --color-grayscale-10: #edf1f5;
 
   --z-index-1: 1;
   --z-index-9: 9;
@@ -192,12 +185,31 @@
   --z-index-99999: 99999;
   --z-index-999999: 999999;
 
-  --background-image-stat-1: linear-gradient(180deg, #2B82D8 0%, #389EE8 100%);
-  --background-image-stat-2: linear-gradient(180deg, #F4831F 0%, #FB9D2D 100%);
-  --background-image-stat-3: linear-gradient(180deg, #0EBDC9 0%, #23CEDA 100%);
-  --background-image-stat-4: linear-gradient(180deg, #9823FE 0%, #AE53FF 100%);
-  --background-image-stat-5: linear-gradient(180deg, #FDA81F 0%, #FFCD57 100%);
-  --background-image-stat-6: linear-gradient(180deg, #FF3B3B 0%, #FF6666 100%);
+  --background-image-stat-1: linear-gradient(180deg, #2b82d8 0%, #389ee8 100%);
+  --background-image-stat-2: linear-gradient(180deg, #f4831f 0%, #fb9d2d 100%);
+  --background-image-stat-3: linear-gradient(180deg, #0ebdc9 0%, #23ceda 100%);
+  --background-image-stat-4: linear-gradient(180deg, #9823fe 0%, #ae53ff 100%);
+  --background-image-stat-5: linear-gradient(180deg, #fda81f 0%, #ffcd57 100%);
+  --background-image-stat-6: linear-gradient(180deg, #ff3b3b 0%, #ff6666 100%);
+}
+
+@utility bg-stat-1 {
+  background-image: var(--background-image-stat-1);
+}
+@utility bg-stat-2 {
+  background-image: var(--background-image-stat-2);
+}
+@utility bg-stat-3 {
+  background-image: var(--background-image-stat-3);
+}
+@utility bg-stat-4 {
+  background-image: var(--background-image-stat-4);
+}
+@utility bg-stat-5 {
+  background-image: var(--background-image-stat-5);
+}
+@utility bg-stat-6 {
+  background-image: var(--background-image-stat-6);
 }
 
 /*
@@ -312,8 +324,6 @@
   background-color: #344054;
 }
 
-
-
 @layer utilities {
   /* For Remove Date Icon */
   input[type="date"]::-webkit-inner-spin-button,
@@ -427,9 +437,7 @@
   background-image: none !important;
   font-weight: 500;
 }
-.flatpickr-month
-.flatpickr-current-month
-.flatpickr-monthDropdown-months:focus {
+.flatpickr-month .flatpickr-current-month .flatpickr-monthDropdown-months:focus {
   outline: none !important;
   border: 0 !important;
 }
@@ -459,7 +467,9 @@ span.flatpickr-weekday,
   @apply !bg-none;
 }
 .flatpickr-day.inRange {
-  box-shadow: -5px 0 0 #f9fafb, 5px 0 0 #f9fafb !important;
+  box-shadow:
+    -5px 0 0 #f9fafb,
+    5px 0 0 #f9fafb !important;
   @apply dark:!shadow-datepicker;
 }
 .flatpickr-day.inRange,
@@ -576,9 +586,7 @@ span.flatpickr-weekday,
 .fc-header-toolbar.fc-toolbar .fc-toolbar-chunk:last-child .fc-button {
   @apply !h-auto !w-auto rounded-md !border-0 bg-transparent !px-5 !py-2 text-sm font-medium text-gray-500 hover:text-gray-700 focus:shadow-none! dark:text-gray-400;
 }
-.fc-header-toolbar.fc-toolbar
-  .fc-toolbar-chunk:last-child
-  .fc-button.fc-button-active {
+.fc-header-toolbar.fc-toolbar .fc-toolbar-chunk:last-child .fc-button.fc-button-active {
   @apply text-gray-900 bg-white dark:bg-gray-800 dark:text-white;
 }
 .fc-theme-standard th {
@@ -778,7 +786,8 @@ span.flatpickr-weekday,
 
 .task {
   border-radius: 0.75rem;
-  box-shadow: 0 1px 3px 0 rgba(16, 24, 40, 0.1),
+  box-shadow:
+    0 1px 3px 0 rgba(16, 24, 40, 0.1),
     0 1px 2px 0 rgba(16, 24, 40, 0.06);
   opacity: 0.8;
   cursor: grabbing; /* Changes the cursor to indicate dragging */

@@ -135,7 +135,7 @@ const DashboardMetrics: React.FC = () => {
         isUp={true}
         icon={<ColorTotalMoney className="w-6 h-6" />}
         themeClass="border border-[#02B4FA]/30 bg-[#02B4FA]/5"
-        iconBg="bg-brand-gradient-3"
+        iconBg="bg-stat-3"
         iconShadow="shadow-custom-blue"
       />
       <StatCard
@@ -147,7 +147,7 @@ const DashboardMetrics: React.FC = () => {
         isUp={false}
         icon={<ColorTotalGoods className="w-6 h-6" />}
         themeClass="border border-[#FF8110]/30 bg-[#FF8110]/5 dark:bg-orange-900/20 dark:border-orange-800/50"
-        iconBg="bg-brand-gradient-2"
+        iconBg="bg-stat-2"
         iconShadow="shadow-custom-orange"
       />
       <StatCard
@@ -159,7 +159,7 @@ const DashboardMetrics: React.FC = () => {
         isUp={true}
         icon={<ColorTotalOrder className="w-6 h-6" />}
         themeClass="border border-[#22B07E]/30 bg-[#22B07E]/5 dark:bg-green-900/20 dark:border-green-800/50"
-        iconBg="bg-brand-gradient-4"
+        iconBg="bg-stat-4"
         iconShadow="shadow-custom-green"
       />
       <StatCard
@@ -171,7 +171,7 @@ const DashboardMetrics: React.FC = () => {
         isUp={false}
         icon={<ColorTotalAmount className="w-6 h-6" />}
         themeClass="border border-[#FDBB1F]/30 bg-[#FDBB1F]/5 dark:bg-yellow-900/20 dark:border-yellow-800/50"
-        iconBg="bg-brand-gradient-5"
+        iconBg="bg-stat-5"
         iconShadow="shadow-custom-yellow"
       />
       <StatCard
@@ -184,7 +184,7 @@ const DashboardMetrics: React.FC = () => {
         isNeutral={true}
         icon={<ColorWarning className="w-6 h-6" />}
         themeClass="border border-[#FF5B5B]/30 bg-[#FF5B5B]/5 dark:bg-red-900/20 dark:border-red-800/50"
-        iconBg="bg-brand-gradient-6"
+        iconBg="bg-stat-6"
         iconShadow="shadow-custom-red"
       />
     </div>
