@@ -6,275 +6,69 @@ import DatePicker from "@/components/form/date-picker";
 import { FilterIcon, DocsIcon, DownloadIcon, ArrowFill } from "@/icons";
 import ReportTable, { ReportColumn } from "../common/ReportTable";
 import { TableRow, TableCell } from "@/components/ui/table";
+import {
+  ReportItem,
+  HEADER_ROWS,
+  REPORT_DATA,
+  ADVANCED_FILTERS_CONFIG,
+  FOOTER_TOTALS,
+} from "./mock-data";
 
 const POSSalesShiftReport: React.FC = () => {
-  const [filterValues, setFilterValues] = useState({
-    quickSelect: "Chọn nhanh",
-    warehouse: "Chọn kho",
+  interface FilterValues {
+    quickSelect: string;
+    warehouse: string;
+    category: string;
+    productGroup: string;
+    product: string;
+    ioGroup: string;
+    target: string;
+    docType: string;
+    priceGroup: string;
+  }
+
+  const [filterValues, setFilterValues] = useState<FilterValues>({
+    quickSelect: "Hôm nay",
+    warehouse: "Kho 1",
+    category: "Chọn ngành hàng",
+    productGroup: "Chọn nhóm hàng hóa",
+    product: "Chọn hàng hóa",
+    ioGroup: "Chọn nhóm nhập xuất",
+    target: "Chọn đối tượng",
+    docType: "Chọn loại chứng từ",
+    priceGroup: "Chọn nhóm giá",
   });
 
-  // Định nghĩa Header cho báo cáo POS (2 tầng)
-  const headerRows: ReportColumn[][] = [
-    [
-      {
-        header: "Mã hàng hóa",
-        rowSpan: 2,
-        showSort: true,
-        className: "w-[110px]",
-      },
-      {
-        header: "Tên hàng hóa",
-        rowSpan: 2,
-        className: "w-[200px]",
-        showSort: true,
-      },
-      { header: "Số lượng", colSpan: 7, align: "center" },
-      { header: "Giá BQ", rowSpan: 2, showSort: true, className: "w-[100px]" },
-      { header: "Tiền hàng", rowSpan: 2, showSort: true, className: "w-[130px]" },
-      { header: "Thuế GTGT", rowSpan: 2, showSort: true, className: "w-[110px]" },
-      { header: "Thuế MT", rowSpan: 2, showSort: true, className: "w-[110px]" },
-      { header: "Tổng cộng", rowSpan: 2, align: "right", showSort: true, className: "w-[150px]" },
-    ],
-    [
-      { header: "Bán tiền ngay CHXD", className: "text-[11px] w-[100px]" },
-      { header: "Công nợ tại CHXD", className: "text-[11px] w-[100px]" },
-      { header: "Bán khác", className: "text-[11px] w-[90px]", showSort: true },
-      { header: "Xuất KM", className: "text-[11px] w-[90px]", showSort: true },
-      { header: "CK thương mại", className: "text-[11px] w-[110px]" },
-      { header: "Bán lẻ thu lẻ", className: "text-[11px] w-[110px]", showSort: true },
-      { header: "Total", className: "text-[11px] w-[100px]", showSort: true },
-    ],
-  ];
+  const [showAdvanced, setShowAdvanced] = useState(false);
 
-  // Mock data đầy đủ theo thiết kế
-  const reportData = [
-    // NHÓM: XĂNG DẦU SÁNG
-    {
-      type: "group",
-      id: "g1",
-      name: "Xăng dầu sáng",
-      values: [
-        "313.420.268",
-        "240.073.121",
-        "1.063.148.394",
-        "2.000",
-        "",
-        "732.558.580",
-        "20.345.200.363",
-        "100.000.000",
-        "35.000.000.000",
-        "3.000.000.000",
-        "3.000.000.000",
-        "65.000.000.000",
-      ],
-    },
-    {
-      type: "subgroup",
-      id: "sg1",
-      name: "Nhiên liệu xăng",
-      parentId: "g1",
-      values: [
-        "313.420.268",
-        "240.073.121",
-        "1.063.148.394",
-        "2.000",
-        "",
-        "732.558.580",
-        "19.345.200.363",
-        "100.000.000",
-        "35.000.000.000",
-        "3.000.000.000",
-        "3.000.000.000",
-        "65.000.000.000",
-      ],
-    },
-    {
-      type: "leaf",
-      id: "l1",
-      code: "0201004",
-      name: "Xăng E5 RON 92 mức 2",
-      values: [
-        "13.420.268",
-        "13.420.268",
-        "13.420.268",
-        "",
-        "",
-        "13.420.268",
-        "13.420.268",
-        "13.420.268",
-        "13.420.268",
-        "13.420.268",
-        "13.420.268",
-        "13.420.268",
-      ],
-    },
-    {
-      type: "leaf",
-      id: "l2",
-      code: "0201005",
-      name: "Xăng RON 95-III",
-      values: [
-        "13.420.268",
-        "13.420.268",
-        "13.420.268",
-        "",
-        "",
-        "13.420.268",
-        "13.420.268",
-        "13.420.268",
-        "13.420.268",
-        "13.420.268",
-        "13.420.268",
-        "13.420.268",
-      ],
-    },
-    {
-      type: "subgroup",
-      id: "sg2",
-      name: "Nhiên liệu Diezen",
-      parentId: "g1",
-      values: [
-        "313.420.268",
-        "240.073.121",
-        "1.063.148.394",
-        "2.000",
-        "",
-        "732.558.580",
-        "1.345.200.363",
-        "100.000.000",
-        "35.000.000.000",
-        "3.000.000.000",
-        "3.000.000.000",
-        "65.000.000.000",
-      ],
-    },
-    {
-      type: "leaf",
-      id: "l3",
-      code: "0202001",
-      name: "DO 0,05S-II",
-      values: [
-        "13.420.268",
-        "13.420.268",
-        "13.420.268",
-        "",
-        "",
-        "13.420.268",
-        "13.420.268",
-        "13.420.268",
-        "13.420.268",
-        "13.420.268",
-        "13.420.268",
-        "13.420.268",
-      ],
-    },
+  // Helper render tiêu đề nhóm
+  const renderGroupHeader = (item: ReportItem) => (
+    <div className={`flex items-center gap-2 ${item.type === "subgroup" ? "pl-6" : ""}`}>
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+        <path
+          d="M10.2628 12.8843L14.9274 7.49531C15.1006 7.29436 14.9444 7 14.6646 7L5.33542 7C5.0556 7 4.89936 7.29436 5.07264 7.49531L9.73723 12.8843C9.87074 13.0386 10.1293 13.0386 10.2628 12.8843Z"
+          fill="#5D6A7D"
+          fillOpacity="0.5"
+        />
+      </svg>
+      {item.name}
+    </div>
+  );
 
-    // NHÓM: DẦU MỠ NHỜN
-    {
-      type: "group",
-      id: "g2",
-      name: "Dầu mỡ nhờn",
-      values: [
-        "313.420.268",
-        "240.073.121",
-        "1.063.148.394",
-        "2.000",
-        "",
-        "732.558.580",
-        "20.345.200.363",
-        "100.000.000",
-        "35.000.000.000",
-        "3.000.000.000",
-        "3.000.000.000",
-        "65.000.000.000",
-      ],
-    },
-    {
-      type: "subgroup",
-      id: "sg3",
-      name: "Dầu nhờn động cơ",
-      parentId: "g2",
-      values: [
-        "313.420.268",
-        "240.073.121",
-        "1.063.148.394",
-        "2.000",
-        "",
-        "732.558.580",
-        "19.345.200.363",
-        "100.000.000",
-        "35.000.000.000",
-        "3.000.000.000",
-        "3.000.000.000",
-        "65.000.000.000",
-      ],
-    },
-    {
-      type: "leaf",
-      id: "l4",
-      code: "0301001",
-      name: "Dầu nhờn Petrolimex",
-      values: [
-        "13.420.268",
-        "13.420.268",
-        "13.420.268",
-        "",
-        "",
-        "13.420.268",
-        "13.420.268",
-        "13.420.268",
-        "13.420.268",
-        "13.420.268",
-        "13.420.268",
-        "13.420.268",
-      ],
-    },
-    {
-      type: "subgroup",
-      id: "sg4",
-      name: "Dầu nhờn truyền động",
-      parentId: "g2",
-      values: [
-        "313.420.268",
-        "240.073.121",
-        "1.063.148.394",
-        "2.000",
-        "",
-        "732.558.580",
-        "19.345.200.363",
-        "100.000.000",
-        "35.000.000.000",
-        "3.000.000.000",
-        "3.000.000.000",
-        "65.000.000.000",
-      ],
-    },
-    {
-      type: "subgroup",
-      id: "sg5",
-      name: "Dầu phanh",
-      parentId: "g2",
-      values: [
-        "313.420.268",
-        "240.073.121",
-        "1.063.148.394",
-        "2.000",
-        "",
-        "732.558.580",
-        "19.345.200.363",
-        "100.000.000",
-        "35.000.000.000",
-        "3.000.000.000",
-        "3.000.000.000",
-        "65.000.000.000",
-      ],
-    },
+  // Định nghĩa các cột dữ liệu cho hàng tiêu chuẩn (leaf rows)
+  const bodyColumns: ReportColumn<ReportItem>[] = [
+    { accessor: "code", className: "pl-12" },
+    { accessor: "name" },
+    ...Array.from({ length: 12 }).map((_, i) => ({
+      accessor: (item: ReportItem) => item.values[i],
+      align: "right" as const,
+    })),
   ];
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-4">
       {/* Header & Filter Bar */}
-      <div className="bg-white dark:bg-gray-800 p-4">
+      <div className="bg-white dark:bg-gray-800 p-4 rounded-xl dark:border-gray-700">
         <div className="flex items-center justify-between gap-4">
           <div className="shrink-0">
             <h1 className="text-[18px] font-bold text-gray-800 dark:text-white leading-tight">
@@ -285,7 +79,7 @@ const POSSalesShiftReport: React.FC = () => {
             </p>
           </div>
 
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+          <div className="flex items-center gap-2 flex-wrap">
             <CustomSelect
               options={["Hôm nay", "Hôm qua", "Tuần này"]}
               value={filterValues.quickSelect}
@@ -309,19 +103,40 @@ const POSSalesShiftReport: React.FC = () => {
               buttonClassName="bg-white h-10 font-normal"
             />
 
-            <div className="relative min-w-[150px]">
-              <input
-                type="text"
-                placeholder="Lọc nâng cao"
-                className="h-10 pl-3 pr-8 border border-gray-200 dark:border-gray-700 rounded-xl bg-[#F8F9FB] dark:bg-gray-900 text-[13px] focus:outline-none focus:ring-2 focus:ring-brand-500/20 w-full"
-              />
-              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">★</span>
-            </div>
+            <Button
+              variant="secondary"
+              className={`h-10 min-w-[150px] border border-gray-200 dark:border-gray-700 rounded-xl text-[13px] font-normal justify-between px-3 bg-[#F8F9FB] dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all ${
+                showAdvanced
+                  ? "text-gray-900 dark:text-gray-100 ring-2 ring-brand-500/20"
+                  : "text-gray-400"
+              }`}
+              onClick={() => setShowAdvanced(!showAdvanced)}
+            >
+              <span>{showAdvanced ? "Đang lọc..." : "Lọc nâng cao"}</span>
+              <span
+                className={`text-[14px] transition-colors ${showAdvanced ? "text-yellow-500" : "text-gray-400"}`}
+              >
+                ★
+              </span>
+            </Button>
 
             <Button
               variant="ghost"
               size="sm"
               className="h-10 w-10 p-0 text-gray-400 bg-gray-50 dark:bg-gray-700/50 rounded-xl"
+              onClick={() =>
+                setFilterValues({
+                  quickSelect: "Hôm nay",
+                  warehouse: "Kho 1",
+                  category: "Chọn ngành hàng",
+                  productGroup: "Chọn nhóm hàng hóa",
+                  product: "Chọn hàng hóa",
+                  ioGroup: "Chọn nhóm nhập xuất",
+                  target: "Chọn đối tượng",
+                  docType: "Chọn loại chứng từ",
+                  priceGroup: "Chọn nhóm giá",
+                })
+              }
             >
               <span className="text-xl">↺</span>
             </Button>
@@ -354,124 +169,50 @@ const POSSalesShiftReport: React.FC = () => {
             </Button>
           </div>
         </div>
+
+        {/* Advanced Filter Bar */}
+        {showAdvanced && (
+          <div className="bg-[#E9EDF2] dark:bg-gray-700/30 p-4 mt-4 rounded-xl flex items-end gap-4 relative animate-in fade-in slide-in-from-top-2">
+            <div className="grid grid-cols-7 gap-4 flex-1">
+              {ADVANCED_FILTERS_CONFIG.map((item) => (
+                <div key={item.id} className="flex flex-col gap-1.5">
+                  <label className="text-[12px] font-semibold text-[#5D6A7D] dark:text-gray-300">
+                    {item.label}
+                  </label>
+                  <CustomSelect
+                    options={[item.placeholder, ...item.options]}
+                    value={filterValues[item.id as keyof FilterValues]}
+                    onChange={(val) => setFilterValues({ ...filterValues, [item.id]: val })}
+                    width="100%"
+                    buttonClassName="bg-white h-10 font-normal border-none shadow-sm rounded-lg"
+                  />
+                </div>
+              ))}
+            </div>
+            <button
+              onClick={() => setShowAdvanced(false)}
+              className="absolute -top-2 -right-2 w-6 h-6 bg-white dark:bg-gray-800 rounded-full shadow-md flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors border border-gray-100 dark:border-gray-700"
+            >
+              <span className="text-[20px]">✕</span>
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Report Table */}
       <ReportTable
-        headerRows={headerRows}
-        data={reportData}
+        headerRows={HEADER_ROWS}
+        columns={bodyColumns}
+        data={REPORT_DATA}
         maxHeight="calc(100vh - 280px)"
-        renderRow={(item, idx) => {
-          if (item.type === "group") {
-            return (
-              <TableRow key={item.id} className="bg-[#E9F2FB] dark:bg-blue-900/10 font-semibold">
-                <TableCell
-                  colSpan={2}
-                  className="px-2 py-3 border-r border-b border-[#A0B8CE] dark:border-gray-700 font-semibold"
-                >
-                  <div className="flex items-center gap-2">
-                    <ArrowFill className="w-4 h-4" />
-                    {item.name}
-                  </div>
-                </TableCell>
-                {item.values.map((v, i) => (
-                  <TableCell
-                    key={i}
-                    className={`px-2 py-3 border-r border-b border-[#A0B8CE] dark:border-gray-700 text-right tabular-nums`}
-                  >
-                    {v}
-                  </TableCell>
-                ))}
-              </TableRow>
-            );
-          }
-          if (item.type === "subgroup") {
-            return (
-              <TableRow
-                key={item.id}
-                className="bg-white dark:bg-gray-800 font-semibold italic text-gray-700 dark:text-gray-300"
-              >
-                <TableCell
-                  colSpan={2}
-                  className="px-2 py-3 border-r border-b border-[#A0B8CE] dark:border-gray-700 pl-8"
-                >
-                  <div className="flex items-center gap-2">
-                    <ArrowFill className="w-4 h-4" />
-                    {item.name}
-                  </div>
-                </TableCell>
-                {item.values.map((v, i) => (
-                  <TableCell
-                    key={i}
-                    className={`px-2 py-3 border-r border-b border-[#A0B8CE] dark:border-gray-700 text-right tabular-nums`}
-                  >
-                    {v}
-                  </TableCell>
-                ))}
-              </TableRow>
-            );
-          }
-          return (
-            <TableRow
-              key={item.id}
-              className="hover:bg-gray-50 dark:hover:bg-gray-700/30 text-gray-600 dark:text-gray-400"
-            >
-              <TableCell className="px-2 py-3 border-r border-b border-[#A0B8CE] dark:border-gray-700 pl-12">
-                {item.code}
-              </TableCell>
-              <TableCell className="px-2 py-3 border-r border-b border-[#A0B8CE] dark:border-gray-700">
-                {item.name}
-              </TableCell>
-              {item.values.map((v, i) => (
-                <TableCell
-                  key={i}
-                  className={`px-2 py-3 border-r border-b border-[#A0B8CE] dark:border-gray-700 text-right tabular-nums`}
-                >
-                  {v}
-                </TableCell>
-              ))}
-            </TableRow>
-          );
-        }}
-        footer={
-          <TableRow className="bg-[#389EE8] text-white font-bold">
-            <TableCell colSpan={2} className="px-2 py-3 border-r border-white/20 uppercase">
-              Tổng cộng
-            </TableCell>
-            <TableCell className="px-2 py-3 border-r border-white/20 text-right tabular-nums">
-              313.420.268
-            </TableCell>
-            <TableCell className="px-2 py-3 border-r border-white/20 text-right tabular-nums">
-              240.073.121
-            </TableCell>
-            <TableCell className="px-2 py-3 border-r border-white/20 text-right tabular-nums">
-              1.063.148.394
-            </TableCell>
-            <TableCell className="px-2 py-3 border-r border-white/20 text-right tabular-nums">
-              2.000
-            </TableCell>
-            <TableCell className="px-2 py-3 border-r border-white/20 text-right tabular-nums"></TableCell>
-            <TableCell className="px-2 py-3 border-r border-white/20 text-right tabular-nums">
-              732.558.580
-            </TableCell>
-            <TableCell className="px-2 py-3 border-r border-white/20 text-right tabular-nums">
-              20.345.200.363
-            </TableCell>
-            <TableCell className="px-2 py-3 border-r border-white/20 text-right tabular-nums">
-              100.000.000
-            </TableCell>
-            <TableCell className="px-2 py-3 border-r border-white/20 text-right tabular-nums">
-              35.000.000.000
-            </TableCell>
-            <TableCell className="px-2 py-3 border-r border-white/20 text-right tabular-nums">
-              3.000.000.000
-            </TableCell>
-            <TableCell className="px-2 py-3 border-r border-white/20 text-right tabular-nums">
-              3.000.000.000
-            </TableCell>
-            <TableCell className="px-2 py-3 text-right tabular-nums">65.000.000.000</TableCell>
-          </TableRow>
+        isGroupRow={(item) => item.type !== "leaf"}
+        getGroupClassName={(item) =>
+          item.type === "group"
+            ? "bg-[#E9F2FB] dark:bg-blue-900/10 font-semibold"
+            : "bg-white dark:bg-gray-800 font-semibold italic text-gray-700 dark:text-gray-300"
         }
+        renderGroupHeader={renderGroupHeader}
+        footerData={FOOTER_TOTALS}
       />
     </div>
   );
