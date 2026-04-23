@@ -40,7 +40,7 @@ const RevenueTable: React.FC = () => {
   ];
 
   return (
-    <div className="bg-white dark:bg-gray-800 p-6 rounded-[24px] border border-gray-100 dark:border-gray-700/50 shadow-sm col-span-12 lg:col-span-8">
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-[24px] border border-grayscale-10 dark:border-gray-700/50 shadow-dashboard col-span-12 lg:col-span-8">
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-[18px] font-semibold leading-[24px] text-gray-800 dark:text-white">Bảng Báo cáo chi tiết doanh thu theo ngày</h3>
         <CustomSelect 
