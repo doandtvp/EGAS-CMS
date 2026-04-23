@@ -49,6 +49,7 @@ const RevenueTable: React.FC = () => {
           onChange={setSortOption}
           placeholder="Sắp xếp theo"
           width="160px"
+          buttonClassName="bg-white font-normal"
         />
       </div>
 

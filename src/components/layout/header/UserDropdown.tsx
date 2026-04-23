@@ -34,10 +34,10 @@ const UserDropdown: React.FC = () => {
   };
 
   return (
-    <div className="absolute right-0 mt-2 w-[280px] bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden z-100 animate-in fade-in slide-in-from-top-2 duration-200">
+    <div className="absolute right-0 mt-2 w-[300px] bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden z-100 animate-in fade-in slide-in-from-top-2 duration-200">
       {/* User Header */}
       <div className="p-4 flex items-center gap-3 border-b border-gray-100 dark:border-gray-700">
-        <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-brand-100 shadow-sm transition-transform hover:scale-105">
+        <div className="flex-shrink-0 min-w-[48px] w-12 h-12 rounded-full overflow-hidden border-2 border-brand-100 shadow-sm transition-transform hover:scale-105">
           <Image 
             src={user?.avatarUrl || "/images/user/user-01.jpg"} 
             alt="Avatar" 
@@ -62,15 +62,15 @@ const UserDropdown: React.FC = () => {
       {/* Menu Items */}
       <div className="p-2 space-y-1">
         <button className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-brand-50 dark:hover:bg-gray-700/50 hover:text-brand-500 dark:hover:text-brand-400 rounded-lg transition-all group">
-          <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-gray-50 dark:bg-gray-700 group-hover:bg-brand-100 dark:group-hover:bg-brand-900/40 text-gray-400 group-hover:text-brand-500 transition-colors">
-            <PencilIcon className="w-4 h-4" />
+          <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-lg bg-gray-50 dark:bg-gray-700 group-hover:bg-brand-100 dark:group-hover:bg-brand-900/40 text-gray-400 group-hover:text-brand-500 transition-colors">
+            <PencilIcon width={18} height={18} />
           </div>
           <span>Cài đặt</span>
         </button>
 
         <button className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-gray-600 dark:text-gray-300 hover:bg-brand-50 dark:hover:bg-gray-700/50 hover:text-brand-500 dark:hover:text-brand-400 rounded-lg transition-all group">
-          <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-gray-50 dark:bg-gray-700 group-hover:bg-brand-100 dark:group-hover:bg-brand-900/40 text-gray-400 group-hover:text-brand-500 transition-colors">
-            <InfoIcon className="w-4 h-4" />
+          <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-lg bg-gray-50 dark:bg-gray-700 group-hover:bg-brand-100 dark:group-hover:bg-brand-900/40 text-gray-400 group-hover:text-brand-500 transition-colors">
+            <InfoIcon width={24} height={24} />
           </div>
           <span>Trợ giúp</span>
         </button>
@@ -83,8 +83,8 @@ const UserDropdown: React.FC = () => {
           onClick={handleLogout}
           className="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-bold text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all group"
         >
-          <div className="w-8 h-8 flex items-center justify-center rounded-lg bg-red-50 dark:bg-red-900/30 text-red-400 group-hover:text-red-600 transition-colors">
-            <CloseLineIcon className="w-4 h-4" />
+          <div className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-lg bg-red-50 dark:bg-red-900/30 text-red-400 group-hover:text-red-600 transition-colors">
+            <CloseLineIcon width={18} height={18} />
           </div>
           <span>Đăng xuất</span>
         </button>
