@@ -40,20 +40,26 @@ const RevenueTable: React.FC = () => {
   ];
 
   return (
-    <div className="bg-white dark:bg-gray-800 p-6 rounded-[24px] border border-grayscale-10 dark:border-gray-700/50 shadow-dashboard col-span-12 lg:col-span-8">
-      <div className="flex items-center justify-between mb-6">
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-[24px] border border-grayscale-10 dark:border-gray-700/50 shadow-dashboard col-span-12 xl:col-span-8">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <h3 className="text-[18px] font-semibold leading-[24px] text-gray-800 dark:text-white">Bảng Báo cáo chi tiết doanh thu theo ngày</h3>
-        <CustomSelect 
-          options={sortOptions}
-          value={sortOption}
-          onChange={setSortOption}
-          placeholder="Sắp xếp theo"
-          width="160px"
-          buttonClassName="bg-white font-normal"
-        />
+        <div className="w-full sm:w-[160px]">
+          <CustomSelect 
+            options={sortOptions}
+            value={sortOption}
+            onChange={setSortOption}
+            placeholder="Sắp xếp theo"
+            width="100%"
+            buttonClassName="bg-white font-normal"
+          />
+        </div>
       </div>
 
-      <DataTable columns={columns} data={data} />
+      <div className="overflow-x-auto custom-scrollbar">
+        <div className="min-w-[800px]">
+          <DataTable columns={columns} data={data} />
+        </div>
+      </div>
 
       <div className="mt-6 flex justify-end">
         <Pagination 

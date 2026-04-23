@@ -69,45 +69,51 @@ const POSSalesShiftReport: React.FC = () => {
     <div className="flex flex-col gap-4">
       {/* Header & Filter Bar */}
       <div className="bg-white dark:bg-gray-800 p-4 rounded-xl dark:border-gray-700">
-        <div className="flex items-center justify-between gap-4">
-          <div className="shrink-0">
-            <h1 className="text-[18px] font-bold text-gray-800 dark:text-white leading-tight">
+        <div className="flex flex-col 2xl:flex-row 2xl:items-center justify-between gap-6">
+          <div className="shrink-0 text-center 2xl:text-left">
+            <h1 className="text-[18px] lg:text-[20px] font-bold text-gray-800 dark:text-white leading-tight">
               Báo cáo xuất bán hàng hóa
             </h1>
-            <p className="text-[11px] text-gray-500 dark:text-gray-400 italic">
+            <p className="text-[11px] lg:text-[12px] text-gray-500 dark:text-gray-400 italic mt-1">
               Từ ngày 15/11/2025 đến ngày 15/12/2025 23:59
             </p>
           </div>
 
-          <div className="flex items-center gap-2 flex-wrap">
-            <CustomSelect
-              options={["Hôm nay", "Hôm qua", "Tuần này"]}
-              value={filterValues.quickSelect}
-              onChange={(val) => setFilterValues({ ...filterValues, quickSelect: val })}
-              width="170px"
-              buttonClassName="bg-white h-10 font-normal"
-              placeholder="Chọn nhanh"
-            />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 2xl:flex 2xl:items-center gap-3 w-full 2xl:w-auto">
+            <div className="w-full 2xl:w-[150px]">
+              <CustomSelect
+                options={["Hôm nay", "Hôm qua", "Tuần này"]}
+                value={filterValues.quickSelect}
+                onChange={(val) => setFilterValues({ ...filterValues, quickSelect: val })}
+                width="100%"
+                buttonClassName="bg-white h-10 font-normal"
+                placeholder="Chọn nhanh"
+              />
+            </div>
 
-            <DatePicker
-              id="report-range"
-              mode="range"
-              placeholder="08/10/2025 → 20/04/2026"
-              className="w-[240px]"
-            />
+            <div className="w-full sm:col-span-2 lg:col-span-1 2xl:w-[220px]">
+              <DatePicker
+                id="report-range"
+                mode="range"
+                placeholder="08/10/2025 → 20/04/2026"
+                className="w-full"
+              />
+            </div>
 
-            <CustomSelect
-              options={["Kho 1", "Kho 2", "Kho 3"]}
-              value={filterValues.warehouse}
-              onChange={(val) => setFilterValues({ ...filterValues, warehouse: val })}
-              placeholder="Chọn kho"
-              width="130px"
-              buttonClassName="bg-white h-10 font-normal"
-            />
+            <div className="w-full 2xl:w-[120px]">
+              <CustomSelect
+                options={["Kho 1", "Kho 2", "Kho 3"]}
+                value={filterValues.warehouse}
+                onChange={(val) => setFilterValues({ ...filterValues, warehouse: val })}
+                placeholder="Chọn kho"
+                width="100%"
+                buttonClassName="bg-white h-10 font-normal"
+              />
+            </div>
 
             <Button
               variant="secondary"
-              className={`h-10 min-w-[150px] border border-gray-200 dark:border-gray-700 rounded-xl text-[13px] font-normal justify-between px-3 bg-[#F8F9FB] dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all ${
+              className={`h-10 w-full 2xl:w-[140px] border border-gray-200 dark:border-gray-700 rounded-xl text-[13px] font-normal justify-between px-3 bg-[#F8F9FB] dark:bg-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all ${
                 showAdvanced
                   ? "text-gray-900 dark:text-gray-100 ring-2 ring-brand-500/20"
                   : "text-gray-400"
@@ -122,60 +128,70 @@ const POSSalesShiftReport: React.FC = () => {
               </span>
             </Button>
 
-            <Button
-              variant="ghost"
-              size="sm"
-              className="h-10 w-10 p-0 text-gray-400 bg-gray-50 dark:bg-gray-700/50 rounded-xl"
-              onClick={() =>
-                setFilterValues({
-                  quickSelect: "",
-                  warehouse: "",
-                  category: "",
-                  productGroup: "",
-                  product: "",
-                  ioGroup: "",
-                  target: "",
-                  docType: "",
-                  priceGroup: "",
-                })
-              }
-            >
-              <span className="text-xl">↺</span>
-            </Button>
+            <div className="flex items-center gap-2 w-full 2xl:w-auto">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="h-10 w-10 2xl:w-auto 2xl:px-4 p-0 text-gray-400 bg-gray-50 dark:bg-gray-700/50 rounded-xl flex items-center justify-center shrink-0"
+                onClick={() =>
+                  setFilterValues({
+                    quickSelect: "",
+                    warehouse: "",
+                    category: "",
+                    productGroup: "",
+                    product: "",
+                    ioGroup: "",
+                    target: "",
+                    docType: "",
+                    priceGroup: "",
+                  })
+                }
+                title="Mặc định"
+              >
+                <span className="text-xl">↺</span>
+                <span className="hidden 2xl:inline ml-2 text-[13px] font-medium">Mặc định</span>
+              </Button>
 
-            <Button
-              variant="gradient-orange"
-              size="sm"
-              className="h-10 px-4 text-[13px]"
-              leftIcon={<FilterIcon className="w-5 h-5" />}
-            >
-              Áp dụng
-            </Button>
+              <Button
+                variant="gradient-orange"
+                size="sm"
+                className="h-10 flex-1 2xl:w-[120px] 2xl:px-4 text-[13px] whitespace-nowrap"
+                leftIcon={<FilterIcon className="w-5 h-5" />}
+              >
+                Áp dụng
+              </Button>
 
-            <Button
-              variant="primary"
-              size="sm"
-              className="h-10 px-4 text-[13px] bg-[#389EE8] hover:bg-blue-600"
-              leftIcon={<DocsIcon className="w-6 h-6" />}
-            >
-              In ấn
-            </Button>
+              <Button
+                variant="primary"
+                size="sm"
+                className="h-10 w-10 2xl:w-auto 2xl:px-4 p-0 bg-[#389EE8] hover:bg-blue-600 rounded-xl flex items-center justify-center shrink-0"
+                title="In ấn"
+              >
+                <DocsIcon className="w-6 h-6" />
+                <span className="hidden 2xl:inline ml-1 text-[13px] font-medium text-white">
+                  In ấn
+                </span>
+              </Button>
 
-            <Button
-              variant="primary"
-              size="sm"
-              className="h-10 px-4 text-[13px] bg-[#22B07E] hover:bg-green-600"
-              leftIcon={<DownloadIcon className="w-6 h-6" />}
-            >
-              Xuất
-            </Button>
+              <Button
+                variant="primary"
+                size="sm"
+                className="h-10 w-10 2xl:w-auto 2xl:px-4 p-0 bg-[#22B07E] hover:bg-green-600 rounded-xl flex items-center justify-center shrink-0"
+                title="Xuất"
+              >
+                <DownloadIcon className="w-6 h-6" />
+                <span className="hidden 2xl:inline ml-1 text-[13px] font-medium text-white">
+                  Xuất
+                </span>
+              </Button>
+            </div>
           </div>
         </div>
 
         {/* Advanced Filter Bar */}
         {showAdvanced && (
-          <div className="bg-[#E9EDF2] dark:bg-gray-700/30 p-4 mt-4 rounded-xl flex items-end gap-4 relative animate-in fade-in slide-in-from-top-2">
-            <div className="grid grid-cols-7 gap-4 flex-1">
+          <div className="bg-[#E9EDF2] dark:bg-gray-700/30 p-4 mt-6 rounded-xl relative animate-in fade-in slide-in-from-top-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4">
               {ADVANCED_FILTERS_CONFIG.map((item) => (
                 <div key={item.id} className="flex flex-col gap-1.5">
                   <label className="text-[12px] font-semibold text-[#5D6A7D] dark:text-gray-300">
@@ -194,9 +210,9 @@ const POSSalesShiftReport: React.FC = () => {
             </div>
             <button
               onClick={() => setShowAdvanced(false)}
-              className="absolute -top-2 -right-2 w-6 h-6 bg-white dark:bg-gray-800 rounded-full shadow-md flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors border border-gray-100 dark:border-gray-700"
+              className="absolute -top-3 -right-3 w-8 h-8 bg-white dark:bg-gray-800 rounded-full shadow-lg flex items-center justify-center text-gray-400 hover:text-red-500 transition-colors border border-gray-100 dark:border-gray-700 z-10"
             >
-              <span className="text-[20px]">✕</span>
+              <span className="text-[24px] leading-none">&times;</span>
             </button>
           </div>
         )}
