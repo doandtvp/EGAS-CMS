@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import DatePicker from "@/components/form/date-picker";
 import CustomSelect from "./CustomSelect";
 import { FilterIcon } from "@/icons";
+import Button from "@/components/common/Button";
 
 const FilterBar: React.FC = () => {
   const [filterValues, setFilterValues] = useState({
@@ -57,10 +58,13 @@ const FilterBar: React.FC = () => {
         </div>
 
         {/* Apply Button */}
-        <button className="max-w-[100px] w-full h-12 bg-stat-2 text-white rounded-xl font-medium text-sm transition-all active:scale-[0.98] flex items-center justify-center gap-2">
-          <FilterIcon className="w-5 h-5" />
+        <Button 
+          variant="gradient-orange" 
+          className="min-w-[120px]"
+          leftIcon={<FilterIcon className="w-5 h-5" />}
+        >
           Áp dụng
-        </button>
+        </Button>
       </div>
     </div>
   );

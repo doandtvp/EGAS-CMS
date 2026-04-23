@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { StatusBadge } from "@/components/common/StatusBadge";
 import { Pagination } from "@/components/ui/Pagination";
+import Button from "@/components/common/Button";
 
 const CustomerDebt: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -18,9 +19,9 @@ const CustomerDebt: React.FC = () => {
     <div className="bg-white dark:bg-gray-800 rounded-[24px] border border-grayscale-10 dark:border-gray-700/50 shadow-dashboard col-span-12 lg:col-span-4 flex flex-col h-full">
       <div className="flex items-center justify-between pb-4 mb-4 border-b border-grayscale-10 dark:border-gray-700 p-6">
         <h3 className="text-[18px] font-semibold leading-[24px] text-[#5D6A7D] dark:text-white">Công nợ khách hàng</h3>
-        <button className="flex items-center justify-center w-[95px] h-[30px] text-[14px] font-normal leading-[20px] text-[#F4831F] border border-[#F4831F] rounded-md bg-[#F4831F]/5 hover:bg-[#F4831F]/10 transition-all active:scale-95">
+        <Button variant="outline-orange" size="xs" className="min-w-[105px]">
           Xem tất cả
-        </button>
+        </Button>
       </div>
 
       <div className="flex-1 space-y-3 px-6">
