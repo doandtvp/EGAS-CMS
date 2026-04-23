@@ -58,7 +58,7 @@ const FilterBar: React.FC = () => {
             mode="range"
             placeholder="01/05/2025 - 07/05/2025"
             onChange={(dates) => console.log("Selected dates:", dates)}
-            className="h-12"
+            inputClassName="h-12"
           />
         </div>
 

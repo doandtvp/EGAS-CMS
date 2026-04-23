@@ -1,11 +1,10 @@
 "use client";
-import React from "react";
 import FilterBar from "@/components/dashboard/FilterBar";
 import DashboardMetrics from "@/components/dashboard/DashboardMetrics";
 import DashboardCharts from "@/components/dashboard/DashboardCharts";
 import RevenueTable from "@/components/dashboard/RevenueTable";
 import CustomerDebt from "@/components/dashboard/CustomerDebt";
-import AlertToast from "@/components/dashboard/AlertToast";
+import CustomToast from "@/components/dashboard/CustomToast";
 
 export default function GasDashboard() {
   return (
@@ -17,7 +16,7 @@ export default function GasDashboard() {
         <RevenueTable />
         <CustomerDebt />
       </div>
-      <AlertToast />
+      <CustomToast />
     </div>
   );
 }
