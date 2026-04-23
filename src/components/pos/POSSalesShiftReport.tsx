@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import Button from "@/components/common/Button";
 import CustomSelect from "@/components/dashboard/CustomSelect";
 import DatePicker from "@/components/form/date-picker";
-import { FilterIcon, DocsIcon, DownloadIcon, ArrowFill } from "@/icons";
+import { FilterIcon, DocsIcon, DownloadIcon } from "@/icons";
 import ReportTable, { ReportColumn } from "../common/ReportTable";
-import { TableRow, TableCell } from "@/components/ui/table";
+
 import {
   ReportItem,
   HEADER_ROWS,
@@ -28,15 +28,15 @@ const POSSalesShiftReport: React.FC = () => {
   }
 
   const [filterValues, setFilterValues] = useState<FilterValues>({
-    quickSelect: "Hôm nay",
-    warehouse: "Kho 1",
-    category: "Chọn ngành hàng",
-    productGroup: "Chọn nhóm hàng hóa",
-    product: "Chọn hàng hóa",
-    ioGroup: "Chọn nhóm nhập xuất",
-    target: "Chọn đối tượng",
-    docType: "Chọn loại chứng từ",
-    priceGroup: "Chọn nhóm giá",
+    quickSelect: "",
+    warehouse: "",
+    category: "",
+    productGroup: "",
+    product: "",
+    ioGroup: "",
+    target: "",
+    docType: "",
+    priceGroup: "",
   });
 
   const [showAdvanced, setShowAdvanced] = useState(false);
@@ -84,8 +84,9 @@ const POSSalesShiftReport: React.FC = () => {
               options={["Hôm nay", "Hôm qua", "Tuần này"]}
               value={filterValues.quickSelect}
               onChange={(val) => setFilterValues({ ...filterValues, quickSelect: val })}
-              width="130px"
+              width="170px"
               buttonClassName="bg-white h-10 font-normal"
+              placeholder="Chọn nhanh"
             />
 
             <DatePicker
@@ -99,6 +100,7 @@ const POSSalesShiftReport: React.FC = () => {
               options={["Kho 1", "Kho 2", "Kho 3"]}
               value={filterValues.warehouse}
               onChange={(val) => setFilterValues({ ...filterValues, warehouse: val })}
+              placeholder="Chọn kho"
               width="130px"
               buttonClassName="bg-white h-10 font-normal"
             />
@@ -126,15 +128,15 @@ const POSSalesShiftReport: React.FC = () => {
               className="h-10 w-10 p-0 text-gray-400 bg-gray-50 dark:bg-gray-700/50 rounded-xl"
               onClick={() =>
                 setFilterValues({
-                  quickSelect: "Hôm nay",
-                  warehouse: "Kho 1",
-                  category: "Chọn ngành hàng",
-                  productGroup: "Chọn nhóm hàng hóa",
-                  product: "Chọn hàng hóa",
-                  ioGroup: "Chọn nhóm nhập xuất",
-                  target: "Chọn đối tượng",
-                  docType: "Chọn loại chứng từ",
-                  priceGroup: "Chọn nhóm giá",
+                  quickSelect: "",
+                  warehouse: "",
+                  category: "",
+                  productGroup: "",
+                  product: "",
+                  ioGroup: "",
+                  target: "",
+                  docType: "",
+                  priceGroup: "",
                 })
               }
             >
@@ -180,11 +182,12 @@ const POSSalesShiftReport: React.FC = () => {
                     {item.label}
                   </label>
                   <CustomSelect
-                    options={[item.placeholder, ...item.options]}
+                    options={item.options}
                     value={filterValues[item.id as keyof FilterValues]}
                     onChange={(val) => setFilterValues({ ...filterValues, [item.id]: val })}
                     width="100%"
                     buttonClassName="bg-white h-10 font-normal border-none shadow-sm rounded-lg"
+                    placeholder={item.placeholder}
                   />
                 </div>
               ))}
@@ -204,7 +207,7 @@ const POSSalesShiftReport: React.FC = () => {
         headerRows={HEADER_ROWS}
         columns={bodyColumns}
         data={REPORT_DATA}
-        maxHeight="calc(100vh - 280px)"
+        maxHeight={showAdvanced ? "calc(100vh - 385px)" : "calc(100vh - 280px)"}
         isGroupRow={(item) => item.type !== "leaf"}
         getGroupClassName={(item) =>
           item.type === "group"

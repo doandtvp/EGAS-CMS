@@ -31,6 +31,8 @@ interface ReportTableProps<T> {
   minWidth?: string;
   maxHeight?: string;
   className?: string;
+  /** Cho phép nhấn giữ để kéo scroll */
+  canDragTable?: boolean;
   /** Để dự phòng nếu vẫn muốn truyền footer tùy biến hoàn toàn */
   footer?: ReactNode;
   /** Để dự phòng nếu vẫn muốn renderRow tùy biến hoàn toàn */
@@ -51,9 +53,78 @@ export function ReportTable<T>({
   minWidth = "1440px",
   maxHeight,
   className = "",
+  canDragTable = true,
   footer,
   renderRow,
 }: ReportTableProps<T>) {
+  const scrollRef = React.useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = React.useState(false);
+  const [startX, setStartX] = React.useState(0);
+  const [scrollLeft, setScrollLeft] = React.useState(0);
+  
+  // Refs cho momentum scroll
+  const velocity = React.useRef(0);
+  const lastX = React.useRef(0);
+  const animationRef = React.useRef<number | null>(null);
+
+  const startMomentum = () => {
+    if (!scrollRef.current || Math.abs(velocity.current) < 1) return;
+    
+    const step = () => {
+      if (Math.abs(velocity.current) < 0.5 || isDragging) {
+        if (animationRef.current) cancelAnimationFrame(animationRef.current);
+        return;
+      }
+      
+      if (scrollRef.current) {
+        scrollRef.current.scrollLeft -= velocity.current;
+        velocity.current *= 0.95; // Độ ma sát (decay factor)
+        animationRef.current = requestAnimationFrame(step);
+      }
+    };
+    animationRef.current = requestAnimationFrame(step);
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!canDragTable || !scrollRef.current) return;
+    if (animationRef.current) cancelAnimationFrame(animationRef.current);
+    
+    setIsDragging(true);
+    setStartX(e.pageX - scrollRef.current.offsetLeft);
+    setScrollLeft(scrollRef.current.scrollLeft);
+    lastX.current = e.pageX;
+    velocity.current = 0;
+  };
+
+  const handleMouseLeave = () => {
+    if (isDragging) {
+      setIsDragging(false);
+      startMomentum();
+    }
+  };
+
+  const handleMouseUp = () => {
+    if (isDragging) {
+      setIsDragging(false);
+      startMomentum();
+    }
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || !scrollRef.current) return;
+    
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walkX = (x - startX) * 1.5;
+
+    // Tính toán vận tốc dựa trên khoảng cách di chuyển cuối cùng
+    velocity.current = e.pageX - lastX.current;
+    lastX.current = e.pageX;
+
+    if (Math.abs(x - startX) > 5) {
+      e.preventDefault();
+      scrollRef.current.scrollLeft = scrollLeft - walkX;
+    }
+  };
   
   const defaultRenderRow = (item: T, index: number) => {
     if (renderRow) return renderRow(item, index);
@@ -132,7 +203,15 @@ export function ReportTable<T>({
         .custom-scrollbar { scrollbar-width: thin; scrollbar-color: #cbd5e1 transparent; }
       `}</style>
       
-      <div className="overflow-auto relative custom-scrollbar" style={maxHeight ? { maxHeight } : undefined}>
+      <div 
+        ref={scrollRef}
+        onMouseDown={handleMouseDown}
+        onMouseLeave={handleMouseLeave}
+        onMouseUp={handleMouseUp}
+        onMouseMove={handleMouseMove}
+        className={`overflow-auto relative custom-scrollbar ${canDragTable ? (isDragging ? "cursor-grabbing select-none" : "cursor-grab") : ""}`} 
+        style={maxHeight ? { maxHeight } : undefined}
+      >
         <Table className="w-full text-left border-separate border-spacing-0" style={{ minWidth }}>
           <TableHeader className="relative z-20">
             {headerRows.map((row, rowIndex) => (
