@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import HeaderActions from "@/components/layout/header/HeaderActions";
 import UserProfileSection from "@/components/layout/header/UserProfileSection";
-import { OilStaffIcon, DollarLineIcon, BoxIconLine, DocsIcon, PlugInIcon } from "@/icons";
+import { BoxIconLine, DocsIcon, PlugInIcon, BeforePaymentIcon, AfterPaymentIcon } from "@/icons";
 import BeforePaymentPanel from "./components/BeforePaymentPanel";
 import AfterPaymentPanel from "./components/AfterPaymentPanel";
 import NoLiterPanel from "./components/NoLiterPanel";
@@ -23,13 +23,13 @@ const STAFF_NAV_ITEMS: StaffNavItem[] = [
     id: "before-payment",
     label: "Bơm trước",
     subLabel: "thanh toán sau",
-    icon: <OilStaffIcon />,
+    icon: <BeforePaymentIcon />,
   },
   {
     id: "after-payment",
     label: "Thanh toán",
     subLabel: "trước bơm sau",
-    icon: <DollarLineIcon />,
+    icon: <AfterPaymentIcon />,
   },
   {
     id: "noliter",
