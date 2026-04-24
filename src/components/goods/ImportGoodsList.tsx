@@ -174,7 +174,7 @@ const ImportGoodsList: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-140px)] overflow-hidden bg-white dark:bg-gray-900">
+    <div className="flex flex-col h-[calc(100vh-138px)] overflow-hidden bg-white dark:bg-gray-900">
       {/* Search & Filter Bar - Responsive */}
       <div className="flex-none bg-white dark:bg-gray-800 px-4 sm:px-6 pt-4 pb-2 flex flex-col xl:flex-row xl:items-center justify-between gap-4">
         <h2 className="text-theme-base font-bold text-blue-dark dark:text-white whitespace-nowrap">
