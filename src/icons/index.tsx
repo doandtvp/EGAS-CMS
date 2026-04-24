@@ -78,6 +78,11 @@ import AfterPaymentIcon from "./after-payment-icon.svg";
 import ViewedMailIcon from "./viewed-mail.svg";
 import UnreadMailIcon from "./unread-mail.svg";
 import MenuDotsIcon from "./menu-dots.svg";
+import SingleArrowIcon from "./single-arrow-icon.svg";
+import DoubleArrowIcon from "./double-arrow.svg";
+import StatusNewIcon from "./status-new.svg";
+import StatusSuccessIcon from "./status-success.svg";
+import StatusClosedIcon from "./status-closed.svg";
 
 export {
   DownloadIcon,
@@ -160,4 +165,9 @@ export {
   ViewedMailIcon,
   UnreadMailIcon,
   MenuDotsIcon,
+  SingleArrowIcon,
+  DoubleArrowIcon,
+  StatusNewIcon,
+  StatusSuccessIcon,
+  StatusClosedIcon,
 };

@@ -35,14 +35,14 @@ const managerModules: Module[] = [
           {
             id: "shift-measure",
             name: "Số đo bể đầu ca",
-            path: "/",
+            path: "/shift-measure",
             componentKey: "Dashboard",
             icon: null,
           },
           {
             id: "shift-report",
             name: "Danh mục ca bán hàng tại POS",
-            path: "/",
+            path: "/pos-report",
             componentKey: "POSSalesShiftReport",
             icon: null,
           },
@@ -51,6 +51,39 @@ const managerModules: Module[] = [
             name: "Nhận hàng vào ca",
             path: "/calendar",
             componentKey: "Calendar",
+            icon: null,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "module-goods",
+    name: "Hàng hóa",
+    icon: <OilCarIcon />,
+    sections: [
+      {
+        title: "Nghiệp vụ hàng hoá",
+        items: [
+          {
+            id: "goods-receive",
+            name: "Nhập hàng vào bể (XDS)",
+            path: "/goods-receive",
+            componentKey: "GoodsImport",
+            icon: null,
+          },
+          {
+            id: "goods-receive-other",
+            name: "Nhập hàng hóa khác",
+            path: "/calendar",
+            componentKey: "ShiftLeadTasks",
+            icon: null,
+          },
+          {
+            id: "goods-receive-promotion",
+            name: "Nhập hàng khuyến mại",
+            path: "/basic-tables",
+            componentKey: "ShiftLeadTasks",
             icon: null,
           },
         ],
