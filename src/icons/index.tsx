@@ -75,6 +75,9 @@ import ColorTotalGoods from "./color-total-goods.svg";
 import ArrowFill from "./arrow-fill.svg";
 import BeforePaymentIcon from "./before-payment-icon.svg";
 import AfterPaymentIcon from "./after-payment-icon.svg";
+import ViewedMailIcon from "./viewed-mail.svg";
+import UnreadMailIcon from "./unread-mail.svg";
+import MenuDotsIcon from "./menu-dots.svg";
 
 export {
   DownloadIcon,
@@ -154,4 +157,7 @@ export {
   ArrowFill,
   BeforePaymentIcon,
   AfterPaymentIcon,
+  ViewedMailIcon,
+  UnreadMailIcon,
+  MenuDotsIcon,
 };

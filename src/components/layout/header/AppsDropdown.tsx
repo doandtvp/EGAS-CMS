@@ -23,7 +23,7 @@ const AppItem: React.FC<AppItemProps> = ({ label, icon, active }) => (
       {icon}
     </div>
     <span className={cn(
-      "text-[13px] font-bold",
+      "text-theme-label font-bold",
       active ? "text-brand-500" : "text-gray-500 group-hover:text-brand-500"
     )}>{label}</span>
   </button>
@@ -31,7 +31,9 @@ const AppItem: React.FC<AppItemProps> = ({ label, icon, active }) => (
 
 const AppsDropdown: React.FC = () => {
   return (
-    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[320px] bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-100 dark:border-gray-700 p-4 grid grid-cols-2 gap-3 z-[100] animate-in fade-in zoom-in-95 duration-200 origin-top">
+    <div className={cn(
+      "fixed md:absolute top-[64px] md:top-full left-4 right-4 md:left-1/2 md:right-auto md:-translate-x-1/2 mt-2 w-auto md:w-[320px] max-w-[calc(100vw-32px)] bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-100 dark:border-gray-700 p-4 grid grid-cols-2 gap-3 z-[100] animate-in fade-in zoom-in-95 duration-200 origin-top"
+    )}>
       <AppItem 
         label="Bán hàng" 
         icon={<ColorStationIcon className="w-12 h-12" />} 

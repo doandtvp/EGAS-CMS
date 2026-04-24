@@ -1,10 +1,12 @@
 "use client";
 import React, { useRef, useEffect, useState } from "react";
 import { useLayoutStore } from "@/store/useLayoutStore";
+import { useRouter } from "next/navigation";
 import { CloseIcon, MoreTabsIcon } from "@/icons";
 import { cn } from "@/utils";
 
 const TabBar: React.FC = () => {
+  const router = useRouter();
   const { openTabs, activeTabId, setActiveTab, removeTab } = useLayoutStore();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -108,10 +110,32 @@ const TabBar: React.FC = () => {
         });
         setTimeout(checkOverflow, 400);
       }
+      
+      // Also sync URL if it doesn't match active tab path
+      const currentTab = openTabs.find(t => t.id === activeTabId);
+      if (currentTab && window.location.pathname !== currentTab.path) {
+        router.push(currentTab.path);
+      }
     }
-  }, [activeTabId]);
+  }, [activeTabId, openTabs, router]);
 
   const hiddenTabs = openTabs.filter(tab => hiddenTabIds.includes(tab.id));
+
+  const handleRemoveTab = (e: React.MouseEvent, tabId: string) => {
+    e.stopPropagation();
+    const isActive = activeTabId === tabId;
+    removeTab(tabId);
+    
+    if (isActive) {
+      const remainingTabs = openTabs.filter(t => t.id !== tabId);
+      if (remainingTabs.length > 0) {
+        const nextTab = remainingTabs[remainingTabs.length - 1];
+        router.push(nextTab.path);
+      } else {
+        router.push("/");
+      }
+    }
+  };
 
   if (openTabs.length === 0) return null;
 
@@ -145,10 +169,7 @@ const TabBar: React.FC = () => {
             {tab.title}
             
             <button
-              onClick={(e) => {
-                e.stopPropagation();
-                removeTab(tab.id);
-              }}
+              onClick={(e) => handleRemoveTab(e, tab.id)}
               className={cn(
                 "ml-2.5 p-0.5 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-red-500 transition-colors opacity-100 lg:group-hover:opacity-100",
                 activeTabId === tab.id
@@ -185,7 +206,7 @@ const TabBar: React.FC = () => {
               onClick={() => setShowDropdown(false)}
             ></div>
             <div className="absolute right-0 top-full mt-1 w-64 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-2xl z-20 py-2 animate-in fade-in zoom-in-95 duration-200">
-              <div className="px-4 py-1.5 text-[10px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-50 dark:border-gray-800 mb-1">
+              <div className="px-4 py-1.5 text-theme-tiny font-bold text-gray-400 uppercase tracking-widest border-b border-gray-50 dark:border-gray-800 mb-1">
                 More Tabs ({hiddenTabs.length})
               </div>
               <div className="max-h-80 overflow-y-auto custom-scrollbar">
@@ -209,11 +230,7 @@ const TabBar: React.FC = () => {
                     </div>
                     
                     <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        removeTab(tab.id);
-                        if (hiddenTabs.length <= 1) setShowDropdown(false);
-                      }}
+                      onClick={(e) => handleRemoveTab(e, tab.id)}
                       className="p-1 rounded-md opacity-0 group-hover:opacity-100 hover:bg-white dark:hover:bg-gray-700 text-gray-400 hover:text-red-500 transition-all"
                     >
                       <CloseIcon className="w-3.5 h-3.5" />
