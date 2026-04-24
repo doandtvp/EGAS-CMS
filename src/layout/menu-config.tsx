@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  OilStaffIcon,
-  OilCarIcon,
-} from "../icons/index";
+import { OilStaffIcon, OilCarIcon } from "../icons/index";
 import { UserRole } from "@/types/auth";
 
 export type MenuItem = {
@@ -40,25 +37,25 @@ const managerModules: Module[] = [
             name: "Số đo bể đầu ca",
             path: "/",
             componentKey: "Dashboard",
-            icon: null
+            icon: null,
           },
           {
             id: "shift-report",
             name: "Danh mục ca bán hàng tại POS",
-            path: "/pos-report",
+            path: "/",
             componentKey: "POSSalesShiftReport",
-            icon: null
+            icon: null,
           },
           {
             id: "shift-receive",
             name: "Nhận hàng vào ca",
             path: "/calendar",
             componentKey: "Calendar",
-            icon: null
+            icon: null,
           },
-        ]
-      }
-    ]
+        ],
+      },
+    ],
   },
 ];
 

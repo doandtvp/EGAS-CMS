@@ -31,6 +31,7 @@ const ShiftLeadTasks = dynamic(() => import("../components/role-views/ShiftLeadT
   ssr: false,
 });
 const POSSalesShiftReport = dynamic(() => import("../components/pos/POSSalesShiftReport"), { ssr: false });
+const MailInbox = dynamic(() => import("../components/mail/MailInbox"), { ssr: false });
 
 export const ComponentRegistry: Record<string, React.ComponentType<object>> = {
   Dashboard: Dashboard,
@@ -51,6 +52,7 @@ export const ComponentRegistry: Record<string, React.ComponentType<object>> = {
   StaffTasks: StaffTasks,
   ShiftLeadTasks: ShiftLeadTasks,
   POSSalesShiftReport: POSSalesShiftReport,
+  MailInbox: MailInbox,
 };
 
 export const getComponent = (key: string) => {

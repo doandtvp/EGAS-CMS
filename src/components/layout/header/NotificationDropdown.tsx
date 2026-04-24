@@ -34,12 +34,14 @@ const NotificationDropdown: React.FC = () => {
   ];
 
   return (
-    <div className="absolute top-full right-0 md:left-1/2 md:-translate-x-1/2 mt-2 w-[380px] max-w-[90vw] bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-100 dark:border-gray-700 overflow-hidden z-[100] animate-in fade-in slide-in-from-top-2 duration-200">
+    <div className={cn(
+      "fixed md:absolute top-[64px] md:top-full left-4 right-4 md:left-1/2 md:right-auto md:-translate-x-1/2 mt-2 w-auto md:w-[380px] max-w-[calc(100vw-32px)] bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-gray-100 dark:border-gray-700 overflow-hidden z-[100] animate-in fade-in slide-in-from-top-2 duration-200"
+    )}>
       {/* Header */}
       <div className="px-5 py-4 flex items-center justify-between border-b border-gray-50 dark:border-gray-700">
         <h3 className="text-base font-bold text-gray-900 dark:text-white flex items-center gap-2">
           Thông báo
-          <span className="px-2 py-0.5 bg-orange-500 text-white text-[10px] rounded-full">9</span>
+          <span className="px-2 py-0.5 bg-orange-500 text-white text-theme-tiny rounded-full">9</span>
         </h3>
         <button className="flex-shrink-0 p-1 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-md transition-colors">
           <MoreDotIcon className="w-5 h-5 text-gray-400" />
@@ -59,19 +61,19 @@ const NotificationDropdown: React.FC = () => {
             <div className="flex-grow min-w-0">
               <div className="flex items-start justify-between mb-0.5 mt-0.5 gap-2">
                 <p className="text-sm font-bold text-gray-800 dark:text-gray-200 pr-4 break-words">{noti.title}</p>
-                {noti.unread && <div className="flex-shrink-0 right-5 top-8 w-2 h-2 bg-blue-500 rounded-full shadow-[0_0_8px_rgba(59,130,246,0.5)] mt-1.5"></div>}
+                {noti.unread && <div className="flex-shrink-0 right-5 top-8 w-2 h-2 bg-blue-500 rounded-full shadow-soft mt-1.5"></div>}
               </div>
-              <p className="text-[13px] text-gray-500 dark:text-gray-400 line-clamp-2 leading-relaxed mb-2">
+              <p className="text-theme-label text-gray-500 dark:text-gray-400 line-clamp-2 leading-relaxed mb-2">
                 {noti.desc}
               </p>
-              <span className="text-[11px] text-gray-400 font-medium">{noti.time}</span>
+              <span className="text-theme-sub text-gray-400 font-medium">{noti.time}</span>
             </div>
           </div>
         ))}
       </div>
 
       {/* Footer */}
-      <button className="w-full py-3 text-[13px] font-bold text-brand-500 hover:bg-brand-50 dark:hover:bg-brand-900/20 transition-all border-t border-gray-50 dark:border-gray-700">
+      <button className="w-full py-3 text-theme-label font-bold text-brand-500 hover:bg-brand-50 dark:hover:bg-brand-900/20 transition-all border-t border-gray-50 dark:border-gray-700">
         Xem tất cả thông báo
       </button>
     </div>

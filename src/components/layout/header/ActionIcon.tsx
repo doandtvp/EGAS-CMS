@@ -1,5 +1,6 @@
 "use client";
 import React from "react";
+import { cn } from "@/utils";
 
 // Sub-component for individual Action Icons with Badges
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -21,7 +22,10 @@ const ActionIcon: React.FC<ActionIconProps> = ({
 }) => (
   <button 
     onClick={onClick}
-    className={`relative w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-500 dark:text-gray-400 transition-colors ${className}`}
+    className={cn(
+      "relative w-9 h-9 flex items-center justify-center rounded-full bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 hover:border-brand-500 hover:text-brand-500 hover:shadow-custom-blue text-gray-500 dark:text-gray-400 transition-all duration-300",
+      className
+    )}
   >
     <Icon className="w-6 h-6" />
     {badgeCount && (
