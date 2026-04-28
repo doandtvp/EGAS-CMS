@@ -124,7 +124,10 @@ const POSSalesShiftReport: React.FC = () => {
             >
               <span>{showAdvanced ? "Đang lọc..." : "Lọc nâng cao"}</span>
               <span
-                className={cn("text-[14px] transition-colors", showAdvanced ? "text-yellow-500" : "text-gray-400")}
+                className={cn(
+                  "text-[14px] transition-colors",
+                  showAdvanced ? "text-yellow-500" : "text-gray-400"
+                )}
               >
                 ★
               </span>
@@ -148,10 +151,9 @@ const POSSalesShiftReport: React.FC = () => {
                     priceGroup: "",
                   })
                 }
-                title="Mặc định"
+                title=""
               >
                 <span className="text-xl">↺</span>
-                <span className="hidden 2xl:inline ml-2 text-[13px] font-medium">Mặc định</span>
               </Button>
 
               <Button

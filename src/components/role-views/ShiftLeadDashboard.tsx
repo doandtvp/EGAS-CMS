@@ -1,14 +1,38 @@
+"use client";
 import React from "react";
+import ShiftLeadFilterBar from "@/components/shift-lead/ShiftLeadFilterBar";
+import ShiftInfoCard from "@/components/shift-lead/ShiftInfoCard";
+import AlertPanel from "@/components/shift-lead/AlertPanel";
+import SalesPanel from "@/components/shift-lead/SalesPanel";
+import RevenueDebtPanel from "@/components/shift-lead/RevenueDebtPanel";
 
 export default function ShiftLeadDashboard() {
   return (
-    <div className="space-y-4">
-      <h2 className="text-xl font-bold text-gray-900 dark:text-white">Dashboard ca truong</h2>
-      <p className="text-sm text-gray-600 dark:text-gray-300">
-        Day la view mo phong cho role ca truong, gom cac tac vu duyet va kiem soat van hanh ca.
-      </p>
-      <div className="rounded-xl border border-dashed border-blue-300 bg-blue-50/60 p-4 text-sm text-blue-700">
-        Placeholder: tong hop so lieu ca, xac nhan so do be, checklist van hanh.
+    <div className="-mx-4 -mt-4 flex flex-col min-h-screen">
+      {/* Filter bar — full-width sticky */}
+      <div className="sticky top-0 z-10">
+        <ShiftLeadFilterBar />
+      </div>
+
+      {/* 3-column grid */}
+      <div className="bg-gray-bg flex-1 p-4">
+        <div className="grid grid-cols-12 gap-4 items-start">
+          {/* Cột trái: Thông tin chung + Cảnh báo */}
+          <div className="col-span-12 lg:col-span-4 flex flex-col gap-4">
+            <ShiftInfoCard />
+            <AlertPanel />
+          </div>
+
+          {/* Cột giữa: Bán hàng */}
+          <div className="col-span-12 lg:col-span-4">
+            <SalesPanel />
+          </div>
+
+          {/* Cột phải: Doanh thu & Công nợ */}
+          <div className="col-span-12 lg:col-span-4">
+            <RevenueDebtPanel />
+          </div>
+        </div>
       </div>
     </div>
   );

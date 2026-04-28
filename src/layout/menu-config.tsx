@@ -1,5 +1,5 @@
 import React from "react";
-import { OilStaffIcon, OilCarIcon } from "../icons/index";
+import { OilStaffIcon, OilCarIcon, ShiftLeadIcon } from "../icons/index";
 import { UserRole } from "@/types/auth";
 
 export type MenuItem = {
@@ -23,6 +23,63 @@ export type Module = {
   }[];
 };
 
+//Nhân viên
+const staffModules: Module[] = [
+  {
+    id: "module-shift",
+    name: "Nghiệp vụ nhân viên",
+    icon: <OilStaffIcon />,
+    sections: [
+      {
+        title: "Vận hành ca",
+        items: [
+          {
+            id: "staff-dashboard",
+            name: "Màn hình làm việc",
+            path: "/",
+            componentKey: "StaffDashboard",
+            icon: null,
+          },
+          {
+            id: "staff-checklist",
+            name: "Checklist đầu ca",
+            path: "/calendar",
+            componentKey: "StaffTasks",
+            icon: null,
+          },
+          {
+            id: "staff-report",
+            name: "Nhật ký cuối ca",
+            path: "/basic-tables",
+            componentKey: "StaffTasks",
+            icon: null,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: "module-goods",
+    name: "Hàng hóa tại cột bơm",
+    icon: <OilCarIcon />,
+    sections: [
+      {
+        title: "Tác vụ nhanh",
+        items: [
+          {
+            id: "staff-goods-receive",
+            name: "Ghi nhận nhập hàng",
+            path: "/basic-tables",
+            componentKey: "StaffTasks",
+            icon: null,
+          },
+        ],
+      },
+    ],
+  },
+];
+
+//Cửa hàng trưởng
 const managerModules: Module[] = [
   {
     id: "module-shift",
@@ -92,89 +149,21 @@ const managerModules: Module[] = [
   },
 ];
 
+//Ca trưởng
 const shiftLeadModules: Module[] = [
   {
     id: "module-shift",
-    name: "Quản lý ca bể chứa",
-    icon: <OilStaffIcon />,
+    name: "Ca trưởng",
+    icon: <ShiftLeadIcon />,
     sections: [
       {
         title: "Nghiệp vụ ca trưởng",
         items: [
           {
             id: "shift-lead-overview",
-            name: "Tổng quan ca trực",
+            name: "Tổng quan báo cáo",
             path: "/",
             componentKey: "ShiftLeadDashboard",
-            icon: null,
-          },
-          {
-            id: "shift-lead-approve",
-            name: "Xác nhận số liệu đầu ca",
-            path: "/calendar",
-            componentKey: "ShiftLeadTasks",
-            icon: null,
-          },
-          {
-            id: "shift-lead-checklist",
-            name: "Checklist vận hành ca",
-            path: "/basic-tables",
-            componentKey: "ShiftLeadTasks",
-            icon: null,
-          },
-        ],
-      },
-    ],
-  },
-];
-
-const staffModules: Module[] = [
-  {
-    id: "module-shift",
-    name: "Nghiệp vụ nhân viên",
-    icon: <OilStaffIcon />,
-    sections: [
-      {
-        title: "Vận hành ca",
-        items: [
-          {
-            id: "staff-dashboard",
-            name: "Màn hình làm việc",
-            path: "/",
-            componentKey: "StaffDashboard",
-            icon: null,
-          },
-          {
-            id: "staff-checklist",
-            name: "Checklist đầu ca",
-            path: "/calendar",
-            componentKey: "StaffTasks",
-            icon: null,
-          },
-          {
-            id: "staff-report",
-            name: "Nhật ký cuối ca",
-            path: "/basic-tables",
-            componentKey: "StaffTasks",
-            icon: null,
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: "module-goods",
-    name: "Hàng hóa tại cột bơm",
-    icon: <OilCarIcon />,
-    sections: [
-      {
-        title: "Tác vụ nhanh",
-        items: [
-          {
-            id: "staff-goods-receive",
-            name: "Ghi nhận nhập hàng",
-            path: "/basic-tables",
-            componentKey: "StaffTasks",
             icon: null,
           },
         ],
