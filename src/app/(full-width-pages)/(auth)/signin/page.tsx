@@ -1,8 +1,8 @@
-import SignInForm from "@/components/auth/SignInForm";
+﻿import SignInForm from "@/components/auth/SignInForm";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Next.js SignIn Page | TailAdmin - Next.js Dashboard Template",
+  title: "EGAS CMS - Trang quản trị hệ thống EGAS ",
   description: "This is Next.js Signin Page TailAdmin Dashboard Template",
 };
 
