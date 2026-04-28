@@ -9,80 +9,88 @@ const ReactApexChart = dynamic(() => import("react-apexcharts"), { ssr: false })
 /* ─── 1. Sản lượng bán theo vòi (Bar) ─────────────────────────── */
 const SalesByNozzleChart: React.FC = () => {
   const options: ApexOptions = {
-    chart: { type: "bar", height: 180, toolbar: { show: false }, fontFamily: "Inter, sans-serif" },
+    chart: {
+      type: "bar",
+      height: 200,
+      toolbar: { show: false },
+      fontFamily: "Inter, sans-serif",
+      animations: { enabled: true },
+    },
     plotOptions: {
       bar: {
-        borderRadius: 5,
-        borderRadiusApplication: "end",
-        columnWidth: "52%",
+        borderRadius: 6,
+        borderRadiusApplication: "around",
+        columnWidth: "12px",
+        distributed: true,
         colors: {
-          ranges: [{ from: 0, to: 10000, color: "#E8F1FF" }],
+          backgroundBarColors: ["#F8FAFC"],
+          backgroundBarOpacity: 1,
+          backgroundBarRadius: 12,
         },
       },
     },
-    colors: ["#3B82F6"],
+    colors: ["#CBD5E1", "#CBD5E1", "#CBD5E1", "#CBD5E1", "#3B82F6", "#CBD5E1", "#CBD5E1"],
+    dataLabels: { enabled: false },
     states: {
-      hover: { filter: { type: "none" } },
+      hover: {
+        filter: {
+          type: "darken",
+          // @ts-expect-error - value exists in runtime but not in ApexCharts types
+          value: 0.9,
+        },
+      },
       active: { filter: { type: "none" } },
     },
     xaxis: {
-      categories: ["F1", "F2", "F3", "F4", "D1", "D2", "D3", "Vắt"],
+      categories: ["E1", "E2", "A1", "A2", "D1", "D2", "D3"],
       axisBorder: { show: false },
       axisTicks: { show: false },
-      labels: { style: { colors: "#94A3B8", fontSize: "10px" } },
-    },
-    yaxis: {
-      min: 0,
-      max: 9,
-      tickAmount: 3,
       labels: {
-        style: { colors: "#94A3B8", fontSize: "10px" },
-        formatter: (v) => `${v}`,
+        style: {
+          colors: ["#64748B", "#64748B", "#64748B", "#64748B", "#3B82F6", "#64748B", "#64748B"],
+          fontSize: "12px",
+          fontWeight: 400,
+        },
       },
     },
-    grid: { borderColor: "#F1F5F9", strokeDashArray: 4, padding: { left: -4, right: 0 } },
-    dataLabels: { enabled: false },
-    tooltip: { y: { formatter: (v) => `${v} triệu L` } },
+    yaxis: {
+      min: 1,
+      max: 6,
+      tickAmount: 5,
+      labels: {
+        style: { colors: "#94A3B8", fontSize: "12px" },
+        formatter: (v) => `${Math.floor(v)}`,
+      },
+    },
+    grid: {
+      borderColor: "#F1F5F9",
+      strokeDashArray: 4,
+      xaxis: { lines: { show: false } },
+      yaxis: { lines: { show: true } },
+      padding: { top: 0, right: 0, bottom: 0, left: 10 },
+    },
+    tooltip: {
+      y: {
+        formatter: (v) => `${v} Lít`,
+      },
+    },
+    legend: { show: false },
   };
 
-  // D1 highlighted with full blue
   const series = [
     {
-      name: "Sản lượng (triệu L)",
-      data: [3, 2, 5, 4, 8, 5, 4, 2],
-      // no individual colors API needed — will use a custom render below
+      name: "Sản lượng",
+      data: [4, 4.8, 3.9, 4.5, 5.6, 5, 4],
     },
   ];
 
-  // Manually colour D1 bar (index 4) separately by using fill
-  const optionsFinal: ApexOptions = {
-    ...options,
-    fill: {
-      type: "solid",
-      colors: ["#E8F1FF"],
-    },
-  };
-
-  // Workaround: use individual bar color override via distributed + colors array
-  const optionsDist: ApexOptions = {
-    ...options,
-    plotOptions: {
-      bar: {
-        borderRadius: 5,
-        borderRadiusApplication: "end",
-        columnWidth: "52%",
-        distributed: true,
-      },
-    },
-    colors: ["#E0EAFF", "#E0EAFF", "#E0EAFF", "#E0EAFF", "#3B82F6", "#E0EAFF", "#E0EAFF", "#E0EAFF"],
-    legend: { show: false },
-    tooltip: { y: { formatter: (v) => `${v} triệu L` } },
-  };
-
   return (
-    <div>
-      <div className="text-[10px] text-gray-400 font-medium mb-1">(Lít)</div>
-      <ReactApexChart options={optionsDist} series={series} type="bar" height={180} />
+    <div className="relative">
+      <div className="absolute left-0 top-[-8px] text-[13px] text-gray-400 font-normal">(Lít)</div>
+      <div className="absolute right-0 bottom-[18px] text-[13px] text-gray-400 font-normal">
+        (Vòi)
+      </div>
+      <ReactApexChart options={options} series={series} type="bar" height={200} />
     </div>
   );
 };
@@ -90,53 +98,95 @@ const SalesByNozzleChart: React.FC = () => {
 /* ─── 2. Sản lượng theo mặt hàng (Donut) ──────────────────────── */
 const SalesByProductDonut: React.FC = () => {
   const total = 10324345;
+  const data = [
+    { name: "RON 95", pct: 45, color: "#2388FF" },
+    { name: "E5", pct: 35, color: "#69AFFF" },
+    { name: "DO 0.05S", pct: 20, color: "#D6E9FF" },
+  ];
+
   const options: ApexOptions = {
-    chart: { type: "donut", fontFamily: "Inter, sans-serif", toolbar: { show: false } },
-    colors: ["#3B82F6", "#60A5FA", "#BFDBFE"],
-    labels: ["RON 95", "E5", "DO 0.05"],
-    legend: {
-      show: true,
-      position: "right",
-      fontSize: "11px",
-      markers: { size: 6, offsetX: -2 },
-      itemMargin: { vertical: 4 },
-      formatter: (name, opts) => {
-        const pct = [45, 35, 20][opts.seriesIndex];
-        return `<span style="color:#374151;font-weight:600">${name}</span> <span style="color:#94A3B8">${pct}%</span>`;
-      },
-    },
-    stroke: { show: true, width: 3, colors: ["#fff"] },
+    chart: { type: "donut", fontFamily: "var(--font-averta), sans-serif", toolbar: { show: false } },
+    colors: data.map((d) => d.color),
+    labels: data.map((d) => d.name),
+    legend: { show: false },
+    stroke: { show: true, width: 4, colors: ["#fff"] },
     plotOptions: {
       pie: {
+        expandOnClick: false,
         donut: {
-          size: "70%",
+          size: "65%",
           labels: {
             show: true,
             total: {
               show: true,
-              label: `Tổng ${(total / 1000000).toFixed(2)} triệu lít`,
-              fontSize: "10px",
-              color: "#94A3B8",
+              label: "Tổng 123,344 lít",
+              fontSize: "12px",
+              fontWeight: 400,
+              color: "#64748B",
               formatter: () => total.toLocaleString("vi-VN"),
             },
-            value: { show: false },
+            value: {
+              show: true,
+              fontSize: "16px",
+              fontWeight: 700,
+              color: "#1E293B",
+              offsetY: 4,
+              formatter: (v) => v,
+            },
           },
+        },
+        // @ts-expect-error - borderRadius exists in newer ApexCharts versions but not in current types
+        borderRadius: 8,
+      },
+    },
+    grid: { padding: { bottom: -10 } },
+    dataLabels: { enabled: false },
+    states: {
+      hover: {
+        filter: {
+          type: "darken",
+          // @ts-expect-error - value exists in runtime
+          value: 0.9,
         },
       },
     },
-    dataLabels: { enabled: false },
-    tooltip: { y: { formatter: (v) => `${v}%` } },
+    tooltip: {
+      enabled: true,
+      custom: ({ series, seriesIndex, dataPointIndex, w }) => {
+        const label = w.globals.labels[seriesIndex];
+        const val = series[seriesIndex];
+        return `<div class="px-3 py-2 text-sm font-bold text-white bg-[#19213D] rounded-lg shadow-xl border-none">
+          ${label}: ${val}%
+        </div>`;
+      },
+    },
   };
 
   return (
-    <div className="h-[160px] flex items-center">
-      <ReactApexChart
-        options={options}
-        series={[45, 35, 20]}
-        type="donut"
-        height={160}
-        width="100%"
-      />
+    <div className="flex flex-col sm:flex-row items-center gap-8 py-2">
+      {/* Chart container */}
+      <div className="w-[200px] h-[200px] shrink-0">
+        <ReactApexChart
+          options={options}
+          series={data.map((d) => d.pct)}
+          type="donut"
+          height={200}
+          width={200}
+        />
+      </div>
+
+      {/* Custom Legend */}
+      <div className="flex flex-col gap-4 w-full sm:w-auto">
+        {data.map((item, idx) => (
+          <div key={idx} className="flex items-center gap-3">
+            <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: item.color }} />
+            <div className="flex items-center gap-1.5 text-sm">
+              <span className="text-gray-500">{item.name}</span>
+              <span className="font-bold text-black-custom dark:text-white">{item.pct}%</span>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
@@ -152,22 +202,20 @@ const staffData = [
 
 const SalesByStaff: React.FC = () => (
   <div>
-    <div className="text-[22px] font-bold text-blue-custom dark:text-blue-400 mb-3">
-      1,456,563,345
-    </div>
-    <div className="space-y-2.5">
+    <div className="text-[34px] font-bold text-[#2388FF] mb-4 leading-none">1,456,563,345</div>
+    <div className="space-y-4">
       {staffData.map((s) => (
-        <div key={s.name} className="flex items-center gap-2.5">
-          <div className="w-[90px] shrink-0 text-xs text-black-custom dark:text-white truncate">
+        <div key={s.name} className="flex items-center gap-2 sm:gap-4">
+          <div className="w-[80px] sm:w-[100px] shrink-0 text-xs sm:text-sm text-black-custom dark:text-gray-300 truncate">
             {s.name}
           </div>
-          <div className="flex-1 h-2 rounded-full bg-blue-50 dark:bg-gray-700 overflow-hidden">
+          <div className="flex-1 h-5 sm:h-6 rounded-full bg-blue-50 dark:bg-gray-700/50 overflow-hidden relative">
             <div
-              className="h-full rounded-full bg-gradient-to-r from-blue-400 to-blue-600"
+              className="h-full rounded-full bg-gradient-to-r from-[#C3DDFF] to-[#8DC1FF] border border-[#8DC1FF]/20"
               style={{ width: `${s.pct}%` }}
             />
           </div>
-          <div className="w-[90px] shrink-0 text-xs text-right text-black-custom dark:text-white tabular-nums">
+          <div className="w-[90px] sm:w-[110px] shrink-0 text-xs sm:text-sm font-semibold text-right text-black-custom dark:text-white tabular-nums">
             {s.value.toLocaleString("vi-VN")}
           </div>
         </div>
@@ -193,16 +241,35 @@ const priceData: PriceRow[] = [
 ];
 
 const priceColumns: ColumnDef<PriceRow>[] = [
-  { key: "name", header: "Tên" },
-  { key: "unit", header: "Số lượng", className: "text-center" },
-  { key: "price", header: "Đơn giá", className: "text-right tabular-nums" },
+  { key: "name", header: "Tên", align: "left" },
+  { key: "unit", header: "Số lượng", align: "center" },
+  { key: "price", header: "Đơn giá", align: "right", className: "tabular-nums font-medium" },
 ];
 
 /* ─── 5. Tổng giao dịch + Line chart ─────────────────────────────── */
 const TransactionChart: React.FC = () => {
   const lineOptions: ApexOptions = {
-    chart: { type: "line", height: 80, toolbar: { show: false }, sparkline: { enabled: true }, fontFamily: "Inter, sans-serif" },
-    stroke: { curve: "smooth", width: [2, 2], colors: ["#3B82F6", "#FDA81F"] },
+    chart: {
+      type: "area",
+      height: 100,
+      toolbar: { show: false },
+      sparkline: { enabled: true },
+      fontFamily: "Inter, sans-serif",
+    },
+    stroke: { curve: "smooth", width: 2.5, colors: ["#2388FF", "#FF5C8E"] },
+    fill: {
+      type: "gradient",
+      gradient: {
+        shade: "light",
+        type: "vertical",
+        shadeIntensity: 0.5,
+        inverseColors: false,
+        opacityFrom: 0.6,
+        opacityTo: 0.1,
+        stops: [0, 100],
+      },
+    },
+    colors: ["#2388FF", "#FF5C8E"],
     tooltip: {
       x: { show: false },
       y: { formatter: (v) => `${v} giao dịch` },
@@ -218,31 +285,29 @@ const TransactionChart: React.FC = () => {
 
   return (
     <div>
-      <div className="flex items-end justify-between mb-1">
-        <div>
-          <div className="text-[26px] font-bold text-blue-custom dark:text-blue-400 leading-tight">
-            50,000
-          </div>
-          <div className="text-xs text-gray-500 dark:text-gray-400">giao dịch hôm nay</div>
+      <div className="flex items-start justify-between mb-4">
+        <div className="flex items-baseline gap-2">
+          <div className="text-[34px] font-bold text-[#2388FF] leading-none">50,000</div>
+          <div className="text-sm text-gray-500 font-medium">giao dịch hôm nay</div>
         </div>
-        <div className="flex items-center gap-1 text-xs font-medium text-green-600 bg-green-50 border border-green-200 rounded-full px-2 py-0.5 mb-1">
-          <span>+23%</span>
-          <span className="text-gray-400 font-normal ml-1">so với hôm qua</span>
+        <div className="text-right">
+          <div className="text-[#10B981] font-bold text-lg leading-tight">+23%</div>
+          <div className="text-sm text-gray-400 font-medium">so với hôm qua</div>
         </div>
       </div>
 
-      <div className="mt-2">
-        <ReactApexChart options={lineOptions} series={lineSeries} type="line" height={80} />
+      <div className="mt-4 -mx-1">
+        <ReactApexChart options={lineOptions} series={lineSeries} type="area" height={100} />
       </div>
 
-      <div className="flex items-center gap-4 mt-2">
+      <div className="flex items-center justify-end gap-4 mt-2">
         <div className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-blue-500 inline-block"></span>
-          <span className="text-[11px] text-gray-500">Hôm nay</span>
+          <span className="w-2.5 h-2.5 rounded-full bg-[#2388FF] inline-block"></span>
+          <span className="text-xs text-gray-500 font-medium">Hôm nay</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-yellow-400 inline-block"></span>
-          <span className="text-[11px] text-gray-500">Hôm qua</span>
+          <span className="w-2.5 h-2.5 rounded-full bg-[#FF5C8E] inline-block"></span>
+          <span className="text-xs text-gray-500 font-medium">Hôm qua</span>
         </div>
       </div>
     </div>
@@ -252,19 +317,26 @@ const TransactionChart: React.FC = () => {
 /* ─── 6. Hình thức giao dịch ────────────────────────────────────── */
 const TransactionMethods: React.FC = () => {
   const methods = [
-    { label: "Tiền mặt", value: "30,000", color: "text-blue-600" },
-    { label: "Chuyển khoản", value: "18,000", color: "text-orange-500" },
-    { label: "Thẻ", value: "1,000", color: "text-purple-500" },
-    { label: "Ví", value: "1,000", color: "text-green-500" },
+    { label: "Tiền mặt", value: "30,000" },
+    { label: "Chuyển khoản", value: "18,000" },
+    { label: "Thẻ", value: "1,000" },
+    { label: "Ví", value: "1,000" },
   ];
   return (
-    <div className="grid grid-cols-4 gap-2 mt-3">
-      {methods.map((m) => (
-        <div key={m.label} className="text-center">
-          <p className={`text-sm font-bold tabular-nums ${m.color}`}>{m.value}</p>
-          <p className="text-[10px] text-gray-500 mt-0.5">{m.label}</p>
-        </div>
-      ))}
+    <div className="bg-[#F8FAFF] dark:bg-gray-800/40 rounded-xl p-4 border border-blue-50/50 dark:border-gray-700/50">
+      <h5 className="text-sm font-bold text-black-custom dark:text-white mb-4">
+        Hình thức giao dịch
+      </h5>
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        {methods.map((m) => (
+          <div key={m.label}>
+            <p className="text-[13px] text-gray-500 dark:text-gray-400 mb-1">{m.label}</p>
+            <p className="text-base font-bold text-black-custom dark:text-white tabular-nums">
+              {m.value}
+            </p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
@@ -272,15 +344,15 @@ const TransactionMethods: React.FC = () => {
 /* ─── Composed: SalesPanel ─────────────────────────────────────── */
 const SalesPanel: React.FC = () => {
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-[20px] border border-grayscale-10 dark:border-gray-700/50 shadow-dashboard overflow-hidden">
-      <div className="px-5 pt-4 pb-3 border-b border-gray-100 dark:border-gray-700">
+    <div className="px-4 bg-white dark:bg-gray-800 rounded-[20px] border border-grayscale-10 dark:border-gray-700/50 shadow-dashboard overflow-hidden">
+      <div className="pt-4 pb-3 border-b border-gray-100 dark:border-gray-700">
         <h3 className="text-[15px] font-semibold text-black-custom dark:text-white">Bán hàng</h3>
       </div>
 
-      <div className="px-5 py-4 space-y-5">
+      <div className="py-4 space-y-5">
         {/* Sản lượng bán theo vòi */}
         <section>
-          <h4 className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-wide">
+          <h4 className="text-sm font-bold text-black-custom dark:text-white mb-4">
             Sản lượng bán theo vòi
           </h4>
           <SalesByNozzleChart />
@@ -288,7 +360,7 @@ const SalesPanel: React.FC = () => {
 
         <div className="border-t border-gray-100 dark:border-gray-700 pt-4">
           {/* Sản lượng theo mặt hàng */}
-          <h4 className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-wide">
+          <h4 className="text-sm font-bold text-black-custom dark:text-white mb-4">
             Sản lượng theo mặt hàng
           </h4>
           <SalesByProductDonut />
@@ -296,7 +368,7 @@ const SalesPanel: React.FC = () => {
 
         <div className="border-t border-gray-100 dark:border-gray-700 pt-4">
           {/* Sản lượng theo nhân viên */}
-          <h4 className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-wide">
+          <h4 className="text-sm font-bold text-black-custom dark:text-white mb-4">
             Sản lượng theo nhân viên
           </h4>
           <SalesByStaff />
@@ -304,27 +376,31 @@ const SalesPanel: React.FC = () => {
 
         <div className="border-t border-gray-100 dark:border-gray-700 pt-4">
           {/* Giá bán hiện hành */}
-          <h4 className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-wide">
+          <h4 className="text-sm font-bold text-black-custom dark:text-white mb-4">
             Giá bán hiện hành
           </h4>
-          <div className="overflow-x-auto custom-scrollbar">
-            <DataTable columns={priceColumns} data={priceData} />
+          <div className="overflow-hidden rounded-lg border border-gray-100 dark:border-gray-700">
+            <DataTable
+              columns={priceColumns}
+              data={priceData}
+              headerRowClassName="bg-[#E8F1FF] dark:bg-blue-900/20"
+              headerCellClassName="py-3 px-4 text-xs font-bold text-gray-600 dark:text-gray-300 uppercase tracking-wider border-none"
+              rowClassName="even:bg-[#F8FAFC] dark:even:bg-gray-800/40 border-b border-gray-50 dark:border-gray-700 last:border-none"
+              bodyCellClassName="py-3 px-4 text-sm text-black-custom dark:text-gray-200"
+            />
           </div>
         </div>
 
         <div className="border-t border-gray-100 dark:border-gray-700 pt-4">
           {/* Tổng giao dịch */}
-          <h4 className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-2 uppercase tracking-wide">
+          <h4 className="text-sm font-bold text-black-custom dark:text-white mb-4">
             Tổng số giao dịch trong ca
           </h4>
           <TransactionChart />
         </div>
 
-        <div className="border-t border-gray-100 dark:border-gray-700 pt-2">
+        <div className="pt-2">
           {/* Hình thức giao dịch */}
-          <h4 className="text-xs font-medium text-gray-500 dark:text-gray-400 mb-1 uppercase tracking-wide">
-            Hình thức giao dịch
-          </h4>
           <TransactionMethods />
         </div>
       </div>
