@@ -89,6 +89,9 @@ import PrintIcon from "./print-icon.svg";
 import DataSynchronizationIcon from "./data-synchronization.svg";
 import ShiftAssignIcon from "./shift-assign.svg";
 import ShiftEndIcon from "./shift-end.svg";
+import ClockIcon from "./clock.svg";
+import MorningShiftIcon from "./morning-shift.svg";
+import ShiftCodeIcon from "./shift-code.svg";
 
 export {
   DownloadIcon,
@@ -182,4 +185,7 @@ export {
   DataSynchronizationIcon,
   ShiftAssignIcon,
   ShiftEndIcon,
+  ClockIcon,
+  MorningShiftIcon,
+  ShiftCodeIcon,
 };
