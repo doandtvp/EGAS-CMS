@@ -99,13 +99,13 @@ const SalesByNozzleChart: React.FC = () => {
 const SalesByProductDonut: React.FC = () => {
   const total = 10324345;
   const data = [
-    { name: "RON 95", pct: 45, color: "#3B82F6" },
-    { name: "E5", pct: 35, color: "#60A5FA" },
-    { name: "DO 0.05S", pct: 20, color: "#CBD5E1" },
+    { name: "RON 95", pct: 45, color: "#2388FF" },
+    { name: "E5", pct: 35, color: "#69AFFF" },
+    { name: "DO 0.05S", pct: 20, color: "#D6E9FF" },
   ];
 
   const options: ApexOptions = {
-    chart: { type: "donut", fontFamily: "Inter, sans-serif", toolbar: { show: false } },
+    chart: { type: "donut", fontFamily: "var(--font-averta), sans-serif", toolbar: { show: false } },
     colors: data.map((d) => d.color),
     labels: data.map((d) => d.name),
     legend: { show: false },
@@ -141,14 +141,29 @@ const SalesByProductDonut: React.FC = () => {
     },
     grid: { padding: { bottom: -10 } },
     dataLabels: { enabled: false },
+    states: {
+      hover: {
+        filter: {
+          type: "darken",
+          // @ts-expect-error - value exists in runtime
+          value: 0.9,
+        },
+      },
+    },
     tooltip: {
       enabled: true,
-      y: { formatter: (v) => `${v}%` },
+      custom: ({ series, seriesIndex, dataPointIndex, w }) => {
+        const label = w.globals.labels[seriesIndex];
+        const val = series[seriesIndex];
+        return `<div class="px-3 py-2 text-sm font-bold text-white bg-[#19213D] rounded-lg shadow-xl border-none">
+          ${label}: ${val}%
+        </div>`;
+      },
     },
   };
 
   return (
-    <div className="flex items-center gap-8 py-2">
+    <div className="flex flex-col sm:flex-row items-center gap-8 py-2">
       {/* Chart container */}
       <div className="w-[200px] h-[200px] shrink-0">
         <ReactApexChart
@@ -161,7 +176,7 @@ const SalesByProductDonut: React.FC = () => {
       </div>
 
       {/* Custom Legend */}
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 w-full sm:w-auto">
         {data.map((item, idx) => (
           <div key={idx} className="flex items-center gap-3">
             <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: item.color }} />
@@ -190,17 +205,17 @@ const SalesByStaff: React.FC = () => (
     <div className="text-[34px] font-bold text-[#2388FF] mb-4 leading-none">1,456,563,345</div>
     <div className="space-y-4">
       {staffData.map((s) => (
-        <div key={s.name} className="flex items-center gap-4">
-          <div className="w-[100px] shrink-0 text-sm text-black-custom dark:text-gray-300 truncate">
+        <div key={s.name} className="flex items-center gap-2 sm:gap-4">
+          <div className="w-[80px] sm:w-[100px] shrink-0 text-xs sm:text-sm text-black-custom dark:text-gray-300 truncate">
             {s.name}
           </div>
-          <div className="flex-1 h-6 rounded-full bg-blue-50 dark:bg-gray-700/50 overflow-hidden relative">
+          <div className="flex-1 h-5 sm:h-6 rounded-full bg-blue-50 dark:bg-gray-700/50 overflow-hidden relative">
             <div
               className="h-full rounded-full bg-gradient-to-r from-[#C3DDFF] to-[#8DC1FF] border border-[#8DC1FF]/20"
               style={{ width: `${s.pct}%` }}
             />
           </div>
-          <div className="w-[110px] shrink-0 text-sm font-semibold text-right text-black-custom dark:text-white tabular-nums">
+          <div className="w-[90px] sm:w-[110px] shrink-0 text-xs sm:text-sm font-semibold text-right text-black-custom dark:text-white tabular-nums">
             {s.value.toLocaleString("vi-VN")}
           </div>
         </div>
@@ -312,7 +327,7 @@ const TransactionMethods: React.FC = () => {
       <h5 className="text-sm font-bold text-black-custom dark:text-white mb-4">
         Hình thức giao dịch
       </h5>
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
         {methods.map((m) => (
           <div key={m.label}>
             <p className="text-[13px] text-gray-500 dark:text-gray-400 mb-1">{m.label}</p>

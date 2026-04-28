@@ -29,8 +29,8 @@ const ShiftInfoCard: React.FC = () => {
     <div className="px-4 bg-white dark:bg-gray-800 rounded-[20px] border border-grayscale-10 dark:border-gray-700/50 shadow-dashboard overflow-hidden">
       {/* Header */}
       <div className="py-4 border-b border-gray-100 dark:border-gray-700">
-        <div className="flex items-center justify-between mb-2">
-          <h3 className="text-[15px] font-semibold text-black-custom dark:text-white">
+        <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+          <h3 className="text-[15px] font-semibold text-black-custom dark:text-white shrink-0">
             Thông tin chung
           </h3>
           <div className="flex items-center gap-2">
@@ -41,18 +41,22 @@ const ShiftInfoCard: React.FC = () => {
                 className="text-xs text-gray-500 dark:text-gray-400"
               />
             </div>
-            <Badge color="success" size="sm">
+            <Badge
+              color="success"
+              size="sm"
+              className="bg-[#00B164]/10 text-[#00B164] border-none font-normal px-2 h-7 flex items-center rounded-lg text-xs"
+            >
               Đang hoạt động
             </Badge>
           </div>
         </div>
 
-        <div className="flex items-center gap-4 text-xs text-gray-600 dark:text-gray-400">
-          <div className="flex items-center gap-1.5">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-600 dark:text-gray-400">
+          <div className="flex items-center gap-1.5 whitespace-nowrap">
             <MorningShiftIcon className="w-6 h-6" />
             <span>Ca sáng (06:00-14:00)</span>
           </div>
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1.5 whitespace-nowrap">
             <ShiftCodeIcon className="w-6 h-6" />
             <span>Mã ca: 120/2025</span>
           </div>
@@ -60,7 +64,7 @@ const ShiftInfoCard: React.FC = () => {
       </div>
 
       {/* Ca truong info */}
-      <div className="py-3 flex items-center justify-between border-b border-gray-100 dark:border-gray-700">
+      <div className="py-3 flex flex-col sm:flex-row sm:items-center justify-between border-b border-gray-100 dark:border-gray-700 gap-4">
         <div className="flex items-center gap-3">
           <Avatar src={user?.avatarUrl} name={user?.displayName || "User"} size={40} />
           <div>
@@ -70,12 +74,12 @@ const ShiftInfoCard: React.FC = () => {
             <p className="text-xs text-gray-500 dark:text-gray-400">Ca trưởng</p>
           </div>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 w-full max-w-[400px] xl:w-auto">
           <Button
             variant="gradient-orange"
             size="sm"
             leftIcon={<ShiftAssignIcon className="w-5 h-5" />}
-            className="h-10 rounded-lg"
+            className="h-10 rounded-lg flex-1 xl:flex-none"
           >
             Giao ca
           </Button>
@@ -83,7 +87,7 @@ const ShiftInfoCard: React.FC = () => {
             variant="gradient-orange"
             size="sm"
             leftIcon={<ShiftEndIcon className="w-5 h-5" />}
-            className="h-10 rounded-lg"
+            className="h-10 rounded-lg flex-1 xl:flex-none"
           >
             Kết ca
           </Button>

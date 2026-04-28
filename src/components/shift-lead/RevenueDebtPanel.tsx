@@ -49,11 +49,11 @@ const RevenueSummary: React.FC = () => (
 /* ─── Donut: Doanh thu theo hình thức thanh toán ──────────────── */
 const RevenueByPaymentDonut: React.FC = () => {
   const options: ApexOptions = {
-    chart: { type: "donut", fontFamily: "Inter, sans-serif", toolbar: { show: false } },
+    chart: { type: "donut", fontFamily: "var(--font-averta), sans-serif", toolbar: { show: false } },
     colors: ["#2388FF", "#69AFFF", "#A7D2FF", "#D6E9FF"],
     labels: ["Tiền mặt", "QR", "Thẻ", "Voucher"],
     legend: { show: false },
-    stroke: { show: true, width: 2, colors: ["#fff"] },
+    stroke: { show: true, width: 4, colors: ["#fff"] },
     plotOptions: {
       pie: {
         donut: {
@@ -65,7 +65,25 @@ const RevenueByPaymentDonut: React.FC = () => {
       },
     },
     dataLabels: { enabled: false },
-    tooltip: { y: { formatter: (v) => `${v}%` } },
+    states: {
+      hover: {
+        filter: {
+          type: "darken",
+          // @ts-expect-error - value exists in runtime
+          value: 0.9,
+        },
+      },
+    },
+    tooltip: {
+      enabled: true,
+      custom: ({ series, seriesIndex, dataPointIndex, w }) => {
+        const label = w.globals.labels[seriesIndex];
+        const val = series[seriesIndex];
+        return `<div class="px-3 py-2 text-sm font-bold text-white bg-[#19213D] rounded-lg shadow-xl border-none">
+          ${label}: ${val}%
+        </div>`;
+      },
+    },
   };
 
   const legendItems = [
@@ -128,7 +146,7 @@ const RevenueByPerson: React.FC = () => {
       height: 280,
       toolbar: { show: false },
       fontFamily: "var(--font-averta), sans-serif",
-      sparkline: { enabled: true },
+      animations: { enabled: true },
     },
     plotOptions: {
       bar: {
@@ -156,10 +174,25 @@ const RevenueByPerson: React.FC = () => {
     },
     yaxis: {
       labels: { show: false },
+      axisBorder: { show: false },
+      axisTicks: { show: false },
     },
     legend: { show: false },
     dataLabels: { enabled: false },
+    states: {
+      hover: {
+        filter: {
+          type: "darken",
+          // @ts-expect-error - value exists in runtime
+          value: 0.9,
+        },
+      },
+    },
     tooltip: {
+      enabled: true,
+      shared: true,
+      intersect: false,
+      followCursor: true,
       custom: ({ series, seriesIndex, dataPointIndex }) => {
         const val = series[seriesIndex][dataPointIndex];
         return `<div class="px-3 py-2 text-sm font-bold text-white bg-[#19213D] rounded-lg shadow-xl border-none">
@@ -176,11 +209,11 @@ const RevenueByPerson: React.FC = () => {
       </h4>
       <div className="flex gap-0">
         {/* Labels Column */}
-        <div className="flex flex-col h-[280px] w-[110px]">
+        <div className="flex flex-col h-[280px] w-[90px] sm:w-[120px]">
           {staffRevenueData.map((item, idx) => (
             <div
               key={idx}
-              className="flex-1 text-[14px] font-normal text-[#19213D] dark:text-gray-400 text-right flex items-center justify-end pr-4"
+              className="flex-1 text-[12px] sm:text-[14px] font-normal text-[#19213D] dark:text-gray-400 text-right flex items-center justify-end pr-2 sm:pr-4 whitespace-nowrap"
             >
               {item.name}
             </div>

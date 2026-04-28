@@ -8,10 +8,10 @@ const ShiftLeadFilterBar: React.FC = () => {
   const [paymentCode, setPaymentCode] = useState("");
 
   return (
-    <div className="bg-gray-bg px-4 py-3 flex flex-wrap items-center gap-2.5">
+    <div className="bg-gray-bg px-4 py-3 flex flex-col md:flex-row md:items-center gap-4">
       {/* Left: Filters */}
-      <div className="flex items-center gap-2.5 flex-1 flex-wrap">
-        <div className="w-[180px]">
+      <div className="flex flex-col sm:flex-row items-center gap-2.5 flex-1 w-full">
+        <div className="w-full sm:w-[180px]">
           <CustomSelect
             options={["Tất cả vòi bơm", "Vòi 01", "Vòi 02", "Vòi 03"]}
             value={invoiceCode}
@@ -21,7 +21,7 @@ const ShiftLeadFilterBar: React.FC = () => {
             buttonClassName="bg-white font-normal h-10 text-sm"
           />
         </div>
-        <div className="w-[200px]">
+        <div className="w-full sm:w-[200px]">
           <CustomSelect
             options={["Tất cả nhân viên", "Nguyễn Văn A", "Trần Thị B", "Lê Văn C"]}
             value={paymentCode}
@@ -34,12 +34,12 @@ const ShiftLeadFilterBar: React.FC = () => {
       </div>
 
       {/* Right: Actions */}
-      <div className="flex items-center gap-2.5">
+      <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto md:justify-end">
         <Button
           variant="secondary"
           size="sm"
           leftIcon={<ConfigIcon className="w-5 h-5" />}
-          className="h-10 px-4 text-sm font-medium bg-white border border-black/10 rounded-lg"
+          className="h-10 px-4 text-sm font-medium bg-white border border-black/10 rounded-lg flex-1 sm:flex-none"
         >
           Cấu hình
         </Button>
@@ -48,7 +48,7 @@ const ShiftLeadFilterBar: React.FC = () => {
           variant="gradient-orange"
           size="sm"
           leftIcon={<PrintIcon className="w-5 h-5" />}
-          className="h-10 px-4 text-sm font-medium rounded-lg"
+          className="h-10 px-4 text-sm font-medium rounded-lg flex-1 sm:flex-none"
         >
           In báo cáo
         </Button>
@@ -57,7 +57,7 @@ const ShiftLeadFilterBar: React.FC = () => {
           variant="gradient-orange"
           size="sm"
           leftIcon={<DataSynchronizationIcon className="w-5 h-5" />}
-          className="h-10 px-4 text-sm font-medium rounded-lg"
+          className="h-10 px-4 text-sm font-medium rounded-lg flex-1 sm:flex-none"
         >
           Đồng bộ dữ liệu
         </Button>
