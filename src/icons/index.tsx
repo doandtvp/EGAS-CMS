@@ -83,6 +83,12 @@ import DoubleArrowIcon from "./double-arrow.svg";
 import StatusNewIcon from "./status-new.svg";
 import StatusSuccessIcon from "./status-success.svg";
 import StatusClosedIcon from "./status-closed.svg";
+import ShiftLeadIcon from "./shift-lead.svg";
+import ConfigIcon from "./config-icon.svg";
+import PrintIcon from "./print-icon.svg";
+import DataSynchronizationIcon from "./data-synchronization.svg";
+import ShiftAssignIcon from "./shift-assign.svg";
+import ShiftEndIcon from "./shift-end.svg";
 
 export {
   DownloadIcon,
@@ -170,4 +176,10 @@ export {
   StatusNewIcon,
   StatusSuccessIcon,
   StatusClosedIcon,
+  ShiftLeadIcon,
+  ConfigIcon,
+  PrintIcon,
+  DataSynchronizationIcon,
+  ShiftAssignIcon,
+  ShiftEndIcon,
 };

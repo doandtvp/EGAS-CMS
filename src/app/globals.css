@@ -210,24 +210,6 @@
   --background-image-stat-6: linear-gradient(180deg, #ff3b3b 0%, #ff6666 100%);
 }
 
-@utility bg-stat-1 {
-  background-image: var(--background-image-stat-1);
-}
-@utility bg-stat-2 {
-  background-image: var(--background-image-stat-2);
-}
-@utility bg-stat-3 {
-  background-image: var(--background-image-stat-3);
-}
-@utility bg-stat-4 {
-  background-image: var(--background-image-stat-4);
-}
-@utility bg-stat-5 {
-  background-image: var(--background-image-stat-5);
-}
-@utility bg-stat-6 {
-  background-image: var(--background-image-stat-6);
-}
 
 /*
   The default border color has changed to `currentColor` in Tailwind CSS v4,

@@ -12,6 +12,7 @@ import { getComponent } from "@/layout/ComponentRegistry";
 import BottomNav from "@/components/layout/BottomNav";
 import MobileSidebar from "@/components/layout/MobileSidebar";
 import { useAuthStore } from "@/store/useAuthStore";
+import { cn } from "@/utils";
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const { sidebarMode, isMobileOpen, openTabs, activeTabId, addTab } = useLayoutStore();
@@ -109,7 +110,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
           {/* Page Content area */}
           <main className="p-4 mx-auto max-w-full md:p-6 min-h-[calc(100vh-140px)]">
-            <div className="bg-white dark:bg-gray-900 rounded-3xl min-h-[inherit] shadow-theme-xl overflow-hidden animate-in fade-in zoom-in-95 duration-500">
+            <div
+              className={cn(
+                "bg-white dark:bg-gray-900 rounded-3xl min-h-[inherit] overflow-hidden animate-in fade-in zoom-in-95 duration-500",
+                user?.role !== "ca_truong" && "shadow-theme-xl"
+              )}
+            >
               {isHydrated && activeTab ? (
                 /* Dynamic Tab Content */
                 getComponent(activeTab.componentKey)
