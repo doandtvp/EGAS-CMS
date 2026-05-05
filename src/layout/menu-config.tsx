@@ -1,5 +1,11 @@
 import React from "react";
-import { OilStaffIcon, OilCarIcon, ShiftLeadIcon } from "../icons/index";
+import {
+  OilStaffIcon,
+  OilCarIcon,
+  ShiftLeadIcon,
+  CategoryIcon,
+  PieChartIcon,
+} from "../icons/index";
 import { UserRole } from "@/types/auth";
 
 export type MenuItem = {
@@ -82,12 +88,12 @@ const staffModules: Module[] = [
 //Cửa hàng trưởng
 const managerModules: Module[] = [
   {
-    id: "module-shift",
+    id: "module-dashboard",
     name: "Quản lý ca bể chứa",
     icon: <OilStaffIcon />,
     sections: [
       {
-        title: "Nghiệp vụ ca",
+        title: "Tổng quan",
         items: [
           {
             id: "shift-measure",
@@ -96,18 +102,30 @@ const managerModules: Module[] = [
             componentKey: "Dashboard",
             icon: null,
           },
+        ],
+      },
+    ],
+  },
+  {
+    id: "module-category",
+    name: "Danh mục",
+    icon: <CategoryIcon />,
+    sections: [
+      {
+        title: "Quản lý danh mục",
+        items: [
           {
-            id: "shift-report",
-            name: "Danh mục ca bán hàng tại POS",
-            path: "/pos-report",
-            componentKey: "POSSalesShiftReport",
+            id: "shift-category",
+            name: "Nhóm hàng hóa",
+            path: "/pos-shift-category",
+            componentKey: "POSShiftCategory",
             icon: null,
           },
           {
-            id: "shift-receive",
-            name: "Nhận hàng vào ca",
-            path: "/calendar",
-            componentKey: "Calendar",
+            id: "goods-industry",
+            name: "Hàng hoá - toàn ngành",
+            path: "/goods-industry",
+            componentKey: "GoodsIndustry",
             icon: null,
           },
         ],
@@ -115,12 +133,12 @@ const managerModules: Module[] = [
     ],
   },
   {
-    id: "module-goods",
-    name: "Hàng hóa",
+    id: "module-goods-import",
+    name: "Hàng hoá",
     icon: <OilCarIcon />,
     sections: [
       {
-        title: "Nghiệp vụ hàng hoá",
+        title: "Nhập hàng",
         items: [
           {
             id: "goods-receive",
@@ -129,18 +147,23 @@ const managerModules: Module[] = [
             componentKey: "GoodsImport",
             icon: null,
           },
+        ],
+      },
+    ],
+  },
+  {
+    id: "module-reports",
+    name: "Báo cáo",
+    icon: <PieChartIcon />,
+    sections: [
+      {
+        title: "Thống kê",
+        items: [
           {
-            id: "goods-receive-other",
-            name: "Nhập hàng hóa khác",
-            path: "/calendar",
-            componentKey: "ShiftLeadTasks",
-            icon: null,
-          },
-          {
-            id: "goods-receive-promotion",
-            name: "Nhập hàng khuyến mại",
-            path: "/basic-tables",
-            componentKey: "ShiftLeadTasks",
+            id: "shift-report",
+            name: "Báo cáo nhanh",
+            path: "/pos-report",
+            componentKey: "POSSalesShiftReport",
             icon: null,
           },
         ],

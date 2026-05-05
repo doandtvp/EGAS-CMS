@@ -32,6 +32,8 @@ const ShiftLeadTasks = dynamic(() => import("../components/role-views/ShiftLeadT
 });
 const POSSalesShiftReport = dynamic(() => import("../components/pos/POSSalesShiftReport"), { ssr: false });
 const MailInbox = dynamic(() => import("../components/mail/MailInbox"), { ssr: false });
+const POSShiftCategory = dynamic(() => import("../components/pos/POSShiftCategory"), { ssr: false });
+const GoodsIndustry = dynamic(() => import("../components/goods/GoodsIndustry"), { ssr: false });
 
 export const ComponentRegistry: Record<string, React.ComponentType<object>> = {
   Dashboard: Dashboard,
@@ -53,6 +55,8 @@ export const ComponentRegistry: Record<string, React.ComponentType<object>> = {
   ShiftLeadTasks: ShiftLeadTasks,
   POSSalesShiftReport: POSSalesShiftReport,
   MailInbox: MailInbox,
+  POSShiftCategory: POSShiftCategory,
+  GoodsIndustry: GoodsIndustry,
 };
 
 export const getComponent = (key: string) => {
