@@ -238,7 +238,7 @@ const GoodsIndustry: React.FC = () => {
               <Button
                 variant="primary"
                 className="h-10 px-4 bg-success-600 hover:bg-success-700 text-white border-0 text-sm font-semibold rounded-xl"
-                leftIcon={<DownloadIcon className="w-5 h-5" />}
+                leftIcon={<DownloadIcon className="w-6 h-6" />}
               >
                 Import/Export
               </Button>
@@ -252,14 +252,14 @@ const GoodsIndustry: React.FC = () => {
               <Button
                 variant="primary"
                 className="h-10 px-4 bg-brand-500 hover:bg-brand-600 text-white border-0 text-sm font-semibold rounded-xl"
-                leftIcon={<CheckLineIcon className="w-5 h-5" />}
+                leftIcon={<CheckLineIcon className="w-4 h-4" />}
               >
                 Lưu
               </Button>
               <Button
                 variant="primary"
                 className="h-10 px-4 bg-orange-500 hover:bg-orange-600 text-white border-0 text-sm font-semibold rounded-xl"
-                leftIcon={<PlusIcon className="w-5 h-5" />}
+                leftIcon={<PlusIcon className="w-3 h-3" />}
               >
                 Thêm mới
               </Button>
