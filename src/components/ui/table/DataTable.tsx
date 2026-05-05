@@ -18,7 +18,7 @@ interface DataTableProps<T> {
   tableClassName?: string;
   headerClassName?: string;
   headerRowClassName?: string;
-  rowClassName?: string;
+  rowClassName?: string | ((row: T, index: number) => string);
   bodyClassName?: string;
   headerCellClassName?: string;
   bodyCellClassName?: string;
@@ -69,7 +69,10 @@ export function DataTable<T>({
             data.map((row, rowIndex) => (
               <TableRow
                 key={rowIndex}
-                className={cn("hover:bg-gray-50/30 dark:hover:bg-gray-700/30 transition-colors", rowClassName)}
+                className={cn(
+                  "hover:bg-gray-50/30 dark:hover:bg-gray-700/30 transition-colors",
+                  typeof rowClassName === 'function' ? rowClassName(row, rowIndex) : rowClassName
+                )}
               >
                 {columns.map((col, colIndex) => (
                   <TableCell

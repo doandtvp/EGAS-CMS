@@ -1,8 +1,7 @@
 "use client";
 import Checkbox from "@/components/form/input/Checkbox";
 import Input from "@/components/form/input/InputField";
-import Label from "@/components/form/Label";
-import { ChevronLeftIcon, EyeCloseIcon, EyeIcon } from "@/icons";
+import { EyeCloseIcon, EyeIcon } from "@/icons";
 import { MOCK_ACCOUNTS } from "@/mock/auth.mock";
 import { getDefaultMenuItemByRole, getModulesByRole } from "@/layout/menu-config";
 import { useAuthStore } from "@/store/useAuthStore";
@@ -60,117 +59,112 @@ export default function SignInForm() {
   };
 
   return (
-    <div className="flex flex-col flex-1 lg:w-1/2 w-full">
-      <div className="w-full max-w-md sm:pt-10 mx-auto mb-5">
-        <Link
-          href="/"
-          className="inline-flex items-center text-sm text-gray-500 transition-colors hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
-        >
-          <ChevronLeftIcon />
-          Back to dashboard
-        </Link>
+    <div className="w-full max-w-[420px] px-6 py-10 sm:px-0">
+      <div className="mb-10 text-center">
+        <h1 className="text-[32px] font-bold text-[#2388FF] mb-2 font-averta">EGAS</h1>
+        <p className="text-sm text-[#64748B]">Đăng nhập tài khoản của bạn</p>
       </div>
-      <div className="flex flex-col justify-center flex-1 w-full max-w-md mx-auto">
-        <div>
-          <div className="mb-5 sm:mb-8">
-            <h1 className="mb-2 font-semibold text-gray-800 text-title-sm dark:text-white/90 sm:text-title-md">
-              Dang nhap
-            </h1>
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              Chon tai khoan role can test va dang nhap vao view tuong ung.
-            </p>
-          </div>
-          <div>
-            <div className="rounded-xl border border-gray-200 bg-gray-50 p-4 text-sm dark:border-gray-800 dark:bg-white/5">
-              <p className="font-semibold text-gray-700 dark:text-gray-200 mb-2">
-                Tai khoan fake (password chung: 123456)
-              </p>
-              <ul className="space-y-1 text-gray-600 dark:text-gray-300">
-                {MOCK_ACCOUNTS.map((account) => (
-                  <li key={account.username}>
-                    <span className="font-medium">{account.username}</span> - {account.displayName}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <form className="mt-5" onSubmit={handleSubmit}>
-              <div className="space-y-6">
-                <div>
-                  <Label>
-                    Username <span className="text-error-500">*</span>{" "}
-                  </Label>
-                  <Input
-                    placeholder="nhan_vien | ca_truong | cua_hang_truong"
-                    type="text"
-                    onChange={(e) => setUsername(e.target.value)}
-                    error={Boolean(errorMessage)}
-                  />
-                </div>
-                <div>
-                  <Label>
-                    Password <span className="text-error-500">*</span>{" "}
-                  </Label>
-                  <div className="relative">
-                    <Input
-                      type={showPassword ? "text" : "password"}
-                      placeholder="Enter your password"
-                      onChange={(e) => setPassword(e.target.value)}
-                      error={Boolean(errorMessage)}
-                    />
-                    <span
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute z-30 -translate-y-1/2 cursor-pointer right-4 top-1/2"
-                    >
-                      {showPassword ? (
-                        <EyeIcon className="fill-gray-500 dark:fill-gray-400" />
-                      ) : (
-                        <EyeCloseIcon className="fill-gray-500 dark:fill-gray-400" />
-                      )}
-                    </span>
-                  </div>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <Checkbox checked={isChecked} onChange={setIsChecked} />
-                    <span className="block font-normal text-gray-700 text-theme-sm dark:text-gray-400">
-                      Keep me logged in
-                    </span>
-                  </div>
-                  <Link
-                    href="/reset-password"
-                    className="text-sm text-brand-500 hover:text-brand-500 dark:text-brand-400"
-                  >
-                    Quen mat khau?
-                  </Link>
-                </div>
-                {errorMessage && (
-                  <p className="text-sm text-error-500">{errorMessage}</p>
-                )}
-                <div>
-                  <button
-                    type="submit"
-                    className="inline-flex w-full items-center justify-center rounded-lg bg-brand-500 px-4 py-3 text-sm font-semibold text-white transition hover:bg-brand-600"
-                  >
-                    Dang nhap
-                  </button>
-                </div>
-              </div>
-            </form>
 
-            <div className="mt-5">
-              <p className="text-sm font-normal text-center text-gray-700 dark:text-gray-400 sm:text-start">
-                Chua co tai khoan? {""}
-                <Link
-                  href="/signup"
-                  className="text-brand-500 hover:text-brand-500 dark:text-brand-400"
-                >
-                  Dang ky
-                </Link>
-              </p>
-            </div>
+      <div className="mb-6">
+        <div className="rounded-xl border border-gray-100 bg-[#F8FAFC] p-4 text-[13px] dark:border-gray-800 dark:bg-white/5">
+          <p className="font-bold text-[#1E293B] dark:text-gray-200 mb-2">
+            Tài khoản dùng thử (mật khẩu: 123456)
+          </p>
+          <div className="grid grid-cols-1 gap-1.5 text-[#64748B] dark:text-gray-300">
+            {MOCK_ACCOUNTS.map((account) => (
+              <div key={account.username} className="flex justify-between">
+                <span>{account.displayName}</span>
+                <span className="font-bold text-[#1E293B]">{account.username}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
+
+      <form onSubmit={handleSubmit} className="space-y-5">
+        <div>
+          <div className="relative">
+            <Input
+              placeholder="EGAS ID"
+              className="pl-4 h-12 bg-white border-gray-200 rounded-xl focus:border-[#2388FF] focus:ring-[#2388FF]/10 transition-all"
+              onChange={(e) => setUsername(e.target.value)}
+              error={Boolean(errorMessage)}
+            />
+          </div>
+        </div>
+
+        <div>
+          <div className="relative">
+            <Input
+              type={showPassword ? "text" : "password"}
+              placeholder="Nhập mật khẩu"
+              className="pl-4 pr-12 h-12 bg-white border-gray-200 rounded-xl focus:border-[#2388FF] focus:ring-[#2388FF]/10 transition-all"
+              onChange={(e) => setPassword(e.target.value)}
+              error={Boolean(errorMessage)}
+            />
+            <span
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer text-gray-400 hover:text-gray-600 transition-colors"
+            >
+              {showPassword ? (
+                <EyeIcon className="w-5 h-5" />
+              ) : (
+                <EyeCloseIcon className="w-5 h-5" />
+              )}
+            </span>
+          </div>
+        </div>
+
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Checkbox checked={isChecked} onChange={setIsChecked} />
+            <span className="text-sm text-[#64748B]">Nhớ tài khoản</span>
+          </div>
+          <Link
+            href="/reset-password"
+            className="text-sm text-[#2388FF] hover:underline font-medium"
+          >
+            Quên mật khẩu?
+          </Link>
+        </div>
+
+        {errorMessage && <p className="text-sm text-error-500 font-medium">{errorMessage}</p>}
+
+        <button
+          type="submit"
+          className="w-full h-12 bg-gradient-to-r from-[#FF9933] to-[#FFB84D] text-white font-bold rounded-xl shadow-lg shadow-orange-200 hover:shadow-orange-300 transform active:scale-[0.98] transition-all"
+        >
+          Đăng nhập
+        </button>
+
+        <div className="relative flex items-center justify-center py-2">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-gray-200"></div>
+          </div>
+          <span className="relative px-3 bg-white text-xs text-gray-400">Hoặc</span>
+        </div>
+
+        <button
+          type="button"
+          className="w-full h-12 bg-[#555E8D] text-white font-bold rounded-xl flex items-center justify-center gap-3 hover:bg-[#4a537d] transition-all"
+        >
+          <div className="w-5 h-5 flex items-center justify-center">
+            <svg
+              width="21"
+              height="21"
+              viewBox="0 0 21 21"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M10.1562 0H0V10.1562H10.1562V0Z" fill="#F25022" />
+              <path d="M21 0H10.8438V10.1562H21V0Z" fill="#7FBA00" />
+              <path d="M10.1562 10.8438H0V21H10.1562V10.8438Z" fill="#00A4EF" />
+              <path d="M21 10.8438H10.8438V21H21V10.8438Z" fill="#FFB900" />
+            </svg>
+          </div>
+          Đăng nhập qua AD
+        </button>
+      </form>
     </div>
   );
 }

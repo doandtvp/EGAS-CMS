@@ -1,8 +1,8 @@
-import SignUpForm from "@/components/auth/SignUpForm";
+﻿import SignUpForm from "@/components/auth/SignUpForm";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Next.js SignUp Page | TailAdmin - Next.js Dashboard Template",
+  title: "EGAS CMS - Trang quản trị hệ thống EGAS ",
   description: "This is Next.js SignUp Page TailAdmin Dashboard Template",
   // other metadata
 };
