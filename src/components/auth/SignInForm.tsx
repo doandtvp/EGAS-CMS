@@ -132,7 +132,7 @@ export default function SignInForm() {
 
         <button
           type="submit"
-          className="w-full h-12 bg-gradient-to-r from-[#FF9933] to-[#FFB84D] text-white font-bold rounded-xl shadow-lg shadow-orange-200 hover:shadow-orange-300 transform active:scale-[0.98] transition-all"
+          className="w-full h-12 bg-gradient-to-r from-[#FF9933] to-[#FFB84D] text-white font-normal rounded-xl transform transition-all"
         >
           Đăng nhập
         </button>
