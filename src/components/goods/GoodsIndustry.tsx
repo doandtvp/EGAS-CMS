@@ -119,7 +119,7 @@ const ProductCard: React.FC<{
     <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group">
       {/* Image Section */}
       <div className="p-3">
-        <div className="relative aspect-square bg-[#F9FAFB] dark:bg-gray-900/50 rounded-xl flex items-center justify-center overflow-hidden p-4">
+        <div className="relative aspect-[1.5] bg-[#F9FAFB] dark:bg-gray-900/50 rounded-xl flex items-center justify-center overflow-hidden p-4">
           <Image
             src={product.image}
             alt={product.name}
@@ -289,7 +289,7 @@ const GoodsIndustry: React.FC = () => {
           currentPage={currentPage}
           totalPages={5}
           onPageChange={setCurrentPage}
-          totalItems={350}
+          totalItems={50}
           pageSize={pageSize}
           onPageSizeChange={setPageSize}
         />
