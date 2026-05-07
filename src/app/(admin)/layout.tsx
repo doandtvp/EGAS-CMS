@@ -37,10 +37,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       return;
     }
 
-    if (user?.role === "nhan_vien") {
+    if (user?.role === "nhan_vien" && pathname !== "/mail") {
       router.replace("/staff");
     }
-  }, [hasHydrated, isAuthenticated, router, user?.role]);
+  }, [hasHydrated, isAuthenticated, router, user?.role, pathname]);
 
   useEffect(() => {
     if (!isHydrated) return;
@@ -82,7 +82,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   // Get current active tab object
   const activeTab = isHydrated ? openTabs.find((t) => t.id === activeTabId) : null;
 
-  if (!hasHydrated || !isAuthenticated || user?.role === "nhan_vien") {
+  if (!hasHydrated || !isAuthenticated || (user?.role === "nhan_vien" && pathname !== "/mail")) {
     return null;
   }
 
