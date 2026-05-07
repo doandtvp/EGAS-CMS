@@ -44,7 +44,7 @@ export default function OtherGoodsPanel() {
   ];
 
   return (
-    <div className="h-full rounded-xl border border-gray-300 bg-[#EFF2F7] overflow-hidden">
+    <div className="h-auto lg:h-full rounded-xl border border-gray-300 bg-[#EFF2F7] overflow-visible lg:overflow-hidden">
       <div className="h-9 bg-[#2F92E8] px-2 flex items-end gap-1.5">
         {tabs.map((tab) => (
           <button
@@ -61,9 +61,9 @@ export default function OtherGoodsPanel() {
         <button className="h-6 w-6 rounded bg-[#4EA4EC] text-white text-sm mb-1">+</button>
       </div>
 
-      <div className="grid grid-cols-[1fr_486px] gap-2 h-[calc(100%-36px)] p-2">
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_486px] gap-2 h-auto lg:h-[calc(100%-36px)] p-2">
         <section className="rounded-lg border border-gray-300 bg-white p-2 flex flex-col overflow-hidden">
-          <div className="mb-2 grid grid-cols-4 gap-2 shrink-0">
+          <div className="mb-2 grid grid-cols-2 md:grid-cols-4 gap-2 shrink-0">
             <SearchInput
               value={searchTerm}
               onChange={setSearchTerm}
@@ -85,7 +85,7 @@ export default function OtherGoodsPanel() {
           </div>
 
           <div className="flex-1 overflow-auto rounded-lg border border-[#D0D7E2] p-2 bg-[#F8FAFC]">
-            <div className="grid grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
               {COMMODITY_DATA.map((item) => (
                 <div
                   key={item.id}

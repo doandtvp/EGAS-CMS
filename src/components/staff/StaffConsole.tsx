@@ -76,15 +76,18 @@ export default function StaffConsole() {
 
   return (
     <div className="min-h-screen bg-[#ECEEF2]">
-      <header className="h-16 border-b border-gray-300 bg-white px-3 flex items-center justify-between">
-        <div className="flex items-center gap-5 text-[12px] text-gray-600">
-          <div className="flex items-center gap-2">
+      {/* ── Header ── */}
+      <header className="h-14 md:h-16 border-b border-gray-300 bg-white px-3 flex items-center justify-between">
+        <div className="flex items-center gap-3 md:gap-5 text-[12px] text-gray-600">
+          {/* Logo — always visible */}
+          <div className="flex items-center gap-2 shrink-0">
             <Image src="/images/logo/egas-logo.svg" alt="EGAS" width={18} height={18} />
-            <span className="text-[30px] font-bold text-[#1E7FD8] leading-none tracking-tight">
+            <span className="text-[22px] md:text-[30px] font-bold text-[#1E7FD8] leading-none tracking-tight">
               EGAS
             </span>
           </div>
-          <div className="flex items-center gap-2">
+          {/* Store / POS / Shift info — hidden on mobile */}
+          <div className="hidden md:flex items-center gap-2">
             <div className="flex items-center gap-2">
               <ShopIcon />
               <span>Cửa hàng: 211001</span>
@@ -107,8 +110,10 @@ export default function StaffConsole() {
         </div>
       </header>
 
-      <div className="flex h-[calc(100vh-40px)]">
-        <aside className="w-[126px] border-r border-gray-300 bg-[#F5F6F8] p-2">
+      {/* ── Body: sidebar + main ── */}
+      <div className="flex flex-col md:flex-row min-h-[calc(100vh-56px)] md:min-h-0 md:h-[calc(100vh-64px)] overflow-y-auto md:overflow-visible">
+        {/* Desktop sidebar — hidden on mobile */}
+        <aside className="hidden md:block w-[126px] border-r border-gray-300 bg-[#F5F6F8] p-2 shrink-0">
           <div className="space-y-2">
             {STAFF_NAV_ITEMS.map((item) => (
               <button
@@ -134,7 +139,52 @@ export default function StaffConsole() {
           </div>
         </aside>
 
-        <main className="flex-1 p-2">{renderActivePanel()}</main>
+        {/* Main content — add bottom padding on mobile for the bottom nav */}
+        <main className="flex-1 p-2 pb-[72px] md:pb-2 overflow-auto">{renderActivePanel()}</main>
+      </div>
+
+      {/* ── Mobile Bottom Navigation ── */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-white border-t border-gray-200 flex items-center justify-around px-1 z-50 shadow-[0_-2px_10px_rgba(0,0,0,0.06)]">
+        {STAFF_NAV_ITEMS.map((item) => {
+          const isActive = activeNav === item.id;
+          return (
+            <button
+              key={item.id}
+              onClick={() => setActiveNav(item.id)}
+              className={`flex flex-col items-center justify-center gap-0.5 flex-1 py-1 transition-all rounded-lg ${
+                isActive
+                  ? "text-[#2F92E8]"
+                  : "text-gray-400 hover:text-gray-600"
+              }`}
+            >
+              <div className={`transition-transform duration-300 ${isActive ? "scale-110" : "scale-100"}`}>
+                <span
+                  className={`flex h-5 w-5 items-center justify-center ${
+                    isActive ? "text-[#2F92E8]" : "text-gray-400"
+                  }`}
+                >
+                  {item.icon}
+                </span>
+              </div>
+              <span
+                className={`text-[10px] font-bold leading-tight whitespace-nowrap ${
+                  isActive ? "text-[#2F92E8]" : "text-gray-400"
+                }`}
+              >
+                {item.label}
+              </span>
+              {item.subLabel && (
+                <span
+                  className={`text-[8px] leading-none whitespace-nowrap -mt-0.5 ${
+                    isActive ? "text-[#2F92E8]/70" : "text-gray-300"
+                  }`}
+                >
+                  {item.subLabel}
+                </span>
+              )}
+            </button>
+          );
+        })}
       </div>
     </div>
   );
