@@ -1,7 +1,8 @@
 "use client";
 
 import SearchInput from "@/components/common/SearchInput";
-import { ChevronDownIcon, SearchIcon } from "@/icons";
+import DropdownSelect from "@/components/common/DropdownSelect";
+import { ChevronDownIcon } from "@/icons";
 import { useState } from "react";
 import { OrderSidebar } from "./OrderSidebar";
 
@@ -95,6 +96,35 @@ export default function BeforePaymentPanel() {
   const tabs = ["Giao dịch 1", "Giao dịch 2"];
   const [activeTab, setActiveTab] = useState(tabs[0]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedPump, setSelectedPump] = useState("");
+  const [selectedFilter, setSelectedFilter] = useState("");
+  const [selectedTime, setSelectedTime] = useState("");
+
+  const pumpOptions = [
+    { value: "all", label: "Tất cả vòi bơm" },
+    { value: "voi-1", label: "Vòi 1 - E5" },
+    { value: "voi-2", label: "Vòi 2 - E5" },
+    { value: "voi-3", label: "Vòi 3 - E5" },
+    { value: "voi-4", label: "Vòi 4 - E5" },
+    { value: "voi-5", label: "Vòi 5 - E5" },
+    { value: "voi-6", label: "Vòi 6 - E5" },
+  ];
+
+  const filterOptions = [
+    { value: "all", label: "Tất cả" },
+    { value: "xuat-ban", label: "Xuất bán" },
+    { value: "xuat-noi-bo", label: "Xuất nội bộ" },
+    { value: "xuat-tra", label: "Xuất trả" },
+  ];
+
+  const timeOptions = [
+    { value: "today", label: "Hôm nay" },
+    { value: "yesterday", label: "Hôm qua" },
+    { value: "this-week", label: "Tuần này" },
+    { value: "this-month", label: "Tháng này" },
+    { value: "last-month", label: "Tháng trước" },
+  ];
+
   return (
     <div className="h-full rounded-xl border border-gray-300 bg-[#EFF2F7] overflow-hidden">
       <div className="h-9 bg-[#2F92E8] px-2 flex items-end gap-1.5">
@@ -122,18 +152,24 @@ export default function BeforePaymentPanel() {
               onChange={setSearchTerm}
               placeholder="Tìm kiếm nhanh"
             />
-            <button className="flex h-9 items-center justify-between rounded-md border border-[#D0D7E2] bg-[#F6F8FB] px-3 text-sm text-[#596A80]">
-              Chọn vòi bơm
-              <ChevronDownIcon className="h-4 w-4 text-[#8A98AC]" />
-            </button>
-            <button className="flex h-9 items-center justify-between rounded-md border border-[#D0D7E2] bg-[#F6F8FB] px-3 text-sm text-[#596A80]">
-              Lọc nâng cao
-              <ChevronDownIcon className="h-4 w-4 text-[#8A98AC]" />
-            </button>
-            <button className="flex h-9 items-center justify-between rounded-md border border-[#D0D7E2] bg-[#F6F8FB] px-3 text-sm text-[#596A80]">
-              Thời gian
-              <ChevronDownIcon className="h-4 w-4 text-[#8A98AC]" />
-            </button>
+            <DropdownSelect
+              options={pumpOptions}
+              value={selectedPump}
+              onChange={setSelectedPump}
+              placeholder="Chọn vòi bơm"
+            />
+            <DropdownSelect
+              options={filterOptions}
+              value={selectedFilter}
+              onChange={setSelectedFilter}
+              placeholder="Lọc nâng cao"
+            />
+            <DropdownSelect
+              options={timeOptions}
+              value={selectedTime}
+              onChange={setSelectedTime}
+              placeholder="Thời gian"
+            />
           </div>
 
           <div className="h-[calc(100%-44px)] overflow-auto rounded-lg border border-[#D0D7E2]">
