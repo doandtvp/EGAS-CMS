@@ -1,7 +1,7 @@
-import { ChevronDownIcon } from "@/icons";
 import { OrderSidebar } from "./OrderSidebar";
 import { useState } from "react";
 import SearchInput from "@/components/common/SearchInput";
+import DropdownSelect from "@/components/common/DropdownSelect";
 
 export const RuaXeIcon = () => {
   return (
@@ -82,6 +82,15 @@ export default function ServicePanel() {
   const tabs = ["Giao dịch 1", "Giao dịch 2"];
   const [activeTab, setActiveTab] = useState(tabs[0]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedService, setSelectedService] = useState("");
+
+  const serviceOptions = [
+    { value: "all", label: "Tất cả dịch vụ" },
+    { value: "rua-xe", label: "Rửa xe" },
+    { value: "thay-dau", label: "Thay dầu" },
+    { value: "bao-duong", label: "Bảo dưỡng" },
+    { value: "sua-chua", label: "Sửa chữa" },
+  ];
 
   return (
     <div className="h-full rounded-xl border border-gray-300 bg-[#EFF2F7] overflow-hidden">
@@ -109,10 +118,12 @@ export default function ServicePanel() {
               onChange={setSearchTerm}
               placeholder="Tìm kiếm nhanh"
             />
-            <button className="flex h-9 items-center justify-between rounded-md border border-[#D0D7E2] bg-[#F6F8FB] px-3 text-sm text-[#596A80]">
-              Chọn loại hàng
-              <ChevronDownIcon className="h-4 w-4 text-[#8A98AC]" />
-            </button>
+            <DropdownSelect
+              options={serviceOptions}
+              value={selectedService}
+              onChange={setSelectedService}
+              placeholder="Chọn loại hàng"
+            />
 
           </div>
 

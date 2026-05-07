@@ -1,13 +1,23 @@
 import React, { useState } from "react";
 import { OrderSidebar } from "./OrderSidebar";
-import { ChevronDownIcon } from "@/icons";
 import SearchInput from "@/components/common/SearchInput";
+import DropdownSelect from "@/components/common/DropdownSelect";
 import { PetrolPumpIcon, PUMP_DATA } from "./AfterPaymentPanel";
 
 export default function NoLiterPanel() {
   const tabs = ["Giao dịch 1", "Giao dịch 2"];
   const [activeTab, setActiveTab] = useState(tabs[0]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  const categoryOptions = [
+    { value: "all", label: "Tất cả loại hàng" },
+    { value: "xang", label: "Xăng" },
+    { value: "dau", label: "Dầu Diesel" },
+    { value: "gas", label: "Gas" },
+    { value: "nhot", label: "Dầu nhớt" },
+    { value: "phu-kien", label: "Phụ kiện" },
+  ];
 
   return (
     <div className="h-full rounded-xl border border-gray-300 bg-[#EFF2F7] overflow-hidden">
@@ -35,18 +45,13 @@ export default function NoLiterPanel() {
               onChange={setSearchTerm}
               placeholder="Tìm kiếm nhanh"
             />
-            <button className="flex h-9 items-center justify-between rounded-md border border-[#D0D7E2] bg-[#F6F8FB] px-3 text-sm text-[#596A80]">
-              Chọn vòi bơm
-              <ChevronDownIcon className="h-4 w-4 text-[#8A98AC]" />
-            </button>
-            <button className="flex h-9 items-center justify-between rounded-md border border-[#D0D7E2] bg-[#F6F8FB] px-3 text-sm text-[#596A80]">
-              Lọc nâng cao
-              <ChevronDownIcon className="h-4 w-4 text-[#8A98AC]" />
-            </button>
-            <button className="flex h-9 items-center justify-between rounded-md border border-[#D0D7E2] bg-[#F6F8FB] px-3 text-sm text-[#596A80]">
-              Thời gian
-              <ChevronDownIcon className="h-4 w-4 text-[#8A98AC]" />
-            </button>
+            <DropdownSelect
+              options={categoryOptions}
+              value={selectedCategory}
+              onChange={setSelectedCategory}
+              placeholder="Chọn loại hàng"
+            />
+
           </div>
 
           <div className="h-[calc(100%-44px)] overflow-auto rounded-lg border border-[#D0D7E2]">
