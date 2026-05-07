@@ -6,8 +6,7 @@ import React from "react";
 
 export const metadata: Metadata = {
   title: "EGAS CMS - Trang quản trị hệ thống EGAS ",
-  description:
-    "This is Next.js Basic Table  page for TailAdmin  Tailwind CSS Admin Dashboard Template",
+  description: "EGAS CMS - Trang quản trị hệ thống EGAS",
   // other metadata
 };
 

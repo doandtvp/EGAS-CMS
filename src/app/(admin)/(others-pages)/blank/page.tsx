@@ -4,7 +4,7 @@ import React from "react";
 
 export const metadata: Metadata = {
   title: "EGAS CMS - Trang quản trị hệ thống EGAS ",
-  description: "This is Next.js Blank Page TailAdmin Dashboard Template",
+  description: "EGAS CMS - Trang quản trị hệ thống EGAS",
 };
 
 export default function BlankPage() {
