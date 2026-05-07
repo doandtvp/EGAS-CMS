@@ -1,7 +1,7 @@
-import { ChevronDownIcon } from "@/icons";
 import { useState } from "react";
 import { OrderSidebar } from "./OrderSidebar";
 import SearchInput from "@/components/common/SearchInput";
+import DropdownSelect from "@/components/common/DropdownSelect";
 
 const COMMODITY_DATA = [
   { id: 1, name: "Bình gas 12kg", code: "GAS-12", price: 420000, originalPrice: 450000, stock: 120, unit: "Bình" },
@@ -23,6 +23,25 @@ export default function OtherGoodsPanel() {
   const tabs = ["Giao dịch 1", "Giao dịch 2"];
   const [activeTab, setActiveTab] = useState(tabs[0]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedSort, setSelectedSort] = useState("");
+
+  const categoryOptions = [
+    { value: "all", label: "Tất cả loại hàng" },
+    { value: "gas", label: "Gas" },
+    { value: "nhot", label: "Dầu nhớt" },
+    { value: "nuoc", label: "Nước rửa / làm mát" },
+    { value: "phu-kien", label: "Phụ kiện" },
+  ];
+
+  const sortOptions = [
+    { value: "name-asc", label: "Tên A → Z" },
+    { value: "name-desc", label: "Tên Z → A" },
+    { value: "price-asc", label: "Giá tăng dần" },
+    { value: "price-desc", label: "Giá giảm dần" },
+    { value: "stock-asc", label: "Tồn kho tăng dần" },
+    { value: "stock-desc", label: "Tồn kho giảm dần" },
+  ];
 
   return (
     <div className="h-full rounded-xl border border-gray-300 bg-[#EFF2F7] overflow-hidden">
@@ -50,18 +69,19 @@ export default function OtherGoodsPanel() {
               onChange={setSearchTerm}
               placeholder="Tìm kiếm nhanh"
             />
-            <button className="flex h-9 items-center justify-between rounded-md border border-[#D0D7E2] bg-[#F6F8FB] px-3 text-sm text-[#596A80]">
-              Chọn loại hàng
-              <ChevronDownIcon className="h-4 w-4 text-[#8A98AC]" />
-            </button>
-            <button className="flex h-9 items-center justify-between rounded-md border border-[#D0D7E2] bg-[#F6F8FB] px-3 text-sm text-[#596A80]">
-              Lọc nâng cao
-              <ChevronDownIcon className="h-4 w-4 text-[#8A98AC]" />
-            </button>
-            <button className="flex h-9 items-center justify-between rounded-md border border-[#D0D7E2] bg-[#F6F8FB] px-3 text-sm text-[#596A80]">
-              Thời gian
-              <ChevronDownIcon className="h-4 w-4 text-[#8A98AC]" />
-            </button>
+            <DropdownSelect
+              options={categoryOptions}
+              value={selectedCategory}
+              onChange={setSelectedCategory}
+              placeholder="Chọn loại hàng"
+            />
+            <DropdownSelect
+              options={sortOptions}
+              value={selectedSort}
+              onChange={setSelectedSort}
+              placeholder="Sắp xếp theo"
+            />
+
           </div>
 
           <div className="flex-1 overflow-auto rounded-lg border border-[#D0D7E2] p-2 bg-[#F8FAFC]">
