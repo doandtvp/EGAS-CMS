@@ -1,11 +1,11 @@
-import { ChevronDownIcon, SearchIcon } from "@/icons";
+import { ChevronDownIcon } from "@/icons";
 import { OrderSidebar } from "./OrderSidebar";
 import { useState } from "react";
 import SearchInput from "@/components/common/SearchInput";
 
 
 
-const PUMP_DATA = [
+export const PUMP_DATA = [
   { id: 1, name: "Trụ 1", type: "Xăng RON95", variant: "blue" },
   { id: 2, name: "Trụ 2", type: "Dầu Diesel - III", variant: "yellow" },
   { id: 3, name: "Trụ 3", type: "Dầu Diesel - V", variant: "yellow" },
